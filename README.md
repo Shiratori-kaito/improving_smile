@@ -58,7 +58,7 @@
 - React.js or Vue.js　（一度Railsで実装してから移行する）
 バックエンド
 - Ruby (3.2.2)
-- Ruby on Rails (6.1.7.6)
+- Ruby on Rails (7.0.8)
 インフラ/ストレージ
 - heroku
 - AWS S3
