@@ -1,4 +1,7 @@
 **# [その笑顔、全力？]**
+Figma 
+https://www.figma.com/file/8CS5ilDtB91CpvvoAxdnTm/improving_smile?type=design&node-id=0-1&mode=design&t=60cebtEoENIL13vc-0
+
 
 **## サービス概要**
 
@@ -58,7 +61,7 @@
 - React.js or Vue.js　（一度Railsで実装してから移行する）
 バックエンド
 - Ruby (3.2.2)
-- Ruby on Rails (7.0.8)
+- Ruby on Rails (7.1.0)
 インフラ/ストレージ
 - heroku
 - AWS S3
