@@ -1,6 +1,5 @@
 **# [その笑顔、全力？]**
-Figma 
-https://www.figma.com/file/8CS5ilDtB91CpvvoAxdnTm/improving_smile?type=design&node-id=0%3A1&mode=design&t=6LBq8h5uq1qbMfnR-1
+[Figma](https://www.figma.com/file/8CS5ilDtB91CpvvoAxdnTm/improving_smile?type=design&node-id=0%3A1&mode=design&t=6LBq8h5uq1qbMfnR-1)
 
 **## サービス概要**
 
