@@ -1,0 +1,29 @@
+<div class="flex justify-center items-start min-h-screen bg-gray-100 pt-12">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full md:w-2/3 lg:w-1/2">
+    <div class="flex justify-between items-center mb-5">
+      <h1 class="text-2xl font-bold">マイページ</h1>
+      <%= link_to '編集', edit_profile_path, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+    </div>
+
+    <div class="flex justify-center items-center mb-5">
+      <%= image_tag current_user.avatar.url, class: 'rounded-full w-72 h-72 object-cover' %>
+    </div>
+
+    <table class="table-auto w-full">
+      <tr>
+        <th class="px-4 py-2 text-left bg-gray-200"><%= User.human_attribute_name(:name) %></th>
+        <td class="px-4 py-2"><%= current_user.name %></td>
+      </tr>
+      <tr>
+        <th class="px-4 py-2 text-left bg-gray-200"><%= User.human_attribute_name(:email) %></th>
+        <td class="px-4 py-2"><%= current_user.email %></td>
+      </tr>
+      <% if current_user.sns.present? %>
+        <tr>
+          <th class="px-4 py-2 text-left bg-gray-200"><%= User.human_attribute_name(:sns) %></th>
+          <td class="px-4 py-2"><%= current_user.sns %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

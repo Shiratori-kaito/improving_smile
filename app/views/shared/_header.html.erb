@@ -1,0 +1,11 @@
+<ul>
+  <li class="nav-item">
+    <%= link_to 'マイページ', profile_path, class: 'text-gray-700 hover:text-gray-900 hover:bg-gray-100 py-2 px-4 inline-block rounded-full' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Home', root_path, class: 'text-gray-700 hover:text-gray-900 hover:bg-gray-100 py-2 px-4 inline-block rounded-full' %>
+  </li>
+  <li class="nav-item">
+    <%= button_to 'ログアウト', logout_path, class: 'text-gray-700 hover:text-gray-900 hover:bg-gray-100 py-2 px-4 inline-block rounded-full', method: :delete %>
+  </li>
+</ul>

@@ -1,0 +1,29 @@
+<header>
+  <nav class="bg-light">
+    <div class="container mx-auto">
+      <div class="flex justify-between items-center py-4">
+        <button
+          class="lg:hidden block text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="hidden lg:flex lg:items-center lg:w-auto lg:space-x-6"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav ml-auto main-nav align-items-center">
+            <li class="nav-item">
+              <%= link_to 'ログイン', login_path, class: 'nav-link text-gray-600 hover:text-gray-800' %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

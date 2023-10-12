@@ -1,0 +1,22 @@
+<div class="container mx-auto">
+  <div class="w-10/12 mx-auto">
+    <h1 class="text-4xl font-bold mb-6">ログイン</h1>
+    <%= form_with url: login_path, local: true do |f| %>
+      <div class="mb-4">
+        <%= f.label :email, class: 'text-lg font-semibold' %>
+        <%= f.text_field :email, class: 'w-full p-2 border rounded shadow-sm focus:outline-none focus:shadow-outline' %>
+      </div>
+      <div class="mb-4">
+        <%= f.label :password, class: 'text-lg font-semibold' %>
+        <%= f.password_field :password, class: 'w-full p-2 border rounded shadow-sm focus:outline-none focus:shadow-outline' %>
+      </div>
+      <div class="mb-6">
+        <%= f.submit 'ログイン', class: 'w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+      </div>
+    <% end %>
+    <div class="text-right">
+      <%= link_to '登録ページへ', new_user_path, class: 'text-blue-500 hover:underline' %>
+      <a href="#" class="text-gray-500 hover:underline ml-4">パスワードをお忘れの方はこちら</a>
+    </div>
+  </div>
+</div>

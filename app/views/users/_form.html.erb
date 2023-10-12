@@ -1,0 +1,42 @@
+<%= form_with(model: user, local: true, html: { class: 'max-w-md mx-auto' }) do |form| %>
+  <% if user.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+      <h2 class="font-semibold"><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul class="list-disc pl-5">
+        <% user.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :email, class: 'block text-gray-700 font-bold mb-2' %>
+    <%= form.text_field :email, class: 'w-full p-2 border rounded shadow appearance-none focus:outline-none focus:shadow-outline' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :password, class: 'block text-gray-700 font-bold mb-2' %>
+    <%= form.password_field :password, class: 'w-full p-2 border rounded shadow appearance-none focus:outline-none focus:shadow-outline' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :password_confirmation, class: 'block text-gray-700 font-bold mb-2' %>
+    <%= form.password_field :password_confirmation, class: 'w-full p-2 border rounded shadow appearance-none focus:outline-none focus:shadow-outline' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :name, class: 'block text-gray-700 font-bold mb-2' %>
+    <%= form.text_field :name, class: 'w-full p-2 border rounded shadow appearance-none focus:outline-none focus:shadow-outline' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :sns, class: 'block text-gray-700 font-bold mb-2' %>
+    <%= form.text_field :sns, class: 'w-full p-2 border rounded shadow appearance-none focus:outline-none focus:shadow-outline' %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.submit class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+  </div>
+<% end %>
