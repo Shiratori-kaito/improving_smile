@@ -1,15 +1,15 @@
 import React from 'react';
+import { createRoot } from 'react-dom/client';
 
-export const Posts = props =>  {
-  // 投稿一覧のロジック
+
+export const UserPosts = ({posts}) => {
   return (
     <div>
-      {props.posts.map((post) => (
+      {posts.map((post) => (
         <div key={post.id}>
           <p>{post.content}</p>
         </div>
       ))}
     </div>
   );
-}
-
+};

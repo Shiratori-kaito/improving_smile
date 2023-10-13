@@ -51,6 +51,8 @@ gem 'carrierwave', '~> 2.0'
 
 gem 'mini_magick'
 
+gem 'aws-sdk', '~> 3'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

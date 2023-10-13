@@ -38,6 +38,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc)
+    @followers = {name: "MAI"}
+    @liked_posts = {title: "post10"}
   end
 
   # PATCH/PUT /users/1 or /users/1.json

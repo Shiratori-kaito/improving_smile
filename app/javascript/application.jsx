@@ -4,18 +4,16 @@ import {Hello} from './components/Hello';
 import {Allcameras} from './components/Allcameras';
 import {Camera} from './components/Camera';
 
-const app = document.getElementById('root');
-const root = createRoot(app);
 
-
-
-const App = () => {
-  return (
-    <div>
-      <Hello />
-    </div>
+//id=captureがあった場合のみ、Cameraをレンダリングする
+if (document.getElementById("capture")) {
+  const capture = document.getElementById("capture");
+  const capturePage = createRoot(capture);
+  capturePage.render(
+    <Camera />
   );
 }
-root.render(<App />) ;
+
+
 
 

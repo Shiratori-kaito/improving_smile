@@ -6,23 +6,12 @@
 
   <div class="mt-4">
     <div class="flex justify-around border-b-2">
-      <button class="py-2 px-4">自分の投稿一覧</button>
-      <button class="py-2 px-4">フォロー中のユーザー</button>
-      <button class="py-2 px-4">いいねした投稿</button>
-    </div>
-
-    <!-- 自分の投稿一覧 -->
-    <div class="mt-4">
-      <%= content_tag :div, id: "posts-data", data: { posts: @posts.to_json } do %><% end %>
-    </div>
-
-    <!-- フォロー中のユーザー -->
-    <div id="following" class="mt-4 hidden">
-      <!-- フォロー中のユーザーのリストがここに入る -->
-    </div>
-    <!-- いいねした投稿 -->
-    <div id="likes" class="mt-4 hidden">
-      <!-- いいねした投稿のリストがここに入る -->
+      <%= content_tag :div, id: "user-data",
+      data: {
+        posts: @posts.to_json,
+        followers: @followers.to_json,
+        liked_posts: @liked_posts.to_json
+      } do %><% end %>
     </div>
   </div>
 </div>
