@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  photo: one
+  happy: MyString
+  sad: MyString
+  angry: MyString
+  surprised: MyString
+  calm: MyString
+  fear: MyString
+  confused: MyString
+  disgusted: MyString
+
+two:
+  photo: two
+  happy: MyString
+  sad: MyString
+  angry: MyString
+  surprised: MyString
+  calm: MyString
+  fear: MyString
+  confused: MyString
+  disgusted: MyString

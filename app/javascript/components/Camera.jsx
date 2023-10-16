@@ -25,24 +25,23 @@ export const Camera = () => {
 
   const handleUpload = async () => {
     if (file) {
-      // RailsのAPIから署名付きURLを取得
-      const response = await fetch('/presigned_url?filename=image.jpg', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-      const { url } = await response.json();
+      const formData = new FormData();
+      formData.append('photo[image]', file);
   
-      // S3へのアップロード
-      await fetch(url, {
-        method: 'PUT',
-        body: file,
-        headers: {
-          'Content-Type': file.type
+      try {
+        const response = await fetch('/photos/create', {
+          method: 'POST',
+          body: formData
+        });
+  
+        if (response.ok) {
+          window.location.href = '/photos/detect_faces';
+        } else {
+          console.error("Error uploading image to Rails");
         }
-      });
-      
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 

@@ -13,8 +13,6 @@ image = { bytes: s3_response.body.read }
 response = client.detect_faces({ image: image, attributes:['ALL']})
 
 # 結果を表示する
-response.face_details.each do |face_detail|
-  puts face_detail.emotions
-  puts "  Bounding box: #{face_detail.bounding_box.to_h}"
-  puts face_detail.key?(:emotions)
-end
+
+puts response
+

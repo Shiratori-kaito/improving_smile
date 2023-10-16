@@ -1,0 +1,16 @@
+<div class="flex mb-4">
+  <div class="w-1/2 p-4">
+    <!-- ここにプロフィール画像 -->
+  </div>
+  <div class="w-1/2 p-4">
+    <!-- AWS rekognitionのレスポンスを基にしたグラフ -->
+      <div class="mb-2">
+          <div class="text-sm"><%= image_tag @image %></div>
+          <%= @analyse_face_emotion.happy %>
+      </div>
+  </div>
+
+  <div class="mb-4">
+    <p class="text-6xl">100</p>
+  <button class="bg-orange-400 px-4 py-2">Next</button>
+</div>
