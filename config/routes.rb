@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  get 'post/index'
-  get 'post/new'
-  get 'post/edit'
+  get 'posts/index'
+  post 'posts/create'
+  get 'posts/edit'
   root to: 'home#index'
   resources :posts
   resources :users do
-    resources :followings, only: [:index], module: :users
-    resources :followers, only: [:index], module: :users
+    member do
+      get :following, :followers
+    end
+    resources :relationships, only: [:create, :destroy]
   end
   resource :profile, only: [:show, :edit, :update]
   get 'presigned_url', to: 'uploads#presigned_url'

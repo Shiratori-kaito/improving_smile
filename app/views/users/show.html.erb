@@ -1,9 +1,23 @@
 <div class="container mx-auto p-4">
   <div class="flex justify-center items-center flex-col">
-    
-    <h2 class="text-2xl mt-2">Username</h2>
+    <%= image_tag @user.avatar.url, class: "rounded-full w-32 h-32" %>
+    <h2 class="text-2xl mt-2"><%= @user.name %></h2>
   </div>
-
+  <div class="flex justify-center items-center mt-4">
+    <div class="flex flex-col items-center">
+      <% unless @user == @current_user %>
+        <% if @current_user.following?(@user) %> 
+          <%= button_to "フォロー解除", user_relationships_path(@user), method: :delete, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+        <% else %>
+          <%= button_to "フォローする", user_relationships_path(@user), method: :post, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+        <% end %>
+      <% end %>
+      <div class="mt-2">
+        <span class="mr-2"><%= @user.following_users.count %> フォロー</span>
+        <span><%= @user.follower_users.count %> フォロワー</span>
+      </div>
+    </div>
+  </div>
   <div class="mt-4">
     <div class="flex justify-around border-b-2">
       <%= content_tag :div, id: "user-data",

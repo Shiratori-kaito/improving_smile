@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_16_045704) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_20_154449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -81,7 +81,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_045704) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "analyse_face_detail_id"
+    t.bigint "analyse_face_emotion_id"
+    t.index ["analyse_face_detail_id"], name: "index_posts_on_analyse_face_detail_id"
+    t.index ["analyse_face_emotion_id"], name: "index_posts_on_analyse_face_emotion_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id", null: false
+    t.integer "following_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+    t.index ["following_id"], name: "index_relationships_on_following_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,5 +115,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_045704) do
   add_foreign_key "analyse_face_details", "photos"
   add_foreign_key "analyse_face_emotions", "photos"
   add_foreign_key "photos", "users"
+  add_foreign_key "posts", "analyse_face_details"
+  add_foreign_key "posts", "analyse_face_emotions"
   add_foreign_key "posts", "users"
 end
