@@ -19,7 +19,9 @@ export const Camera = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setUrl(imageSrc);
     const blob = await fetch(imageSrc).then(r => r.blob());
-    const file = new File([blob], "image.jpg", { type: blob.type });
+    const currentTimestamp = new Date().getTime();
+    const dynamicFileName = `photo_${currentTimestamp}.jpg`;
+    const file = new File([blob], dynamicFileName, { type: blob.type });
     setFile(file);
   },[webcamRef]);
 

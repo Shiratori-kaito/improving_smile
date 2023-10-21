@@ -23,19 +23,15 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      redirect_to login_path, notice: "User was successfully created."
+    else
+      render :new, alert: "User was not created."
     end
   end
 
   def show
+    @current_user = current_user
     @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc)
     @followers = {name: "MAI"}
@@ -56,13 +52,12 @@ class UsersController < ApplicationController
   end
 
   # DELETE /users/1 or /users/1.json
-  def destroy
-    @user.destroy
+  def followings
+    @followings = @user.following_users
+  end
 
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
-    end
+  def followers
+    @followers = @user.follower_users
   end
 
   private

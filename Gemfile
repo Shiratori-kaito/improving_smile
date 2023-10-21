@@ -53,6 +53,10 @@ gem 'mini_magick'
 
 gem 'aws-sdk', '~> 3'
 
+gem 'chartkick'
+
+gem 'pry-rails'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
