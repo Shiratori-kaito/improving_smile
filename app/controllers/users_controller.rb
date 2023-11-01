@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @current_user = current_user
     @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc)
-    @followers = {name: "MAI"}
+    @followers = [@user.following_users]
     @liked_posts = {title: "post10"}
   end
 
@@ -68,6 +68,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :name, :sns, :avatar, :avatar_cache)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :avatar_cache)
     end
 end

@@ -1,0 +1,60 @@
+<div class="flex-grow flex flex-row p-4 bg-gray-100">
+  <div class="flex flex-col justify-center items-center w-1/2 border-r-2">
+    <%= @user.name %>
+    <div class="w-3/4 h-3/4 bg-yellow-300 rounded-full relative shadow-md">
+      <%= image_tag @post.photo.image, class: "w-full h-full rounded-full" %>
+    </div>
+  </div>
+  <div class="w-1/2 pl-8 pr-8">
+      <div class="mb-4 text-right">
+        <div class="text-xl border-b-4 border-blue-400 pb-2 font-bold">感情パーセンタージ</div>
+      </div>
+      <div class="mb-4">
+        <%= content_tag :div, id: 'emotion-chart', data: { emotions: @data.to_json } do %><% end %>
+      </div>
+  </div>
+</div>
+
+<div class="flex flex-row p-4 bg-orange-400">
+  <div class="flex-grow flex flex-col items-center justify-center">
+    <div class="text-white font-bold mb-2 text-xl">採点</div>
+    <div class="text-6xl text-white"><%= @analyse_face_detail.smile%></div>
+  </div>
+</div>
+<div class="flex flex-row p-4 bg-green-400">
+  <% if @post.favorited?(@current_user) %>
+    <%= button_to "UnFavorite", post_favorites_path(@post), method: :delete, remote: true, class: "text-white py-2 px-4 rounded bg-blue-500 hover:bg-red-600 focus:outline-none focus:ring focus:ring-blue-200" %>
+  <% else %>
+    <%= button_to "Favorite", post_favorites_path(@post), method: :post, remote: true, class: "text-white py-2 px-4 rounded bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200" %>
+  <% end %>
+</div>
+<div class="flex flex-row p-4 bg-gray-100">
+  <div class="flex-grow flex flex-col items-center justify-center">
+    <div class="text-xl font-bold mb-2">コメント</div>
+  </div>
+</div>
+<div class="flex flex-col space-y-4">
+  <% if @comments.present? %>
+    <% @comments.each do |comment| %>
+      <div class="flex flex-row p-4 bg-gray-100">
+        <div class="flex-grow flex flex-col items-center justify-center">
+          <%= image_tag comment.user.avatar.url, size: '40x40', class: "rounded-full" %>
+          <div class="text-xs my-2"><%= comment.user.name %></div>
+          <%= comment.content %>
+          <% if current_user.id == comment.user_id %>
+            <%= button_to "Delete", post_comment_path(comment.post, comment), method: :delete, remote: true, "data-confirm" => "コメントを削除しますか", class: "text-xs bg-red-500 hover:bg-red-600 text-black py-1 px-2 rounded" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="flex flex-col">
+  <%= form_with model: [@post, @comment], local: false, class: "space-y-4" do |f| %>
+    <%= f.text_area :content, rows: '5', placeholder: "コメントを投稿しましょう！", class: "w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300" %>
+    <div class="text-right">
+      <%= f.submit "Submit", class: "py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-200" %>
+    </div>
+  <% end %>
+</div>
+

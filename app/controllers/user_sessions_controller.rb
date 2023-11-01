@@ -1,5 +1,5 @@
 class UserSessionsController < ApplicationController
-  skip_before_action :require_login, only: %i[create new]
+  skip_before_action :require_login, only: %i[create new guest_login]
   def new; end
 
   def create
@@ -12,7 +12,14 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-    logout
-    redirect_to login_path
+    session.delete(:user_id)
+  end
+
+  def guest_login
+    random_email = SecureRandom.hex(8) + '@example.com'
+    random_password = SecureRandom.hex(8)
+    user = User.create!(email: random_email, password: random_password, password_confirmation: random_password, name: 'ゲストユーザー', role: 'guest_user')
+    auto_login(user)
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 end

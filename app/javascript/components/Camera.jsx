@@ -33,6 +33,9 @@ export const Camera = () => {
       try {
         const response = await fetch('/photos/create', {
           method: 'POST',
+          headers: {
+            'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+          },
           body: formData
         });
   

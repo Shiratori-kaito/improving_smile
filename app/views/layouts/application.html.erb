@@ -8,15 +8,14 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <%= javascript_include_tag "graph", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
     <div id="root"></div>
     <% if logged_in? %>
-      <%= render 'shared/header' %>
+      <%= content_tag :div, id: "already-login", data: { id: current_user.id } do %><% end %>
     <% else %>
-      <%= render 'shared/before_login_header' %>
+      <div id="not-login"></div>
     <% end %>
     <%= yield %>
   </body>

@@ -2,11 +2,11 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
   mount_uploader :avatar, AvatarUploader
 
-  has_many :posts
-  has_many :photos
-  # has_many :active_friendships, class_name :'Friendship', foreign_key: :follower_id, dependent: :destroy, inverse_of: :follower
-  # has_many :passive_friendships, class_name :'Friendship', foreign_key: :followed_id, dependent: :destroy, inverse_of: :followed
-
+  has_many :posts, dependent: :destroy
+  has_many :photos, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  
   has_many :followers,
            class_name: 'Relationship',
            foreign_key: 'follower_id',
@@ -27,6 +27,10 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true, presence: true
   validates :name, presence: true, length: { maximum: 255 }
+
+  validates :reset_password_token, presence: true, uniqueness: true, allow_nil: true
+
+  enum :role => { general_user:0, guest_user:1}
 
   def follow(user_id)
     followers.create(following_id: user_id)
