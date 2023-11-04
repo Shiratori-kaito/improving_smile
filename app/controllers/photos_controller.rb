@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create]
   before_action :set_user, only: [:create, :detect_faces]
-  skip_before_action :require_login, only: %i[capture create detect_faces]
+  skip_before_action :require_signup, only: %i[capture create detect_faces]
+
 
   def capture;end
 
@@ -34,13 +34,16 @@ class PhotosController < ApplicationController
     })
   
     face_detail = response.face_details.first
-    @analyse_face_dateil = AnalyseFaceDetail.create!({
+    @analyse_face_detail = AnalyseFaceDetail.create!({
       photo_id: @photo.id,
       smile: face_detail[:smile][:confidence],
       sunglass: face_detail[:sunglasses][:value],
-      eye_open: face_detail[:eyes_open][:confidence],
-      mouth_open: face_detail[:mouth_open][:confidence],
-      eye_direction: face_detail[:eye_direction][:confidence]
+      eye_open: face_detail[:eyes_open][:value],
+      mouth_open: face_detail[:mouth_open][:value],
+      eye_direction_yaw: face_detail[:eye_direction][:yaw],
+      eye_direction_pitch: face_detail[:eye_direction][:pitch],
+      agerange_high: face_detail[:age_range][:high],
+      agerange_low: face_detail[:age_range][:low]
     })
 
     @emotion = face_detail.emotions
@@ -69,10 +72,8 @@ class PhotosController < ApplicationController
 
     @score = @analyse_face_emotion.happy.to_f - @analyse_face_emotion.sad.to_f - @analyse_face_emotion.angry.to_f - (@analyse_face_emotion.surprised.to_f / 2) + @analyse_face_emotion.fear.to_f + @analyse_face_emotion.confused.to_f + @analyse_face_emotion.disgusted.to_f
 
-    @emotions_comment = extra_comment(@analyse_face_emotion)
-
-
-
+    @analyse_face_emotion.emotion_comment = extra_comment(@analyse_face_emotion)
+    @analyse_face_emotion.save!
 
 
   end

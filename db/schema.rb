@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_01_031700) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_04_074550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,9 +48,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_031700) do
     t.boolean "sunglass"
     t.integer "eye_open"
     t.integer "mouth_open"
-    t.integer "eye_direction"
+    t.integer "eye_direction_yaw"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "eye_direction_pitch"
+    t.string "agerange_low"
+    t.string "agerange_high"
     t.index ["photo_id"], name: "index_analyse_face_details_on_photo_id"
   end
 
@@ -66,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_031700) do
     t.string "disgusted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "emotion_comment"
     t.index ["photo_id"], name: "index_analyse_face_emotions_on_photo_id"
   end
 

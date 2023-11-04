@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.includes(:user, :analyse_face_detail, :analyse_face_emotion).order(created_at: :desc)
+    @posts = Post.includes(:user, :analyse_face_detail, :analyse_face_emotion).page(params[:page]).per(9).order(created_at: :desc)
 
   end
 
@@ -31,9 +31,6 @@ class PostsController < ApplicationController
     }
     @comments = @post.comments.includes(:user).order(created_at: :desc)
     @comment = current_user.comments.new
-  end
-
-  def edit
   end
 
   def destory

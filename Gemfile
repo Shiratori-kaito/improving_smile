@@ -60,6 +60,8 @@ gem 'pry-rails'
 gem 'wicked'
 
 gem 'kaminari'
+
+gem 'rails-i18n'
 # Use Sass to process CSS
 # gem "sassc-rails"
 

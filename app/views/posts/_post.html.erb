@@ -2,7 +2,7 @@
   <%= link_to user_path(user) do %>
     <div class="flex items-center mb-2">
       <div class="w-16 h-16 bg-gray-200 rounded-full overflow-hidden">
-      <%= image_tag user.avatar.url, class: 'w-full h-full object-cover' %>
+      <%= image_tag (user.avatar.url), class: 'w-full h-full object-cover' %>
       </div>
       <div class="ml-4">
         <h2 class="text-xl font-bold"><%= user.name %></h2>
@@ -11,8 +11,8 @@
   <% end %>
   <%= link_to post_path(post), class: 'ml-auto text-gray-500' do %>
     <div class="ml-4">
-      <p class="text-gray-500">Post Content</p>
-      <p class="text-gray-500"><%= post.id %></p>
+      <p class="text-gray-500"><%= post.content%></p>
+      <p class="text-gray-500"><%=l post.created_at, format: :short%></p>
     </div>
     <div class="bg-gray-100 p-2 rounded-lg">
       <%= image_tag post.photo.image, class: 'w-full h-full object-cover' %>

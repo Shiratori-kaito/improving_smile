@@ -1,5 +1,6 @@
 class UserSessionsController < ApplicationController
   skip_before_action :require_login, only: %i[create new guest_login]
+  skip_before_action :require_signup, only: %i[create new guest_login destroy]
   def new; end
 
   def create

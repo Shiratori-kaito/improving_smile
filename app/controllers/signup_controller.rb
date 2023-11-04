@@ -1,5 +1,6 @@
 class SignupController < ApplicationController
   skip_before_action :require_login
+  skip_before_action :require_signup
 
   def step1
     @user = User.new
