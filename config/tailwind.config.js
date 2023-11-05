@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: [
     './app/views/**/*.html.erb',
@@ -5,6 +7,7 @@ module.exports = {
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.jsx',
   ],
+  important: true,
   theme: {
     extend: {
       backgroundImage: {
@@ -23,8 +26,13 @@ module.exports = {
           },
         },
       },
+      backgroundColor: {
+        'custom-blue': '#3B82F6',
+      },
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

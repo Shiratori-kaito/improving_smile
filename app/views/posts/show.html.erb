@@ -46,11 +46,11 @@
     </div>
   </div>
 </div>
-<div class="flex flex-row p-4 bg-green-400">
+<div class="flex flex-row p-4 ">
   <% if @post.favorited?(@current_user) %>
-    <%= button_to "UnFavorite", post_favorites_path(@post), method: :delete, remote: true, class: "text-white py-2 px-4 rounded bg-blue-500 hover:bg-red-600 focus:outline-none focus:ring focus:ring-blue-200" %>
+    <%= button_to "UnFavorite", post_favorites_path(@post), method: :delete, remote: true, class: "bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring focus:ring-blue-200" %>
   <% else %>
-    <%= button_to "Favorite", post_favorites_path(@post), method: :post, remote: true, class: "text-white py-2 px-4 rounded bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200" %>
+    <%= button_to "Favorite", post_favorites_path(@post), method: :post, remote: true, class: "bg-blue-500 text-white py-2 px-4 rounded  hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200" %>
   <% end %>
 </div>
 <div class="flex flex-row p-4 bg-gray-100">
