@@ -52,7 +52,7 @@ export default function AlreadyLogin({user}) {
       <div className="fixed w-full top-0 z-50 bg-yellow-400 h-15">
         <header className="flex justify-between py-1 w-full">
           <button onClick={handleHome} type="button" className="py-1">
-            <img src="/assets/camera.png" alt="logo"  />
+            <img src="/camera.png" alt="logo"  />
           </button>
           <h1 className="text-white text-5xl font-mono p-4">Smile-Improving</h1>
           {/* humbergerbutton */}
