@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_20_154449) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_04_074550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,9 +48,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_20_154449) do
     t.boolean "sunglass"
     t.integer "eye_open"
     t.integer "mouth_open"
-    t.integer "eye_direction"
+    t.integer "eye_direction_yaw"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "eye_direction_pitch"
+    t.string "agerange_low"
+    t.string "agerange_high"
     t.index ["photo_id"], name: "index_analyse_face_details_on_photo_id"
   end
 
@@ -66,7 +69,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_20_154449) do
     t.string "disgusted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "emotion_comment"
     t.index ["photo_id"], name: "index_analyse_face_emotions_on_photo_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_favorites_on_post_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -103,17 +126,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_20_154449) do
     t.string "crypted_password"
     t.string "salt"
     t.string "name", null: false
-    t.string "sns"
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_token_expires_at"
+    t.datetime "reset_password_email_sent_at"
+    t.integer "access_count_to_reset_password_page", default: 0
+    t.integer "role", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "analyse_face_details", "photos"
   add_foreign_key "analyse_face_emotions", "photos"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "posts"
+  add_foreign_key "favorites", "users"
   add_foreign_key "photos", "users"
   add_foreign_key "posts", "analyse_face_details"
   add_foreign_key "posts", "analyse_face_emotions"

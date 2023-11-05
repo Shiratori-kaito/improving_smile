@@ -1,22 +1,25 @@
-<div class="container mx-auto">
-  <div class="w-10/12 mx-auto">
-    <h1 class="text-4xl font-bold mb-6">ログイン</h1>
+<div class="container mx-auto p-6 bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="w-6/12 mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-4xl font-bold mb-6 text-center">ログイン</h1>
     <%= form_with url: login_path, local: true do |f| %>
       <div class="mb-4">
-        <%= f.label :email, class: 'text-lg font-semibold' %>
+        <%= f.label :email, class: 'block text-lg font-semibold mb-2' %>
         <%= f.text_field :email, class: 'w-full p-2 border rounded shadow-sm focus:outline-none focus:shadow-outline' %>
       </div>
       <div class="mb-4">
-        <%= f.label :password, class: 'text-lg font-semibold' %>
+        <%= f.label :password, class: 'block text-lg font-semibold mb-2' %>
         <%= f.password_field :password, class: 'w-full p-2 border rounded shadow-sm focus:outline-none focus:shadow-outline' %>
       </div>
       <div class="mb-6">
-        <%= f.submit 'ログイン', class: 'w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+        <%= f.submit 'ログイン', class: 'w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4' %>
       </div>
     <% end %>
-    <div class="text-right">
-      <%= link_to '登録ページへ', new_user_path, class: 'text-blue-500 hover:underline' %>
-      <a href="#" class="text-gray-500 hover:underline ml-4">パスワードをお忘れの方はこちら</a>
+    <% if logged_in? === false %>
+      <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'w-6/12 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' %>
+    <% end %>
+    <div class="text-right mt-4">
+      <%= link_to '登録ページへ', step1_signup_index_path, class: 'text-blue-500 hover:underline mr-4' %>
+      <%= link_to "パスワードをお忘れの方はこちら", new_password_reset_path, class: 'text-blue-500 hover:underline' %>
     </div>
   </div>
 </div>

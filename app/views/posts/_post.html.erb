@@ -1,24 +1,32 @@
 <div class="bg-white rounded-lg shadow p-4 mb-4">
-  <div class="flex items-center mb-2">
-    <div class="w-16 h-16 bg-gray-200 rounded-full overflow-hidden">
+  <%= link_to user_path(user) do %>
+    <div class="flex items-center mb-2">
+      <div class="w-16 h-16 bg-gray-200 rounded-full overflow-hidden">
+      <%= image_tag (user.avatar.url), class: 'w-full h-full object-cover' %>
+      </div>
+      <div class="ml-4">
+        <h2 class="text-xl font-bold"><%= user.name %></h2>
+      </div>
     </div>
+  <% end %>
+  <%= link_to post_path(post), class: 'ml-auto text-gray-500' do %>
     <div class="ml-4">
-      <h2 class="text-xl font-bold">User Name</h2>
-      <p class="text-gray-500">Post Content</p>
+      <p class="text-gray-500"><%= post.content%></p>
+      <p class="text-gray-500"><%=l post.created_at, format: :short%></p>
     </div>
-  </div>
-  <div class="bg-gray-100 p-2 rounded-lg">
-    <p class="text-gray-700">Post Details...</p>
-    <% data = {
-      "喜び" => analyse_face_emotion.happy,
-      "悲しむ" => analyse_face_emotion.sad,
-      "怒り" => analyse_face_emotion.angry,
-      "驚き" => analyse_face_emotion.surprised,
-      "落ち着き" => analyse_face_emotion.calm,
-      "恐れ" => analyse_face_emotion.fear,
-      "混乱" => analyse_face_emotion.confused,
-      "嫌悪" => analyse_face_emotion.disgusted
-    } %>
-    <%= content_tag :div, id: "emotion-chart", data: { emotions: data.to_json } do %><% end %>
-  </div>
+    <div class="bg-gray-100 p-2 rounded-lg">
+      <%= image_tag post.photo.image, class: 'w-full h-full object-cover' %>
+      <% data = {
+        "喜び" => analyse_face_emotion.happy,
+        "悲しむ" => analyse_face_emotion.sad,
+        "怒り" => analyse_face_emotion.angry,
+        "驚き" => analyse_face_emotion.surprised,
+        "落ち着き" => analyse_face_emotion.calm,
+        "恐れ" => analyse_face_emotion.fear,
+        "混乱" => analyse_face_emotion.confused,
+        "嫌悪" => analyse_face_emotion.disgusted
+      } %>
+      <%= content_tag :div, id: "emotion-chart-#{post.id}", data: { emotions: data.to_json } do %><% end %>
+    </div>
+  <% end %>
 </div>

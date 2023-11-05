@@ -1568,6 +1568,26 @@ GEM
     jsbundling-rails (1.2.1)
       railties (>= 6.0.0)
     jwt (2.7.1)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
+    letter_opener_web (1.4.1)
+      actionmailer (>= 3.2)
+      letter_opener (~> 1.0)
+      railties (>= 3.2)
     loofah (2.21.4)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -1595,6 +1615,8 @@ GEM
       net-protocol
     nio4r (2.5.9)
     nokogiri (1.15.4-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
@@ -1645,6 +1667,9 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails-i18n (7.0.8)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (7.0.8)
       actionpack (= 7.0.8)
       activesupport (= 7.0.8)
@@ -1687,6 +1712,8 @@ GEM
     stringio (3.0.8)
     tailwindcss-rails (2.0.31-arm64-darwin)
       railties (>= 6.0.0)
+    tailwindcss-rails (2.0.31-x86_64-linux)
+      railties (>= 6.0.0)
     thor (1.2.2)
     timeout (0.4.0)
     turbo-rails (1.5.0)
@@ -1705,12 +1732,15 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    wicked (2.0.0)
+      railties (>= 3.0.7)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.12)
 
 PLATFORMS
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   aws-sdk (~> 3)
@@ -1722,11 +1752,14 @@ DEPENDENCIES
   debug
   jbuilder
   jsbundling-rails
+  kaminari
+  letter_opener_web (~> 1.0)
   mini_magick
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
   rails (= 7.0.8)
+  rails-i18n
   selenium-webdriver
   sorcery
   sprockets-rails
@@ -1735,6 +1768,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
+  wicked
 
 RUBY VERSION
    ruby 3.2.2p53

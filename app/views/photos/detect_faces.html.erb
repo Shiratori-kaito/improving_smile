@@ -1,39 +1,68 @@
-<%= form_with model:Post.new,url: posts_path, local: true do |form| %>
-  <div class="flex-grow flex flex-row p-4 bg-gray-100">
-    <div class="flex flex-col justify-center items-center w-1/2 border-r-2">
-      <div class="w-3/4 h-3/4 bg-yellow-300 rounded-full relative shadow-md">
-        <%= image_tag @image, class: "w-full h-full rounded-full" %>
+<div class="h-hull mt-20 ">
+  <%= form_with model:Post.new,url: posts_path, local: true do |form| %>
+    <div class="mx-3 bg-white flex justify-center rounded-lg shadow-lg bg-yellow-100">
+      <%= image_tag @image, class: "w-[30%] h-[30%] rounded-lg" %>
+    </div>
+    <div class="w-full flex justify-center text-center bg-yellow-300 p-6 mb-3 ">
+      <%= image_tag "light.png", class:"w-10 h-10"%>
+      <h2 class="font-bold text-xl pt-1 pr-3">あなたの診断結果は...</h2>
+      <h2 class="font-bold text-3xl pt-1">【<%= @analyse_face_emotion.emotion_comment %>】</h2>
+    </div>
+    <div class="flex ">
+      <div class="flex-1 border-r-2">
+          <div class="mb-4 text-right">
+            <div class="text-3xl border-b-4 border-blue-400 pb-2 font-bold">感情パーセンテージ</div>
+          </div>
+          <div class="mb-4">
+            <%= content_tag :div, id: 'emotion-chart', data: { emotions: @data.to_json } do %><% end %>
+          </div>
+      </div>
+      <div class="flex-1 pl-8 pr-8">
+        <div class="bg-orange-200 rounded flex-grow flex flex-col items-center ">
+          <div class="text-white font-bold mb-2 text-2xl">採 点</div>
+          <div class="text-6xl text-white pb-3"><%= @analyse_face_emotion.score %></div>
+        </div>
+        <div class="bg-orange-200 rounded flex-grow flex flex-row items-center ">
+          <div class="flex-1 border-r-2">
+            <div class="text-white font-bold mb-2 text-center text-xl">目線の向き（上下）</div>
+            <div class="text-6xl text-white text-center pb-3"><%= @analyse_face_detail.eye_direction_pitch_description%></div>
+          </div>
+          <div class="flex-1">
+            <div class="text-white font-bold mb-2 text-center text-xl">目線の向き（左右）</div>
+            <div class="text-6xl text-white text-center pb-3 "><%= @analyse_face_detail.eye_direction_yaw_description %></div>
+          </div>
+        </div>
+        <div class="bg-orange-200 rounded flex-grow flex flex-col items-center ">
+          <div class="text-white font-bold mb-2 text-2xl">目の開き</div>
+          <div class="text-5xl text-white pb-3"><%= @analyse_face_detail.eye_open_judge %></div>
+        </div>
+        <div class="bg-orange-200 rounded flex-grow flex flex-col items-center ">
+          <div class="text-white font-bold mb-2 text-2xl">顔年齢</div>
+          <div class="text-5xl text-white pb-3 "><%= @analyse_face_detail.age_range %></div>
+        </div>
+        <div class="bg-orange-200 rounded flex-grow flex flex-col items-center ">
+          <div class="text-white font-bold mb-2 text-2xl">口の開閉</div>
+          <div class="text-5xl text-white pb-3"><%= @analyse_face_detail.mouth_open_judge %></div>
+        </div>
       </div>
     </div>
-    <div class="w-1/2 pl-8 pr-8">
-        <div class="mb-4 text-right">
-          <div class="text-xl border-b-4 border-blue-400 pb-2 font-bold">感情パーセンタージ</div>
-        </div>
-        <div class="mb-4">
-          <%= content_tag :div, id: 'emotion-chart', data: { emotions: @data.to_json } do %><% end %>
-        </div>
+    <div class="flex-grow flex flex-col items-center justify-center mb-20">
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.hidden_field :analyse_face_detail_id, value: @analyse_face_detail.id %>
+      <%= form.hidden_field :analyse_face_emotion_id, value: @analyse_face_emotion.id %>
     </div>
-  </div>
+    <div class="flex items-center justify-center">
+      <% if current_user.role === "guest_user" %>
+        <div class="flex item-center justify-center mt-5 bg-lime-100 mb-20 p-5 rounded-lg shadow-2xl">
+          <%= link_to 'ログイン', login_path, class:"text-lime-600 font-bold text-3xl" %>
+          <p class="ml-3 pt-2 text-black">すると投稿できます！</p>
+        </div>
+      <% end %>
+    </div>
+    <div class="fixed bottom-0  w-full z-50 flex justify-center items-center bg-gray-200 py-2 px-4 shadow-md">
+      <%= form.submit '投 稿', class: "bg-white border-2 border-black text-xl px-16 py-2 rounded shadow-lg transform transition-transform hover:scale-105" %>
+      <%= link_to "シェア", "https://twitter.com/share?url=#{ request.url }&text=【君の笑顔は...】%0a%0a#{@score}点！", target: '_blank', class: "bg-white border-2 border-black text-xl px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105"  %>
+    </div>
+  <% end %>
+</div>
 
-  <div class="flex flex-row p-4 bg-orange-400">
-    <div class="flex-grow flex flex-col items-center justify-center">
-      <div class="text-white font-bold mb-2 text-xl">採点</div>
-      <div class="text-6xl text-white"><%= @analyse_face_dateil.smile%></div>
-    </div>
-    #コメント入力欄を追加
-    <div class="flex-grow flex flex-col items-center justify-center">
-      <div class="text-white font-bold mb-2 text-xl">コメント</div>
-        <div class="text-6xl text-white">
-          <%= form.text_field :content, class: "w-64 h-32 rounded-lg" %>
-          <%= form.hidden_field :user_id, value: current_user.id %>
-          <%= form.hidden_field :analyse_face_detail_id, value: @analyse_face_dateil.id %>
-          <%= form.hidden_field :analyse_face_emotion_id, value: @analyse_face_emotion.id %>
-        </div>
-      </div>
-    </div>
-    <div class="flex items-center justify-center w-1/4">
-      <%= form.submit '投稿',class: 'bg-blue-600 text-white px-4 py-2 rounded shadow-lg transform transition-transform hover:scale-105', method: :post %>
-      <button class="bg-blue-600 text-white px-4 py-2 rounded shadow-lg transform transition-transform hover:scale-105">Next!</button>
-    </div>
-  </div>
-<% end %>

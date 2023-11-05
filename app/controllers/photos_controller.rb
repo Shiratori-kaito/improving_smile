@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create]
   before_action :set_user, only: [:create, :detect_faces]
+  skip_before_action :require_signup, only: %i[capture create detect_faces]
+
 
   def capture;end
 
@@ -33,18 +34,21 @@ class PhotosController < ApplicationController
     })
   
     face_detail = response.face_details.first
-    @analyse_face_dateil = AnalyseFaceDetail.create({
+    @analyse_face_detail = AnalyseFaceDetail.create!({
       photo_id: @photo.id,
       smile: face_detail[:smile][:confidence],
       sunglass: face_detail[:sunglasses][:value],
-      eye_open: face_detail[:eyes_open][:confidence],
-      mouth_open: face_detail[:mouth_open][:confidence],
-      eye_direction: face_detail[:eye_direction][:confidence]
+      eye_open: face_detail[:eyes_open][:value],
+      mouth_open: face_detail[:mouth_open][:value],
+      eye_direction_yaw: face_detail[:eye_direction][:yaw],
+      eye_direction_pitch: face_detail[:eye_direction][:pitch],
+      agerange_high: face_detail[:age_range][:high],
+      agerange_low: face_detail[:age_range][:low]
     })
 
     @emotion = face_detail.emotions
 
-    @analyse_face_emotion = AnalyseFaceEmotion.create({
+    @analyse_face_emotion = AnalyseFaceEmotion.create!({
     photo_id: @photo.id,
     happy: (@emotion.find { |e| e[:type] == 'HAPPY' }&.dig(:confidence) * 100).round,
     sad: (@emotion.find { |e| e[:type] == 'SAD' }&.dig(:confidence) * 100).round,
@@ -57,7 +61,7 @@ class PhotosController < ApplicationController
     })
     @data = {
       "喜び" => @analyse_face_emotion.happy,
-      "悲しむ" => @analyse_face_emotion.sad,
+      "悲しみ" => @analyse_face_emotion.sad,
       "怒り" => @analyse_face_emotion.angry,
       "驚き" => @analyse_face_emotion.surprised,
       "落ち着き" => @analyse_face_emotion.calm,
@@ -66,9 +70,10 @@ class PhotosController < ApplicationController
       "嫌悪" => @analyse_face_emotion.disgusted
     }
 
+    @score = @analyse_face_emotion.happy.to_f - @analyse_face_emotion.sad.to_f - @analyse_face_emotion.angry.to_f - (@analyse_face_emotion.surprised.to_f / 2) + @analyse_face_emotion.fear.to_f + @analyse_face_emotion.confused.to_f + @analyse_face_emotion.disgusted.to_f
 
-
-
+    @analyse_face_emotion.emotion_comment = extra_comment(@analyse_face_emotion)
+    @analyse_face_emotion.save!
 
 
   end
@@ -81,5 +86,68 @@ class PhotosController < ApplicationController
 
   def set_user
     @user = User.find(current_user.id)
+  end
+
+  def extra_comment(analyse_face_emotion)
+    emotion_params = {
+        happy: analyse_face_emotion.happy,
+        sad: analyse_face_emotion.sad,
+        angry: analyse_face_emotion.angry,
+        surprised: analyse_face_emotion.surprised,
+        calm: analyse_face_emotion.calm,
+        fear: analyse_face_emotion.fear,
+        confused: analyse_face_emotion.confused,
+        disgusted: analyse_face_emotion.disgusted
+    }
+
+    emotions = {
+      happy: "君の笑顔は最高だよ！",
+      sad: "大丈夫だよ、ここにいるよ。",
+      angry: "深呼吸して、落ち着く時間を持とう。",
+      surprised: "何か驚くようなことがあったのかな？",
+      calm: "落ち着いているね。",
+      fear: "大丈夫、一緒に乗り越えていこう。",
+      confused: "何か疑問や不安があるなら、聞いてね。",
+      disgusted: "何か気に食わないことがあったかな？一緒に解決しよう。"
+    }
+
+    conbined_emotions = {
+      happy_sad: "君の笑顔の裏には深い感情があるんだね。",
+      happy_angry: "エネルギッシュだけど、少し刺激的な一日だったかな？",
+      happy_surprised: "何かうれしいサプライズがあったのかな？",
+      happy_fear: "楽しいことと同時に何か心配事もあるのかな？",
+      happy_confused: "楽しんでいるけど、同時に何か考え事をしているのかな？",
+      happy_disgusted: "笑っているけど、何か気に入らないこともあったのかな？",
+      sad_angry: "辛いことやフラストレーションがたまっているのかな？",
+      sad_surprised: "予想外のことで悲しんでいるのかな？",
+      sad_fear: "不安や心配が多い日だったのかな？",
+      sad_confused: "何か疑問や不安を感じているのかな？",
+      sad_disgusted: "何か気に食わないこととともに、悲しみも感じているのかな？",
+      angry_surprised: "何か予想外のことに怒っているのかな？",
+      angry_fear: "不安とフラストレーションが交錯しているのかな？",
+      angry_confused: "何か理解できないことにイライラしているのかな？",
+      angry_disgusted: "何か気に入らないことに怒りを感じているのかな？",
+      surprised_fear: "何か驚くようなことが起こり、それに対して不安を感じているのかな？",
+      surprised_confused: "驚いたこととともに、何か混乱しているのかな？",
+      surprised_disgusted: "驚きの中で、何か気に入らないこともあったのかな？",
+      fear_confused: "不安と疑問が頭の中を駆け巡っているのかな？",
+      fear_disgusted: "何か心配事とともに、嫌なこともあったのかな？",
+      confused_disgusted: "何か理解できないことと、気に食わないことが重なっているのかな？"
+    }
+      # 5000以上の感情を抽出
+    high_emotions = emotion_params.select { |_k, v| v.to_i > 5000 }
+
+    # 高い感情が1つだけの場合
+    if high_emotions.length == 1
+      emotion_key = high_emotions.keys.first
+      emotions[emotion_key] || "コメントが定義されていません。"
+    elsif high_emotions.length > 1
+      # 上位2つの感情を抽出
+      top_2_emotions = high_emotions.sort_by { |_k, v| -v }.take(2).map(&:first)
+      combined_key = "#{top_2_emotions[0]}_#{top_2_emotions[1]}".to_sym
+      return conbined_emotions[combined_key] || "コメントが定義されていません。"
+    else
+      return "特に感情は観測されませんでした。"
+    end
   end
 end

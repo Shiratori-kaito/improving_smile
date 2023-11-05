@@ -5,6 +5,7 @@ import {Allcameras} from './components/Allcameras';
 import {Camera} from './components/Camera';
 import { UserDashboard } from './components/UserDashboard';
 import {EmotionChart} from './components/EmotionChart';
+import AlreadyLogin from './components/AlreadyLogin';
 
 
 
@@ -12,16 +13,18 @@ import {EmotionChart} from './components/EmotionChart';
 //id＝user-dataがあった場合のみ、UserDashboardをレンダリングする
 if (document.getElementById("user-data")) {
   const userDataElement = document.getElementById("user-data");
-  const postsData = JSON.parse(userDataElement.getAttribute('data-posts'));
-  const followersData = JSON.parse(userDataElement.getAttribute('data-followers'));
-  const likedPostsData = JSON.parse(userDataElement.getAttribute('data-liked-posts'));
-  const userPage = createRoot(userDataElement);
+  const postsString = userDataElement.getAttribute('data-posts');
+  const followersString = userDataElement.getAttribute('data-followers'); // 修正点
+  const likedPostsString = userDataElement.getAttribute('data-liked-posts');
 
-  userPage.render(
-    <UserDashboard
-      posts={postsData}
-      followers={followersData}
-      likedPosts={likedPostsData} />
+  const posts = JSON.parse(postsString.replace(/&quot;/g, '"'));
+  const followers = JSON.parse(followersString.replace(/&quot;/g, '"'));
+  const likedPosts = JSON.parse(likedPostsString.replace(/&quot;/g, '"'));
+
+
+  const userDashboardRoot = createRoot(userDataElement);
+  userDashboardRoot.render(
+    <UserDashboard posts={posts} followers={followers} likedPosts={likedPosts} />
   );
 }
 
@@ -35,16 +38,37 @@ if (document.getElementById("capture")) {
   );
 }
 
-if (document.getElementById("emotion-chart")) {
-  const emotionChart = document.getElementById("emotion-chart");
+
+const emotionCharts = document.querySelectorAll(`[id^='emotion-chart']`);
+console.log(emotionCharts);
+emotionCharts.forEach(emotionChart => {
   const emotionString = emotionChart.getAttribute('data-emotions');
   const emotionData = JSON.parse(emotionString.replace(/&quot;/g, '"'));
+  
   const emotionChartPage = createRoot(emotionChart);
-  console.log(emotionData);
+
   emotionChartPage.render(
     <EmotionChart emotions={emotionData}/>
   );
+});
+
+//id=already-loginがあった場合、AlreadyLoginをレンダリングするが、id=not-loginがあった場合、NotLoginをレンダリングする
+if (document.getElementById("already-login")) {
+  const alreadyLoginData = document.getElementById("already-login");
+  const alreadyLoginId = alreadyLoginData.getAttribute('data-id');
+  const alreadyLoginRoot = createRoot(alreadyLoginData);
+  alreadyLoginRoot.render(
+    <AlreadyLogin user={alreadyLoginId}/>
+  );
 }
+
+
+
+
+
+
+
+
 
 
 

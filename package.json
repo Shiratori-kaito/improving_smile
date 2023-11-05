@@ -2,6 +2,10 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.16",
+    "@mui/material": "^5.14.16",
     "autoprefixer": "^10.4.16",
     "aws-sdk": "^2.1473.0",
     "chart.js": "^4.4.0",
