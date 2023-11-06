@@ -1,13 +1,18 @@
 class FavoritesController < ApplicationController
+  before_action :set_post, only: [:destroy]
 
   def create
     @favorite = current_user.favorites.new(post_id: params[:post_id])
     @favorite.save
-    redirect_to("/posts/#{params[:post_id]}")
   end
 
   def destroy
-    current_user.favorites.find_by(post_id: params[:post_id]).destroy!
-    redirect_to("/posts/#{params[:post_id]}")
+    favorite = @post.favorites.find_by(user_id: current_user.id)
+    favorite.destroy!
+
   end
+end
+
+def set_post
+  @post = Post.find(params[:post_id])
 end

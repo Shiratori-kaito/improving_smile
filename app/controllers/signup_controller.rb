@@ -21,7 +21,6 @@ class SignupController < ApplicationController
       password: session[:password],
       password_confirmation: session[:password_confirmation],
       name: user_params[:name],
-      sns: user_params[:sns],
       avatar: user_params[:avatar]
     )
     if @user.save
@@ -37,7 +36,7 @@ class SignupController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation,:name, :sns, :avatar, :avatar_cache)
+    params.require(:user).permit(:email, :password, :password_confirmation,:name, :avatar, :avatar_cache)
   end
 
 end

@@ -147,7 +147,7 @@ class PhotosController < ApplicationController
       combined_key = "#{top_2_emotions[0]}_#{top_2_emotions[1]}".to_sym
       return conbined_emotions[combined_key] || "コメントが定義されていません。"
     else
-      return "特に感情は観測されませんでした。"
+      return "いろんな感情が入り混じっているのかな？"
     end
   end
 end

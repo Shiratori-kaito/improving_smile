@@ -47,6 +47,7 @@
       </div>
     </div>
     <div class="flex-grow flex flex-col items-center justify-center mb-20">
+      <%= form.hidden_field :photo_id, value: @photo.id %>
       <%= form.hidden_field :user_id, value: current_user.id %>
       <%= form.hidden_field :analyse_face_detail_id, value: @analyse_face_detail.id %>
       <%= form.hidden_field :analyse_face_emotion_id, value: @analyse_face_emotion.id %>

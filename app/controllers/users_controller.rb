@@ -34,9 +34,10 @@ class UsersController < ApplicationController
   def show
     @current_user = current_user
     @user = User.find(params[:id])
-    @posts = @user.posts.order(created_at: :desc)
-    @followers = [@user.following_users]
-    @liked_posts = {title: "post10"}
+    @posts = @user.posts
+    @followers = @user.following_users
+    @liked_posts = @user.favorites
+
   end
 
   # PATCH/PUT /users/1 or /users/1.json

@@ -46,39 +46,39 @@
     </div>
   </div>
 </div>
-<div class="flex flex-row p-4 bg-green-400">
-  <% if @post.favorited?(@current_user) %>
-    <%= button_to "UnFavorite", post_favorites_path(@post), method: :delete, remote: true, class: "text-white py-2 px-4 rounded bg-blue-500 hover:bg-red-600 focus:outline-none focus:ring focus:ring-blue-200" %>
-  <% else %>
-    <%= button_to "Favorite", post_favorites_path(@post), method: :post, remote: true, class: "text-white py-2 px-4 rounded bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200" %>
-  <% end %>
-</div>
-<div class="flex flex-row p-4 bg-gray-100">
+<%= content_tag :div, id: 'favorite', data: { id: @post.id } do %><% end %>
+
+<div class="flex flex-col p-4 bg-gray-200">
   <div class="flex-grow flex flex-col items-center justify-center">
     <div class="text-xl font-bold mb-2">コメント</div>
   </div>
-</div>
-<div class="flex flex-col space-y-4">
-  <% if @comments.present? %>
-    <% @comments.each do |comment| %>
-      <div class="flex flex-row p-4 bg-gray-100">
-        <div class="flex-grow flex flex-col items-center justify-center">
-          <%= image_tag comment.user.avatar.url, size: '40x40', class: "rounded-full" %>
-          <div class="text-xs my-2"><%= comment.user.name %></div>
-          <%= comment.content %>
+  <div class="space-y-4 px-10">
+    <% if @comments.present? %>
+      <% @comments.each do |comment| %>
+        <div class="flex items-center justify-center space-x-3 p-4 bg-gray-100 rounded-lg border-2 ">
+          <div class="shrink-0">
+            <%= image_tag comment.user.avatar.url, width: '60', height: '60', class: "rounded-full" %>
+          </div>
+          <div class="flex-grow">
+            <div class="text-xl font-medium"><%= link_to comment.user.name, user_path(comment.user.id) %></div>
+            <div class="text-2xl pl-5"><%= comment.content %></div>
+          </div>
+          <!-- 削除ボタン -->
           <% if current_user.id == comment.user_id %>
-            <%= button_to "Delete", post_comment_path(comment.post, comment), method: :delete, remote: true, "data-confirm" => "コメントを削除しますか", class: "text-xs bg-red-500 hover:bg-red-600 text-black py-1 px-2 rounded" %>
+            <div class="shrink-0">
+              <%= button_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, "data-confirm" => "コメントを削除しますか？", class: "text-xs bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded" %>
+            </div>
           <% end %>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 <div class="flex flex-col">
   <%= form_with model: [@post, @comment], local: false, class: "space-y-4" do |f| %>
     <%= f.text_area :content, rows: '5', placeholder: "コメントを投稿しましょう！", class: "w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300" %>
     <div class="text-right">
-      <%= f.submit "Submit", class: "py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-200" %>
+      <%= f.submit "コメント", class: "py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-200" %>
     </div>
   <% end %>
 </div>

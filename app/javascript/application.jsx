@@ -6,6 +6,7 @@ import {Camera} from './components/Camera';
 import { UserDashboard } from './components/UserDashboard';
 import {EmotionChart} from './components/EmotionChart';
 import AlreadyLogin from './components/AlreadyLogin';
+import {Favorite} from './components/Favorite';
 
 
 
@@ -40,13 +41,11 @@ if (document.getElementById("capture")) {
 
 
 const emotionCharts = document.querySelectorAll(`[id^='emotion-chart']`);
-console.log(emotionCharts);
 emotionCharts.forEach(emotionChart => {
   const emotionString = emotionChart.getAttribute('data-emotions');
   const emotionData = JSON.parse(emotionString.replace(/&quot;/g, '"'));
   
   const emotionChartPage = createRoot(emotionChart);
-
   emotionChartPage.render(
     <EmotionChart emotions={emotionData}/>
   );
@@ -62,7 +61,14 @@ if (document.getElementById("already-login")) {
   );
 }
 
-
+if(document.getElementById("favorite")){
+  const favoriteElement = document.getElementById("favorite");
+  const favoritePostId = favoriteElement.getAttribute('data-id');
+  const favoriteRoot = createRoot(favoriteElement);
+  favoriteRoot.render(
+    <Favorite post={favoritePostId}/>
+  );
+}
 
 
 
