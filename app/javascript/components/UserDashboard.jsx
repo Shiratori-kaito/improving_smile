@@ -1,25 +1,34 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { useState } from 'react';
-import { UserPosts } from './UserPosts';
+import React, { useState } from 'react';
 import { FollowingUsers } from './FollowingUsers';
-import { LikedPosts } from './LikedPosts';
+import { FollowerUsers } from './FollowerUsers'; // FollowerUsers コンポーネントも必要です。
 
-export const UserDashboard = ({ posts, followers, likedPosts }) => {
-  const [activeTab, setActiveTab] = useState("UserPosts");
+export const UserDashboard = ({ followers, countFollowers, followings, countFollowings }) => {
+  const [activeTab, setActiveTab] = useState(null);
+  console.log(followers);
+  console.log(followings);
+  const toggleTab = (tabName) => {
+    // 現在のタブがすでにアクティブな場合は閉じるために null をセットする
+    setActiveTab(activeTab === tabName ? null : tabName);
+  };
 
   return (
     <>
       <div>
-        <button onClick={() => setActiveTab("UserPosts")}>自分の投稿一覧</button>
-        <button onClick={() => setActiveTab("FollowingUsers")}>フォロー中のユーザー</button>
-        <button onClick={() => setActiveTab("LikedPosts")}>いいねした投稿</button>
+        <button onClick={() => toggleTab("FollowingUsers")} style={{
+          fontSize: "1rem", // textSize ではなく fontSize を使用する
+          margin: "5px", // margin の値は "0 5px 0 0" のように書く
+
+        }}>{countFollowings}フォロー</button>
+        <button onClick={() => toggleTab("FollowerUsers")} style={{
+          fontSize: "1rem", // textSize ではなく fontSize を使用する
+          margin: "5px", // margin の値は "0 5px 0 0" のように書く
+
+        }}>{countFollowers}フォロワー</button>
       </div>
 
       <div>
-        {activeTab === "UserPosts" && <UserPosts posts={posts}  />}
-        {activeTab === "FollowingUsers" && <FollowingUsers followers={followers} />}
-        {activeTab === "LikedPosts" && <LikedPosts likedPosts={likedPosts} />}
+        {activeTab === "FollowingUsers" && <FollowingUsers followings={followings} />}
+        {activeTab === "FollowerUsers" && <FollowerUsers followers={followers} />}
       </div>
     </>
   );

@@ -1,31 +1,32 @@
-<div class="container mx-auto mt-20 p-4">
+<div class="mt-20 p-4">
   <div class="flex justify-center items-center flex-col">
     <%= image_tag @user.avatar.url, class: "rounded-full w-32 h-32" %>
     <h2 class="text-2xl mt-2"><%= @user.name %></h2>
   </div>
   <div class="flex justify-center items-center mt-4">
     <div class="flex flex-col items-center">
-      <% unless @user == @current_user %>
-        <% if @current_user.following?(@user) %>
-          <%= button_to "フォロー解除", user_relationships_path(@user), method: :delete, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
-        <% else %>
-          <%= button_to "フォローする", user_relationships_path(@user), method: :post, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+      <div class="flex flex-row">
+        <% unless @user == @current_user %>
+          <% if @current_user.following?(@user) %>
+            <%= button_to "フォロー解除", user_relationships_path(@user), method: :delete, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+          <% else %>
+            <%= button_to "フォローする", user_relationships_path(@user), method: :post, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+          <% end %>
         <% end %>
-      <% end %>
-      <div class="mt-2">
-        <span class="mr-2"><%= @user.following_users.count %> フォロー</span>
-        <span><%= @user.follower_users.count %> フォロワー</span>
+        <%= link_to "いいねした投稿", liked_posts_user_path(@user), class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ml-3" %>
+      </div>
+      <div class="mt-2 flex flex-row">
+        <%= content_tag :div, id: "user-data",data: {followings: @followings.to_json ,countFollowings: @user.following_users.count, followers: @followers, countFollowers: @user.follower_users.count  } do%><% end %>
       </div>
     </div>
   </div>
   <div class="mt-4">
-    <div class="flex justify-around border-b-2">
-      <%= content_tag :div, id: "user-data",
-      data: {
-        posts: @posts.to_json,
-        followers: @followers.to_json,
-        liked_posts: @liked_posts.to_json
-      } do %><% end %>
+    <div class="flex border-b-2">
+      <div class="flex-grow grid grid-cols-1 md:grid-cols-3 gap-4">
+        <% @posts.each do |post| %>
+          <%= render 'posts/post',post: post, user: post.user, analyse_face_emotion: post.analyse_face_emotion, analyse_face_detail: post.analyse_face_detail  %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

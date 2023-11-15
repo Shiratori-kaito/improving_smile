@@ -7,7 +7,6 @@ module.exports = {
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.jsx',
   ],
-  important: true,
   theme: {
     extend: {
       backgroundImage: {
@@ -25,9 +24,6 @@ module.exports = {
             backgroundPosition: '360px -360px',
           },
         },
-      },
-      backgroundColor: {
-        'custom-blue': '#3B82F6',
       },
     },
   },

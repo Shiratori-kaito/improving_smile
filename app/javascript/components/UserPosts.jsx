@@ -1,8 +1,10 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-
+import React, { useState, useEffect, useInsertionEffect } from 'react';
 
 export const UserPosts = ({posts}) => {
+  const flatPosts = posts.flat();
+  console.log(flatPosts);
+  const user = flatPosts[0].user;
+
   return (
     <div>
       {posts.map((post) => (

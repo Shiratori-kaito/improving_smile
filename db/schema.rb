@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_04_074550) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_12_170031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,8 +106,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_04_074550) do
     t.datetime "updated_at", null: false
     t.bigint "analyse_face_detail_id"
     t.bigint "analyse_face_emotion_id"
+    t.bigint "photo_id"
+    t.boolean "blur"
     t.index ["analyse_face_detail_id"], name: "index_posts_on_analyse_face_detail_id"
     t.index ["analyse_face_emotion_id"], name: "index_posts_on_analyse_face_emotion_id"
+    t.index ["photo_id"], name: "index_posts_on_photo_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -149,5 +152,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_04_074550) do
   add_foreign_key "photos", "users"
   add_foreign_key "posts", "analyse_face_details"
   add_foreign_key "posts", "analyse_face_emotions"
+  add_foreign_key "posts", "photos"
   add_foreign_key "posts", "users"
 end

@@ -1,4 +1,5 @@
-class PostsController < ApplicationController
+class PostsController < ApplicationController 
+  before_action :set_post, only: [:show, :destroy]
   def index
     @posts = Post.includes(:user, :analyse_face_detail, :analyse_face_emotion).page(params[:page]).per(9).order(created_at: :desc)
 
@@ -14,7 +15,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @user = User.find(@post.user_id)
     @current_user = current_user
     @analyse_face_detail = AnalyseFaceDetail.find(@post.analyse_face_detail_id)
@@ -31,17 +31,21 @@ class PostsController < ApplicationController
     }
     @comments = @post.comments.includes(:user).order(created_at: :desc)
     @comment = current_user.comments.new
+    @favorite_counts = @post.favorites.count
   end
 
-  def destory
-    @post = Post.find(params[:id])
+  def destroy
     @post.destroy
-    redirect_to posts_path, notice: '投稿を削除しました'
   end
+  
 
   private
 
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
   def post_params
-    params.require(:post).permit(:content, :user_id, :analyse_face_detail_id, :analyse_face_emotion_id)
+    params.require(:post).permit(:content, :blur, :user_id, :analyse_face_detail_id, :analyse_face_emotion_id, :photo_id)
   end
 end

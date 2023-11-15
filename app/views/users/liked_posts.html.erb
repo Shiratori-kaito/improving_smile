@@ -1,0 +1,29 @@
+<div class="mt-20 p-4">
+  <div class="flex justify-center items-center flex-col">
+    <%= image_tag @user.avatar.url, class: "rounded-full w-32 h-32" %>
+    <h2 class="text-2xl mt-2"><%= @user.name %></h2>
+  </div>
+  <div class="flex justify-center items-center mt-4">
+    <div class="flex flex-col items-center">
+      <% unless @user == @current_user %>
+        <% if @current_user.following?(@user) %>
+          <%= button_to "フォロー解除", user_relationships_path(@user), method: :delete, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+        <% else %>
+          <%= button_to "フォローする", user_relationships_path(@user), method: :post, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+        <% end %>
+      <% end %>
+      <div class="mt-2 flex flex-row">
+        <%= content_tag :div, id: "user-data",data: {followings: @followings.to_json ,countFollowings: @user.following_users.count, followers: @followers, countFollowers: @user.follower_users.count  } do%><% end %>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4">
+    <div class="flex border-b-2">
+      <div class="flex-grow grid grid-cols-1 md:grid-cols-3 gap-4">
+        <% @liked_posts.each do |liked_post| %>
+          <%= render 'posts/post',post: liked_post.post, user: liked_post.post.user, analyse_face_emotion: liked_post.post.analyse_face_emotion  %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

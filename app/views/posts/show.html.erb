@@ -1,14 +1,20 @@
-<div class="h-hull mt-20 ">
-  <div class="mx-3 bg-white flex justify-center rounded-lg shadow-lg bg-yellow-100">
-    <%= image_tag @post.photo.image, class: "w-[30%] h-[30%] rounded-lg" %>
+<div class="h-hull mt-20">
+  <div class="bg-yellow-100">
+    <div class="relative  mx-3 flex justify-center rounded-lg">
+      <%= image_tag @post.photo.image, class: "w-[50%] h-[50%] rounded-lg #{"blur-[5px]" if @post.user_id != current_user.id && @post.blur}" %>
+      <%= content_tag :div, id: 'favorite', data: { id: @post.id, count: @favorite_counts } do %><% end %>
+      <% if @post.user_id == current_user.id %>
+        <%= content_tag :div, id: 'trash', data: { id: @post.id } do %><% end %>
+      <% end %>
+    </div>
+    <div class="w-full flex justify-center text-center bg-yellow-300 p-6 mt-7 mb-7 ">
+      <%= image_tag "light.png", class:"w-20 h-20"%>
+      <h2 class="font-bold text-3xl pt-1 pr-3 ">あなたの診断結果は...</h2>
+      <h2 class="font-bold text-5xl pt-1">【<%= @post.analyse_face_emotion.emotion_comment %>】</h2>
+    </div>
   </div>
-  <div class="w-full flex justify-center text-center bg-yellow-300 p-6 mb-3 ">
-    <%= image_tag "light.png", class:"w-10 h-10"%>
-    <h2 class="font-bold text-xl pt-1 pr-3">あなたの診断結果は...</h2>
-    <h2 class="font-bold text-3xl pt-1">【<%= @post.analyse_face_emotion.emotion_comment %>】</h2>
-  </div>
-  <div class="flex">
-    <div class="flex-1 border-r-2">
+  <div class="flex ">
+    <div class="w-3/5 p-5 border-r-2 ml-10">
         <div class="mb-4 text-right">
           <div class="text-3xl border-b-4 border-blue-400 pb-2 font-bold">感情パーセンテージ</div>
         </div>
@@ -16,69 +22,56 @@
           <%= content_tag :div, id: 'emotion-chart', data: { emotions: @data.to_json } do %><% end %>
         </div>
     </div>
-    <div class="flex-1 pl-8 pr-8">
-      <div class="bg-orange-200 rounded flex-grow flex flex-col items-center ">
-        <div class="text-white font-bold mb-2 text-2xl">採 点</div>
-        <div class="text-6xl text-white pb-3"><%= @post.analyse_face_emotion.score %></div>
+    <div class="w-2/5 p-4 border-2 border-gray-500 rounded-lg flex flex-col items-center justify-center">
+      <div class="text-xl tblack mt-1">目の開き</div>
+      <div class="text-5xl text-black font-bold mt-4 mb-16"><%= @post.analyse_face_detail.eye_open_judge %></div>
+      <div class="flex justify-between w-full">
+        <div class="text-xl text-black">目線（上下）</div>
+        <div class="text-xl text-black font-bold">笑顔スコア</div>
+        <div class="text-xl text-black">目線（左右）</div>
       </div>
-      <div class="bg-orange-200 rounded flex-grow flex flex-row items-center ">
-        <div class="flex-1 border-r-2">
-          <div class="text-white font-bold mb-2 text-center text-xl">目線の向き（上下）</div>
-          <div class="text-6xl text-white text-center pb-3"><%= @post.analyse_face_detail.eye_direction_pitch_description%></div>
-        </div>
-        <div class="flex-1">
-          <div class="text-white font-bold mb-2 text-center text-xl">目線の向き（左右）</div>
-          <div class="text-6xl text-white text-center pb-3 "><%= @post.analyse_face_detail.eye_direction_yaw_description %></div>
-        </div>
+      <div class="flex items-center justify-center w-full mt-1">
+        <div class="flex-1 text-center text-5xl text-black font-bold mr-5"><%= @post.analyse_face_detail.eye_direction_pitch_description %></div>
+        <div class="flex-1 text-center text-[140px] text-red-600 font-bold rounded-full  shadow-2xl border-2 border-black px-4 py-2"><%= @analyse_face_emotion.score %></div>
+        <div class="flex-1 text-center text-5xl text-black font-bold ml-5"><%= @post.analyse_face_detail.eye_direction_yaw_description %></div>
       </div>
-      <div class="bg-orange-200 rounded flex-grow flex flex-col items-center ">
-        <div class="text-white font-bold mb-2 text-2xl">目の開き</div>
-        <div class="text-5xl text-white pb-3"><%= @post.analyse_face_detail.eye_open_judge %></div>
-      </div>
-      <div class="bg-orange-200 rounded flex-grow flex flex-col items-center ">
-        <div class="text-white font-bold mb-2 text-2xl">顔年齢</div>
-        <div class="text-5xl text-white pb-3 "><%= @post.analyse_face_detail.age_range %></div>
-      </div>
-      <div class="bg-orange-200 rounded flex-grow flex flex-col items-center ">
-        <div class="text-white font-bold mb-2 text-2xl">口の開閉</div>
-        <div class="text-5xl text-white pb-3"><%= @post.analyse_face_detail.mouth_open_judge %></div>
-      </div>
+      <div class="text-5xl text-black font-bold mt-16"><%= @post.analyse_face_detail.age_range %></div>
+      <div class="text-xl text-black mt-4">顔年齢</div>
     </div>
   </div>
 </div>
-<div class="flex flex-row p-4 ">
-  <% if @post.favorited?(@current_user) %>
-    <%= button_to "UnFavorite", post_favorites_path(@post), method: :delete, remote: true, class: "bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring focus:ring-blue-200" %>
-  <% else %>
-    <%= button_to "Favorite", post_favorites_path(@post), method: :post, remote: true, class: "bg-blue-500 text-white py-2 px-4 rounded  hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200" %>
-  <% end %>
-</div>
-<div class="flex flex-row p-4 bg-gray-100">
+
+<div class="flex flex-col p-4 mt-10 bg-gray-200">
   <div class="flex-grow flex flex-col items-center justify-center">
     <div class="text-xl font-bold mb-2">コメント</div>
   </div>
-</div>
-<div class="flex flex-col space-y-4">
-  <% if @comments.present? %>
-    <% @comments.each do |comment| %>
-      <div class="flex flex-row p-4 bg-gray-100">
-        <div class="flex-grow flex flex-col items-center justify-center">
-          <%= image_tag comment.user.avatar.url, size: '40x40', class: "rounded-full" %>
-          <div class="text-xs my-2"><%= comment.user.name %></div>
-          <%= comment.content %>
+  <div class="space-y-4 px-10">
+    <% if @comments.present? %>
+      <% @comments.each do |comment| %>
+        <div class="flex items-center justify-center space-x-3 p-4 bg-gray-100 rounded-lg border-2 ">
+          <div class="shrink-0">
+            <%= image_tag comment.user.avatar.url, width: '60', height: '60', class: "rounded-full" %>
+          </div>
+          <div class="flex-grow">
+            <div class="text-xl font-medium"><%= link_to comment.user.name, user_path(comment.user.id) %></div>
+            <div class="text-2xl pl-5"><%= comment.content %></div>
+          </div>
+          <!-- 削除ボタン -->
           <% if current_user.id == comment.user_id %>
-            <%= button_to "Delete", post_comment_path(comment.post, comment), method: :delete, remote: true, "data-confirm" => "コメントを削除しますか", class: "text-xs bg-red-500 hover:bg-red-600 text-black py-1 px-2 rounded" %>
+            <div class="shrink-0">
+              <%= button_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, "data-confirm" => "コメントを削除しますか？", class: "text-lg bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded" %>
+            </div>
           <% end %>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 <div class="flex flex-col">
   <%= form_with model: [@post, @comment], local: false, class: "space-y-4" do |f| %>
-    <%= f.text_area :content, rows: '5', placeholder: "コメントを投稿しましょう！", class: "w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300" %>
+    <%= f.text_area :content, rows: '3', placeholder: "コメントを投稿しましょう！", class: "w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300" %>
     <div class="text-right">
-      <%= f.submit "Submit", class: "py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-200" %>
+      <%= f.submit "コメント", class: "py-4 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-200" %>
     </div>
   <% end %>
 </div>

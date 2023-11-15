@@ -1,18 +1,25 @@
 import React from 'react';
 
-export const FollowingUsers = ({ followers }) => {
-  const flatFollowers = followers.flat();
+
+export const FollowingUsers = ({ followings }) => {
+  const flatFollowings = Array.isArray(followings) ? followings.flat() : [];
+
+
 
   return (
-    <div className="flex flex-col space-y-4">
-      {flatFollowers.map(follower => (
-        <div key={follower.id} className="flex items-center space-x-4 p-4 border-b border-gray-200">
-          {follower.avatar.url === "default_avatar.png" ? (
-            <img className="w-12 h-12 rounded-full" src={`/assets/${follower.avatar.url}`} alt={follower.name} />
-          ) : (
-            <img className="w-12 h-12 rounded-full" src={follower.avatar.url} alt={follower.name} />
-          )}
-          <span className="text-sm font-medium">{follower.name}</span>
+    <div className="flex flex-col absolute top-[37%] left-[40%] z-20">
+      {flatFollowings.map((following) => (
+        <div key={following.id} className="bg-yellow-200 border-2 border-gray-500 rounded-lg shadow p-4 flex items-center space-x-4">
+
+          <a href={`/users/${following.id}`} className="flex items-center space-x-4">
+            <img
+              className="w-12 h-12 rounded-full"
+              src={following.avatar.url === "default_avatar.png" ? `/assets/${following.avatar.url}` : following.avatar.url}
+              alt={following.name}
+              style={{ objectFit: 'cover' }}
+            />
+            <div className="text-xl">{following.name}</div>
+          </a>
         </div>
       ))}
     </div>

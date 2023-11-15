@@ -3,11 +3,12 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
+  get '/posts/:post_id/favorites/favorite_status', to: 'favorites#favorite_status'
   root to: 'home#index'
-  resources :posts
   resources :users do
     member do
       get :following, :followers
+      get :liked_posts
     end
     resource :relationships, only: [:create, :destroy]
   end
@@ -19,14 +20,15 @@ Rails.application.routes.draw do
     end
   end
   get 'presigned_url', to: 'uploads#presigned_url'
-  get 'photos/capture'
-  post 'photos/create'
+  get 'photos/capture', to: 'photos#capture'
+  post 'photos/create', to: 'photos#create'
   get 'photos/detect_faces', to: 'photos#detect_faces'
   get 'login', to: 'user_sessions#new' #login_pathが使えるようになり、login_pathが使われるとログイン画面（'user_sessions#new'）に移動する
   post 'login', to: 'user_sessions#create' #login_path('user_sessions#new')からのデータを'user_sessions#create'へ受け取って、データベースに保存
   delete 'logout', to: 'user_sessions#destroy'
   post 'guest_login', to: 'user_sessions#guest_login'
-  get 'pages/policy'
+  get 'pages/policy', to: 'pages#policy'
+  get 'pages/about', to: 'pages#about'
   resources :password_resets, only: [:new, :create, :edit, :update]
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 

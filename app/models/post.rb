@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
-  belongs_to :analyse_face_emotion
-  belongs_to :analyse_face_detail
+  belongs_to :analyse_face_emotion, dependent: :destroy
+  belongs_to :analyse_face_detail, dependent: :destroy
   has_one :photo, through: :analyse_face_detail
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy

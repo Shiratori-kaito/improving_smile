@@ -1,5 +1,5 @@
 class AnalyseFaceDetail < ApplicationRecord
-  belongs_to :photo
+  belongs_to :photo, dependent: :destroy
   has_one :post
 
 
@@ -25,7 +25,7 @@ class AnalyseFaceDetail < ApplicationRecord
 
   def eye_open_judge
     if eye_open === 1
-      "◎"
+      "良い"
     else
       " もう少し目を開けましょう！"
     end
@@ -35,12 +35,5 @@ class AnalyseFaceDetail < ApplicationRecord
     "#{agerange_low} ~ #{agerange_high}"
   end
 
-  def mouth_open_judge
-    if mouth_open === 1
-      "開"
-    else
-      "閉"
-    end
-  end
 
 end
