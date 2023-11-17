@@ -39,7 +39,6 @@ if (document.getElementById("capture")) {
 
 
 const emotionCharts = document.querySelectorAll(`[id^='emotion-chart']`);
-console.log(emotionCharts);
 emotionCharts.forEach(emotionChart => {
   const emotionString = emotionChart.getAttribute('data-emotions');
   const emotionData = JSON.parse(emotionString.replace(/&quot;/g, '"'));
@@ -85,6 +84,7 @@ if(document.getElementById("trash")){
     <PostDelete post={trashPostID}/>
   )
 }
+
 
 
 

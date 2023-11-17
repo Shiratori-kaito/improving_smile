@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+
 import { useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
@@ -24,6 +25,7 @@ export const Favorite = ({post, favoriteCount}) => {
   }, []);
 
 
+
   const handleFavorite = () => {
     const method = favorite ? 'DELETE' : 'POST';
     fetch(`/posts/${post}/favorites`, {
@@ -36,7 +38,9 @@ export const Favorite = ({post, favoriteCount}) => {
     }).then(response => {
       if (response.ok) {
         setFavorite(!favorite);
+
         setCount(count => favorite? count - 1 : count + 1)
+
       } else {
         console.error('Error toggling favorite');
       }
@@ -62,6 +66,7 @@ export const Favorite = ({post, favoriteCount}) => {
                 <div className="text-red-500 text-xl text-bold">いいね{count}</div>
               </div>
             </>
+
           )}
         </button>
       </div>
