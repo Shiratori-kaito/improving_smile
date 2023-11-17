@@ -62,6 +62,7 @@ gem 'wicked'
 gem 'kaminari'
 
 gem 'rails-i18n'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -91,4 +92,4 @@ group :test do
 
 end
 
-gem "tailwindcss-rails", "~> 2.0"
+gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.32'

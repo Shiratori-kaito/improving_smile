@@ -14,9 +14,6 @@
         <%= f.submit 'ログイン', class: 'w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4' %>
       </div>
     <% end %>
-    <% if logged_in? === false %>
-      <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'w-6/12 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' %>
-    <% end %>
     <div class="text-right mt-4">
       <%= link_to '登録ページへ', step1_signup_index_path, class: 'text-blue-500 hover:underline mr-4' %>
       <%= link_to "パスワードをお忘れの方はこちら", new_password_reset_path, class: 'text-blue-500 hover:underline' %>

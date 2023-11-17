@@ -1,5 +1,6 @@
 import React from "react";
 import { useRef,useEffect } from "react";
+import { LoadingIndicator } from "./LoadingIndicator";
 import Webcam from "react-webcam";
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 // import AWS from 'aws-sdk';
@@ -14,7 +15,7 @@ export const Camera = () => {
   const webcamRef = useRef(null);
 
   const [url, setUrl] = React.useState(null);
-  const [file, setFile] = React.useState(null);
+  const [image, setImage] = React.useState(null);
 
   const capturePhoto = React.useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -22,14 +23,14 @@ export const Camera = () => {
     const blob = await fetch(imageSrc).then(r => r.blob());
     const currentTimestamp = new Date().getTime();
     const dynamicFileName = `photo_${currentTimestamp}.jpg`;
-    const file = new File([blob], dynamicFileName, { type: blob.type });
-    setFile(file);
+    const image = new File([blob], dynamicFileName, { type: blob.type });
+    setImage(image);
   },[webcamRef]);
 
   const handleUpload = async () => {
-    if (file) {
+    if (image) {
       const formData = new FormData();
-      formData.append('photo[image]', file);
+      formData.append('photo[image]', image);
   
       try {
         const response = await fetch('/photos/create', {
@@ -90,8 +91,9 @@ export const Camera = () => {
           </>
         ) : (
           <>
+            < LoadingIndicator />
             <div className="z-30 text-sky-300 text-2xl absolute top-[80px] left-[40%]">顔を青枠に合わせてください</div>
-            <div className="z-30 border-2 border-sky-300 w-80 h-96 rounded-full absolute top-[200px] left-[40%]"></div>
+            <div className="z-30 border-2 border-sky-300 w-[400px] h-[500px] rounded-full absolute top-[150px] left-[38%]"></div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh', zIndex: 10, position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)'  }}>
               <Webcam
                 audio={false}

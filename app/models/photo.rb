@@ -3,4 +3,7 @@ class Photo < ApplicationRecord
   has_one :analyse_face_detail
   has_one :analyse_face_emotion
   belongs_to :user
+
+  validates :user_id, presence: true
+
 end

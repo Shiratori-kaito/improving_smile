@@ -1,27 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import { EmotionChart } from './EmotionChart';
-import { format } from 'date-fns'
-import {ja} from 'date-fns/locale'
 
+import React, { useState, useEffect, useInsertionEffect } from 'react';
 
 export const UserPosts = ({posts}) => {
   const flatPosts = posts.flat();
-  const [post, setPost] = useState([]);
-  const postUser = flatPosts[0].user_id;
-  const formatDate = (date) => {
-    return format(new Date(date), 'yyyy/MM/dd', { locale: ja })
-  }
+  console.log(flatPosts);
+  const user = flatPosts[0].user;
 
-  useEffect(() => {
-    fetch(`/users/${postUser}`)
-    .then((response) => {response.json()})
-    .then((data) => {
-      setPost(data);
-    })
-    .catch((e) => { console.error(e); });
-  }, []);
-
-console.log(post);
   return (
     <div>
       {posts.map((post) => (

@@ -15,7 +15,11 @@
       <p class="text-gray-500"><%=l post.created_at, format: :short%></p>
     </div>
     <div class="bg-gray-100 p-2 rounded-lg">
-      <%= image_tag post.photo.image, class: 'w-full h-full object-cover' %>
+      <% if post.blur == false %>
+        <%= image_tag post.photo.image, class: 'w-full h-full object-cover ' %>
+      <% else %>
+        <%= image_tag post.photo.image, class: 'w-full h-full object-cover blur-[5px]' %>
+      <% end %>
       <% data = {
         "喜び" => analyse_face_emotion.happy,
         "悲しみ" => analyse_face_emotion.sad,
@@ -26,7 +30,7 @@
         "混乱" => analyse_face_emotion.confused,
         "嫌悪" => analyse_face_emotion.disgusted
       } %>
-      <%= content_tag :div, id: "emotion-chart-#{post.id}", data: { emotions: data.to_json } do %><% end %>
+            <%= content_tag :div, id: "emotion-chart-#{post.id}", data: { emotions: data.to_json } do %><% end %>
     </div>
   <% end %>
 </div>

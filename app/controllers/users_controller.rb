@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ show destroy liked_posts followings followers]
   skip_before_action :require_login, only: %i[create new]
   skip_before_action :require_signup, only: %i[create new]
 
@@ -8,18 +8,13 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # GET /users/1 or /users/1.json
-  def show
-  end
 
   # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
-  def edit
-  end
+
 
   # POST /users or /users.json
   def create
@@ -32,12 +27,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @current_user = current_user
-    @user = User.find(params[:id])
-    @posts = @user.posts
-    @followers = @user.following_users
-    @liked_posts = @user.favorites
-
+    @posts = @user.posts.includes(:user, :analyse_face_detail, :analyse_face_emotion).page(params[:page]).per(9).order(created_at: :desc)
+    @followings = [@user.following_users]
+    @followers = [@user.follower_users]
   end
 
   # PATCH/PUT /users/1 or /users/1.json
@@ -51,6 +43,12 @@ class UsersController < ApplicationController
 
   def followers
     @followers = @user.follower_users
+  end
+
+  def liked_posts
+    @liked_posts = @user.favorites.includes(:user, :analyse_face_detail, :analyse_face_emotion).page(params[:page]).per(9).order(created_at: :desc)
+    @followings = [@user.following_users]
+    @followers = [@user.follower_users]
   end
 
   private

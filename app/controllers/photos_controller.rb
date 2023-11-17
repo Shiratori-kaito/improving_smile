@@ -6,9 +6,9 @@ class PhotosController < ApplicationController
   def capture;end
 
   def create
-    @photo = @user.photos.new(photo_params)
+    @photo = @user.photos.new
     if @photo.save
-      @photo.image.attach(params[:photo][:image])
+      @photo.image.attach(photo_params[:image])
       redirect_to photos_detect_faces_path
     else
       render :capture
@@ -81,7 +81,7 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:file)
+    params.require(:photo).permit(:image)
   end
 
   def set_user
@@ -101,14 +101,14 @@ class PhotosController < ApplicationController
     }
 
     emotions = {
-      happy: "君の笑顔は最高だよ！",
-      sad: "大丈夫だよ、ここにいるよ。",
-      angry: "深呼吸して、落ち着く時間を持とう。",
-      surprised: "何か驚くようなことがあったのかな？",
-      calm: "落ち着いているね。",
-      fear: "大丈夫、一緒に乗り越えていこう。",
-      confused: "何か疑問や不安があるなら、聞いてね。",
-      disgusted: "何か気に食わないことがあったかな？一緒に解決しよう。"
+      happy: "笑顔が眩しすぎて見えねえ！",
+      sad: "悲しい時は母ちゃんに電話しろい！",
+      angry: "GEKIOKO。",
+      surprised: "部屋に虫でもいたの？",
+      calm: "穏やかだね。それともサウナ中？",
+      fear: "上司に呼び出された？？一緒についていくよ！",
+      confused: "モヤモヤするときは思いっきり叫ぶんだ！",
+      disgusted: "何か気に入らないことがあったのかな？"
     }
 
     conbined_emotions = {
@@ -147,7 +147,9 @@ class PhotosController < ApplicationController
       combined_key = "#{top_2_emotions[0]}_#{top_2_emotions[1]}".to_sym
       return conbined_emotions[combined_key] || "コメントが定義されていません。"
     else
-      return "いろんな感情が入り混じっているのかな？"
+
+      return "感情を爆発させろ！！！"
+
     end
   end
 end
