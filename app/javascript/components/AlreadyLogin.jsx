@@ -4,9 +4,19 @@ import React, { useState } from "react";
 export default function AlreadyLogin({user}) {
   const [openMenu, setOpenMenu] = useState(false);
 
+
   const handleMenuOpen = () => {
     setOpenMenu(!openMenu);
   };
+
+  const handleMypage = () => {
+    window.location.href = `/users/${user}`
+  }
+
+
+  const handlePostsIndex = () => {
+    window.location.href = "/posts";
+  }
 
   const handleProfile = () => {
     window.location.href = "/profile";
@@ -54,7 +64,10 @@ export default function AlreadyLogin({user}) {
           <button onClick={handleHome} type="button" className="py-1">
             <img src="/assets/camera.png" alt="logo"  />
           </button>
-          <h1 className="text-white text-5xl font-mono p-4">Smile-Improving</h1>
+          <div className="flex justify-center">
+            <h1 className="text-white text-7xl pr-10">Face</h1>
+            <h1 className="text-white text-7xl pl-10">World</h1>
+          </div>
           {/* humbergerbutton */}
           <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3">
             <div
@@ -90,10 +103,16 @@ export default function AlreadyLogin({user}) {
           >
             <ul className="mt-6">
               <li className="">
-                <button onClick={handleProfile} type="button" className="py-2 inline-block">MyPage</button>
+                <button onClick={handleMypage} type="button" className="py-2 inline-block">マイページ</button>
               </li>
               <li className="">
-                <button onClick={handleLogout} type="button" className="py-2 inline-block">Logout</button>
+                <button onClick={handlePostsIndex} type="button" className="py-2 inline-block">投稿一覧</button>
+              </li>
+              <li className="">
+                <button onClick={handleProfile} type="button" className="py-2 inline-block">アカウント管理</button>
+              </li>
+              <li className="">
+                <button onClick={handleLogout} type="button" className="py-2 inline-block">ログアウト</button>
               </li>
               <li className="pt-10">
                 <button onClick={handlePolicy} type="button" className="py-2 inline-block">プライバシーポリシー</button>

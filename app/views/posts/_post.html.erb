@@ -20,16 +20,7 @@
       <% else %>
         <%= image_tag post.photo.image, class: 'w-full h-full object-cover blur-[5px]' %>
       <% end %>
-      <% data = {
-        "喜び" => analyse_face_emotion.happy,
-        "悲しみ" => analyse_face_emotion.sad,
-        "怒り" => analyse_face_emotion.angry,
-        "驚き" => analyse_face_emotion.surprised,
-        "落ち着き" => analyse_face_emotion.calm,
-        "恐れ" => analyse_face_emotion.fear,
-        "混乱" => analyse_face_emotion.confused,
-        "嫌悪" => analyse_face_emotion.disgusted
-      } %>
+      <% data = analyse_face_emotion.emotion_data %>
             <%= content_tag :div, id: "emotion-chart-#{post.id}", data: { emotions: data.to_json } do %><% end %>
     </div>
   <% end %>

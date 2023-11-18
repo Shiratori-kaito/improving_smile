@@ -28,7 +28,6 @@ if (document.getElementById("user-data")) {
 }
 
 
-//id=captureがあった場合のみ、Cameraをレンダリングする
 if (document.getElementById("capture")) {
   const capture = document.getElementById("capture");
   const capturePage = createRoot(capture);
