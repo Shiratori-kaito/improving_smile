@@ -10,7 +10,7 @@ export const LoadingIndicator = () => {
 
     const timer = setTimeout(() => {
       setLoading(false);
-    },3000);
+    },4000);
 
     return () => {
       clearTimeout(timer);

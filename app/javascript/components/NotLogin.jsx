@@ -75,10 +75,10 @@ export default function NotLogin() {
           >
             <ul className="mt-6">
               <li className="">
-                <button onClick={handleProfile} type="button" className="py-2 inline-block">MyPage</button>
+                <button onClick={handleProfile} type="button" className="py-2 inline-block">アカウント管理</button>
               </li>
               <li className="">
-                <button onClick={handleLogin} type="button" className="py-2 inline-block">Login</button>
+                <button onClick={handleLogin} type="button" className="py-2 inline-block">ログイン</button>
               </li>
               <li className="pt-10">
                 <button onClick={handlePolicy} type="button" className="py-2 inline-block">プライバシーポリシー</button>
