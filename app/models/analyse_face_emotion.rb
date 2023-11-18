@@ -2,6 +2,19 @@ class AnalyseFaceEmotion < ApplicationRecord
   belongs_to :photo, dependent: :destroy
   has_one :post
 
+  def emotion_data
+    {
+      "喜び" => happy,
+      "悲しみ" => sad,
+      "怒り" => angry,
+      "驚き" => surprised,
+      "落ち着き" => calm,
+      "恐れ" => fear,
+      "混乱" => confused,
+      "嫌悪" => disgusted
+    }
+  end
+
   def score
     if happy.to_i > 5000
       happy.to_i / 100
