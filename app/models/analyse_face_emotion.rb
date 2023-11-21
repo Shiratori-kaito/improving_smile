@@ -1,5 +1,5 @@
 class AnalyseFaceEmotion < ApplicationRecord
-  belongs_to :photo, dependent: :destroy
+  belongs_to :photo
   has_one :post
 
   def emotion_data
