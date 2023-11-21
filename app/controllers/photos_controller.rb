@@ -51,6 +51,7 @@ class PhotosController < ApplicationController
     @data = @analyse_face_emotion.emotion_data
 
     @analyse_face_emotion.emotion_comment =  view_context.extra_comment(@analyse_face_emotion)
+    @analyse_face_emotion.save!
 
 
 
