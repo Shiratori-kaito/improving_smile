@@ -14,7 +14,7 @@ export const FollowingUsers = ({ followings }) => {
           <a href={`/users/${following.id}`} className="flex items-center space-x-4">
             <img
               className="w-12 h-12 rounded-full"
-              src={following.avatar.url === "default_avatar.png" ? `/assets/${following.avatar.url}` : following.avatar.url}
+              src={following.avatar.url}
               alt={following.name}
               style={{ objectFit: 'cover' }}
             />

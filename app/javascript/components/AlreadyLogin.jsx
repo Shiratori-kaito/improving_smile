@@ -62,7 +62,7 @@ export default function AlreadyLogin({user}) {
       <div className="fixed w-full top-0 z-50 bg-yellow-400 h-15">
         <header className="flex justify-between py-1 w-full">
           <button onClick={handleHome} type="button" className="py-1">
-            <img src="/assets/camera.png" alt="logo"  />
+            <img src="/images/camera.png" alt="logo"  />
           </button>
           <div className="flex justify-center">
             <h1 className="text-white text-7xl pr-10">Face</h1>

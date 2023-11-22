@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'custom-bg': "url('/assets/capture.png')"
+        'custom-bg': "url('capture.png')"
       },
       animation: {
         'bg-slide': 'bg 10s infinite linear',
