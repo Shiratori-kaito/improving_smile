@@ -65,6 +65,10 @@ gem 'rails-i18n'
 
 gem 'meta-tags'
 
+gem 'fog-aws'
+
+gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.32'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -93,5 +97,3 @@ group :test do
   gem "selenium-webdriver"
 
 end
-
-gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.32'
