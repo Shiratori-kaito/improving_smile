@@ -45,7 +45,7 @@ export const options = {
 };
 
 
-export const EmotionChart = ({ emotions = {} }) => {
+export const EmotionChart = ({ emotions = {}, height }) => {
   const labels = Object.keys(emotions);
   const dataValues = Object.values(emotions).map(value => parseInt(value));
 
@@ -67,7 +67,7 @@ export const EmotionChart = ({ emotions = {} }) => {
   };
 
   return (
-    <div style={{ width: '100%', height: '400px' }}>
+    <div style={{ width: '100%', height: height }}>
       <Bar data={chartData} options={options} />
     </div>
   )

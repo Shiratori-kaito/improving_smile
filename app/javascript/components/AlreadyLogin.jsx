@@ -59,17 +59,17 @@ export default function AlreadyLogin({user}) {
 
   return (
     <div className="w-full">
-      <div className="fixed w-full top-0 z-50 bg-yellow-400 h-15">
+      <div className="fixed w-full top-0 z-50 bg-yellow-400 h-16">
         <header className="flex justify-between py-1 w-full">
           <button onClick={handleHome} type="button" className="py-1">
             <img src="/images/camera.png" alt="logo"  />
           </button>
           <div className="flex justify-center">
-            <h1 className="text-white text-7xl pr-10">Face</h1>
-            <h1 className="text-white text-7xl pl-10">World</h1>
+            <h1 className="text-white text-6xl pr-10">Face</h1>
+            <h1 className="text-white text-6xl pl-10">World</h1>
           </div>
           {/* humbergerbutton */}
-          <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3">
+          <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3 pb-5">
             <div
               className={
                 openMenu

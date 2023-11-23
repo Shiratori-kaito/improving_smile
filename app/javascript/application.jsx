@@ -40,10 +40,11 @@ if (document.getElementById("capture")) {
 const emotionCharts = document.querySelectorAll(`[id^='emotion-chart']`);
 emotionCharts.forEach(emotionChart => {
   const emotionString = emotionChart.getAttribute('data-emotions');
+  const height = emotionChart.getAttribute('data-height');
   const emotionData = JSON.parse(emotionString.replace(/&quot;/g, '"'));
   const emotionChartPage = createRoot(emotionChart);
   emotionChartPage.render(
-    <EmotionChart emotions={emotionData}/>
+    <EmotionChart emotions={emotionData} height={height}/>
   );
 });
 

@@ -57,14 +57,14 @@ export const Camera = () => {
   }
   return (
     <>
-      <div className="mt-40 mx-5 fixed bg-yellow-100 border-4 border-yellow-500 relative">
+      <div className="mt-20 mx-5 fixed bg-yellow-100 border-4 border-yellow-500 relative">
         <div className="bg-custom-bg  bg-cover animate-bg-slide h-[800px] w-full top-0 left-0"></div>
         {url ? (
           <>
-            <div style={{ display: 'flex', justifyContent: 'center', zIndex: 10, position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', zIndex: 10, position: 'absolute', top: '37%', left: '50%', transform: 'translate(-50%, -50%)' }}>
               <img src={url} alt="Screenshot" style={{ maxWidth: '90%', height: 'auto' }} />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', zIndex: 10, position: 'absolute', top: '90%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', zIndex: 10, position: 'absolute', top: '78%', left: '50%', transform: 'translate(-50%, -50%)' }}>
               <button onClick={() => setUrl(null)} style={{
                 background: 'yellow',
                 borderRadius: '50%',
@@ -92,9 +92,9 @@ export const Camera = () => {
         ) : (
           <>
             < LoadingIndicator />
-            <div className="z-30 text-sky-300 text-2xl absolute top-[80px] left-[40%]">顔を青枠に合わせてください</div>
-            <div className="z-30 border-2 border-sky-300 w-[400px] h-[500px] rounded-full absolute top-[150px] left-[38%]"></div>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh', zIndex: 10, position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)'  }}>
+            <div className="z-30 text-sky-300 text-xl absolute top-[5%] left-[42%]">顔を青枠に合わせてください</div>
+            <div className="z-30 border-2 border-sky-300 w-[320px] h-[450px] rounded-full absolute top-[10%] left-[38%]"></div>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh', zIndex: 10, position: 'absolute', top: '37%', left: '50%', transform: 'translate(-50%, -50%)'  }}>
               <Webcam
                 audio={false}
                 ref={webcamRef}
@@ -105,7 +105,7 @@ export const Camera = () => {
                 onUserMedia={onUserMedia}
               />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', zIndex: 10, position: 'absolute', top: '92%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', zIndex: 10, position: 'absolute', top: '78%', left: '50%', transform: 'translate(-50%, -50%)' }}>
               <button onClick={capturePhoto} style={{
                 background: 'yellow',
                 borderRadius: '50%',
