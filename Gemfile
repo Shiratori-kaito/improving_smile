@@ -63,6 +63,8 @@ gem 'kaminari'
 
 gem 'rails-i18n'
 
+gem 'fog-aws'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
