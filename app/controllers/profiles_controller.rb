@@ -22,7 +22,7 @@ class ProfilesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :name, :sns, :avatar, :avatar_cache)
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :avatar_cache)
   end
 
 end
