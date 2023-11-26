@@ -1,0 +1,3 @@
+default_url_options:
+  protocol: 'https'
+  host: 'faceworldapp-5700d3d0929b.herokuapp.com'
