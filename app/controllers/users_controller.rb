@@ -3,12 +3,6 @@ class UsersController < ApplicationController
   skip_before_action :require_login, only: %i[create new]
   skip_before_action :require_signup, only: %i[create new]
 
-  # GET /users or /users.json
-  def index
-    @users = User.all
-  end
-
-
   # GET /users/new
   def new
     @user = User.new
