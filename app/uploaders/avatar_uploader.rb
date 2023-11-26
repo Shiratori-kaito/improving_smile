@@ -4,11 +4,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  if Rails.env.production?
-    storage :fog # 本番環境ではfogを使用
-  else
-    storage :file # 開発環境とテスト環境ではfileを使用
-  end
+
+  storage :fog # 本番環境ではfogを使用
+  
 
   # storage :fog
 

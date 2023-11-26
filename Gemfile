@@ -67,6 +67,8 @@ gem 'meta-tags'
 
 gem 'fog-aws'
 
+gem 'config'
+
 gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.32'
 # Use Sass to process CSS
 # gem "sassc-rails"
