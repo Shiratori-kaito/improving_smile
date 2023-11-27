@@ -1,7 +1,7 @@
 class Photo < ApplicationRecord
   has_one_attached :image
-  has_one :analyse_face_detail
-  has_one :analyse_face_emotion
+  has_one :analyse_face_detail, dependent: :destroy
+  has_one :analyse_face_emotion, dependent: :destroy
   belongs_to :user
 
   validates :user_id, presence: true
