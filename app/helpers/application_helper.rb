@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def assign_meta_tags(options = {})
     site = 'Face World',
-    title = options[:title]
+           title = options[:title]
     description = '顔の表情を分析して、どんな感情を持っているのかを診断するサービスです。',
-    keywords = '顔,表情,感情,診断,分析',
-    image =  image_url('HomeTop.png')
+                  keywords = '顔,表情,感情,診断,分析',
+                  image =  image_url('HomeTop.png')
     configs = {
       separator: '|',
       reverse: true,

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Post < ApplicationRecord
   belongs_to :user
   belongs_to :analyse_face_emotion, dependent: :destroy
@@ -6,15 +8,9 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
-
-
   attr_accessor :width, :height
 
   def favorited?(user)
-    favorites.where(user_id: user.id).exists?
+    favorites.exists?(user_id: user.id)
   end
-
-  private
-
-
 end

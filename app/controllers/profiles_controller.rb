@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
-  before_action :set_user, only: %i[ edit update ]
+  before_action :set_user, only: %i[edit update]
 
   def show; end
 
@@ -24,5 +26,4 @@ class ProfilesController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :avatar_cache)
   end
-
 end

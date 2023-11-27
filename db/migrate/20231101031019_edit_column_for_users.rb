@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EditColumnForUsers < ActiveRecord::Migration[7.0]
   def down
     remove_column :users, :sns, :string
