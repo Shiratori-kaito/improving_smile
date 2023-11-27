@@ -1,6 +1,6 @@
 <div class="h-hull mt-20">
   <%= form_with model:Post.new,url: posts_path, local: true do |form| %>
-    <div class="bg-yellow-100">
+    <div class="bg-yellow-100 pt-2">
       <div class="mx-3 flex justify-center rounded-lg ">
         <%= image_tag @image, class: "w-[50%] h-[50%] rounded-lg" %>
       </div>
@@ -16,7 +16,7 @@
             <div class="text-3xl border-b-4 border-blue-400 pb-2 font-bold">感情パーセンテージ</div>
           </div>
           <div class="mb-4">
-            <%= content_tag :div, id: 'emotion-chart', data: { emotions: @data.to_json } do %><% end %>
+            <%= content_tag :div, id: 'emotion-chart', data: { emotions: @data.to_json, height: '500px' } do %><% end %>
           </div>
       </div>
       <div class="w-2/5 p-4 border-2 border-gray-500 rounded-lg flex flex-col items-center justify-center">
@@ -46,11 +46,11 @@
     <% if current_user.role == "guest_user" %>
       <div class="fixed bottom-0  w-full z-50 flex justify-center items-center bg-gray-200 py-2 px-4 shadow-md">
         <div class="flex items-center justify-cente">
-          <div class="flex item-center justify-center  mx-5  bg-lime-100 p-3 mb-3 rounded-lg shadow-2xl shadow-lime-900/100">
+          <div class="flex item-center justify-center  mx-5  bg-lime-100 p-2 mb-1 rounded-lg shadow-2xl shadow-lime-900/100">
             <%= link_to 'SignUp', login_path, class:"text-lime-600 font-bold text-3xl" %>
             <p class="ml-3 pt-2 text-black">すると投稿できます！</p>
           </div>
-          <div class="flex item-center justify-center  mx-5 bg-lime-100 p-3 mb-3 rounded-lg shadow-2xl shadow-lime-900/100">
+          <div class="flex item-center justify-center  mx-5 bg-lime-100 p-2 mb-1 rounded-lg shadow-2xl shadow-lime-900/100">
             <%= link_to 'Home', root_path, class:"text-lime-600 font-bold text-3xl ml-3" %>
             <p class="ml-3 pt-2 text-black">に戻ります</p>
           </div>

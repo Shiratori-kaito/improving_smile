@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SignupController < ApplicationController
   skip_before_action :require_login
   skip_before_action :require_signup
@@ -26,9 +28,9 @@ class SignupController < ApplicationController
     if @user.save
       session[:id] = @user.id
       auto_login(@user)
-      redirect_to root_path, notice: "ユーザー登録が完了しました"
+      redirect_to root_path, notice: 'ユーザー登録が完了しました'
     else
-      flash.now[:alert] = "ユーザー登録に失敗しました"
+      flash.now[:alert] = 'ユーザー登録に失敗しました'
       render :step1
     end
   end
@@ -36,7 +38,6 @@ class SignupController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation,:name, :avatar, :avatar_cache)
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :avatar_cache)
   end
-
 end

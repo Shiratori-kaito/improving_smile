@@ -1,17 +1,9 @@
-class PostsController < ApplicationController 
-  before_action :set_post, only: [:show, :destroy]
+class PostsController < ApplicationController
+  before_action :set_post, only: %i[show destroy]
+
   def index
-    @posts = Post.includes(:user, :analyse_face_detail, :analyse_face_emotion).page(params[:page]).per(9).order(created_at: :desc)
-
-  end
-
-  def create
-    @post = Post.new(post_params)
-    if @post.save
-      redirect_to posts_path, notice: '投稿しました'
-    else
-      render :'photos/detect_faces', alert: '投稿に失敗しました'
-    end
+    @posts = Post.includes(:user, :analyse_face_detail,
+                           :analyse_face_emotion).page(params[:page]).per(9).order(created_at: :desc)
   end
 
   def show
@@ -25,10 +17,18 @@ class PostsController < ApplicationController
     @favorite_counts = @post.favorites.count
   end
 
+  def create
+    @post = Post.new(post_params)
+    if @post.save
+      redirect_to posts_path, notice: '投稿しました'
+    else
+      render :'photos/detect_faces', alert: '投稿に失敗しました'
+    end
+  end
+
   def destroy
     @post.destroy
   end
-  
 
   private
 
@@ -37,6 +37,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:content, :blur, :user_id, :analyse_face_detail_id, :analyse_face_emotion_id, :photo_id)
+    params.require(:post).permit(:content, :blur, :user_id, :analyse_face_detail_id,
+                                 :analyse_face_emotion_id, :photo_id)
   end
 end

@@ -13,6 +13,13 @@ export const PostDelete = ({post}) => {
     };
   };
 
+  const redirectToPreviousPage = () => {
+    window.history.back();
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  }
+
   useEffect (() => {
     if (confirm){
       fetch(`/posts/${post}`, {
@@ -24,7 +31,7 @@ export const PostDelete = ({post}) => {
       })
       .then(response => {
         if (response.ok) {
-          window.history.back();
+          redirectToPreviousPage();
         } else {
           console.error('Error deleting post');
         }

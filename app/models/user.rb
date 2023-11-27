@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   authenticates_with_sorcery!
   mount_uploader :avatar, AvatarUploader
@@ -6,7 +8,7 @@ class User < ApplicationRecord
   has_many :photos, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  
+
   has_many :followers,
            class_name: 'Relationship',
            foreign_key: 'follower_id',
@@ -30,7 +32,7 @@ class User < ApplicationRecord
 
   validates :reset_password_token, presence: true, uniqueness: true, allow_nil: true
 
-  enum :role => { general_user:0, guest_user:1}
+  enum role: { general_user: 0, guest_user: 1 }
 
   def follow(user_id)
     followers.create(following_id: user_id)

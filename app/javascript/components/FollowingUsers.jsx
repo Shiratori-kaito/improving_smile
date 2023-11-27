@@ -7,7 +7,7 @@ export const FollowingUsers = ({ followings }) => {
 
 
   return (
-    <div className="flex flex-col absolute top-[37%] left-[40%] z-20">
+    <div className="flex flex-col absolute top-[45%] left-[40%] z-20">
       {flatFollowings.map((following) => (
         <div key={following.id} className="bg-yellow-200 border-2 border-gray-500 rounded-lg shadow p-4 flex items-center space-x-4">
 
@@ -18,7 +18,7 @@ export const FollowingUsers = ({ followings }) => {
               alt={following.name}
               style={{ objectFit: 'cover' }}
             />
-            <div className="text-xl">{following.name}</div>
+            <div className="text-xl px-5">{following.name}</div>
           </a>
         </div>
       ))}

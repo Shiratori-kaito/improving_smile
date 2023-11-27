@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAnalyseFaceDetails < ActiveRecord::Migration[7.0]
   def change
     create_table :analyse_face_details do |t|

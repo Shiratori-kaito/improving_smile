@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg shadow p-4 mb-4">
+<div class="bg-white rounded-lg shadow p-2 mb-4">
   <%= link_to user_path(user) do %>
     <div class="flex items-center mb-2">
       <div class="w-16 h-16 bg-gray-200 rounded-full overflow-hidden">
@@ -6,22 +6,19 @@
       </div>
       <div class="ml-4">
         <h2 class="text-xl font-bold"><%= user.name %></h2>
+        <p class="text-gray-500"><%=l post.created_at, format: :short%></p>
       </div>
     </div>
   <% end %>
   <%= link_to post_path(post), class: 'ml-auto text-gray-500' do %>
-    <div class="ml-4">
-      <p class="text-gray-500"><%= post.content%></p>
-      <p class="text-gray-500"><%=l post.created_at, format: :short%></p>
-    </div>
-    <div class="bg-gray-100 p-2 rounded-lg">
+    <div class="bg-gray-100 p-2 rounded-lg flex flex-col">
       <% if post.blur == false %>
-        <%= image_tag post.photo.image, class: 'w-full h-full object-cover ' %>
+        <%= image_tag post.photo.image, class: 'w-full h-64 object-cover' %>
       <% else %>
-        <%= image_tag post.photo.image, class: 'w-full h-full object-cover blur-[5px]' %>
+        <%= image_tag post.photo.image, class: 'w-full h-64 object-cover blur-[5px]' %>
       <% end %>
       <% data = analyse_face_emotion.emotion_data %>
-            <%= content_tag :div, id: "emotion-chart-#{post.id}", data: { emotions: data.to_json } do %><% end %>
+        <%= content_tag :div, id: "emotion-chart-#{post.id}", data: { emotions: data.to_json, height: '350px' } do %><% end %>
     </div>
   <% end %>
 </div>

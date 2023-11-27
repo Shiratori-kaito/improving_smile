@@ -1,6 +1,6 @@
 <div class="h-hull mt-20">
   <div class="bg-yellow-100">
-    <div class="relative  mx-3 flex justify-center rounded-lg">
+    <div class="relative  mx-3 flex justify-center rounded-lg pt-2">
       <%= image_tag @post.photo.image, class: "w-[50%] h-[50%] rounded-lg #{"blur-[5px]" if @post.user_id != current_user.id && @post.blur}" %>
       <%= content_tag :div, id: 'favorite', data: { id: @post.id, count: @favorite_counts } do %><% end %>
       <% if @post.user_id == current_user.id %>
@@ -19,7 +19,7 @@
           <div class="text-3xl border-b-4 border-blue-400 pb-2 font-bold">感情パーセンテージ</div>
         </div>
         <div class="mb-4">
-          <%= content_tag :div, id: 'emotion-chart', data: { emotions: @data.to_json } do %><% end %>
+          <%= content_tag :div, id: 'emotion-chart', data: { emotions: @data.to_json, height: '500px' } do %><% end %>
         </div>
     </div>
     <div class="w-2/5 p-4 border-2 border-gray-500 rounded-lg flex flex-col items-center justify-center">

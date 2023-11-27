@@ -1,37 +1,39 @@
+# frozen_string_literal: true
+
 class AnalyseFaceEmotion < ApplicationRecord
-  belongs_to :photo, dependent: :destroy
-  has_one :post
+  belongs_to :photo
+  has_one :post, dependent: :destroy
 
   def emotion_data
     {
-      "喜び" => happy,
-      "悲しみ" => sad,
-      "怒り" => angry,
-      "驚き" => surprised,
-      "落ち着き" => calm,
-      "恐れ" => fear,
-      "混乱" => confused,
-      "嫌悪" => disgusted
+      '喜び' => happy,
+      '悲しみ' => sad,
+      '怒り' => angry,
+      '驚き' => surprised,
+      '落ち着き' => calm,
+      '恐れ' => fear,
+      '混乱' => confused,
+      '嫌悪' => disgusted
     }
   end
 
   def score
-    if happy.to_i > 5000
-      happy.to_i / 100
-    elsif surprised.to_i > 5000
-      (surprised.to_i / 100) * 3 / 4
-    elsif calm.to_i > 5000
-      (calm.to_i / 100) * 2 / 3
-    elsif confused.to_i > 5000
-      (confused.to_i / 100) * 1 / 6
-    elsif fear.to_i > 5000
-      (fear.to_i / 100) * 1 / 10
-    elsif disgusted.to_i > 5000
-      (disgusted.to_i / 100) * 1 / 12
-    elsif angry.to_i > 5000
-      (angry.to_i / 100) * 1 / 12
-    else
-      10
+    emotions = {
+      'happy' => 100.0 / 100,
+      'surprised' => 3.0 / 4,
+      'calm' => 2.0 / 3,
+      'confused' => 1.0 / 6,
+      'sad' => 1.0 / 8,
+      'fear' => 1.0 / 10,
+      'disgusted' => 1.0 / 12,
+      'angry' => 1.0 / 12
+    }
+
+    emotions.each do |emotion, factor|
+      value = send(emotion).to_i
+      return (value / 100 * factor).round if value > 5000
     end
+
+    30
   end
 end

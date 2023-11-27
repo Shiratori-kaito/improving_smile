@@ -8,10 +8,6 @@ export default function NotLogin() {
     setOpenMenu(!openMenu);
   };
 
-  const handleProfile = () => {
-    window.location.href = "/profile";
-  }
-
   const handleHome = () => {
     window.location.href = "/";
   }
@@ -34,14 +30,17 @@ export default function NotLogin() {
 
   return (
     <div className="w-full">
-      <div className="fixed w-full top-0 z-50 bg-yellow-400 h-15">
+      <div className="fixed w-full top-0 z-50 bg-yellow-400 h-14">
         <header className="flex justify-between py-1 w-full">
           <button onClick={handleHome} type="button" className="py-1">
-            <img src="/assets/camera.png" alt="logo"  />
+            <img src="/images/camera.png" alt="logo"  />
           </button>
-          <h1 className="text-white text-5xl font-mono p-4">Smile-Improving</h1>
+          <div className="flex justify-center">
+            <h1 className="text-white text-6xl pr-10">Face</h1>
+            <h1 className="text-white text-6xl pl-10">World</h1>
+          </div>
           {/* humbergerbutton */}
-          <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3">
+          <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3 pb-5">
             <div
               className={
                 openMenu
@@ -74,9 +73,6 @@ export default function NotLogin() {
             }
           >
             <ul className="mt-6">
-              <li className="">
-                <button onClick={handleProfile} type="button" className="py-2 inline-block">アカウント管理</button>
-              </li>
               <li className="">
                 <button onClick={handleLogin} type="button" className="py-2 inline-block">ログイン</button>
               </li>

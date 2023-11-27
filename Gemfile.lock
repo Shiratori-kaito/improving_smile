@@ -68,6 +68,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
+    ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.834.0)
     aws-sdk (3.1.0)
@@ -1535,6 +1536,9 @@ GEM
     chartkick (5.0.4)
     coderay (1.1.3)
     concurrent-ruby (1.2.2)
+    config (5.0.0)
+      deep_merge (~> 1.2, >= 1.2.1)
+      dry-validation (~> 1.0, >= 1.0.0)
     crass (1.0.6)
     cssbundling-rails (1.3.3)
       railties (>= 6.0.0)
@@ -1542,6 +1546,39 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    deep_merge (1.2.2)
+    dry-configurable (1.1.0)
+      dry-core (~> 1.0, < 2)
+      zeitwerk (~> 2.6)
+    dry-core (1.0.1)
+      concurrent-ruby (~> 1.0)
+      zeitwerk (~> 2.6)
+    dry-inflector (1.0.0)
+    dry-initializer (3.1.1)
+    dry-logic (1.5.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.0, < 2)
+      zeitwerk (~> 2.6)
+    dry-schema (1.13.3)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 1.0, >= 1.0.1)
+      dry-core (~> 1.0, < 2)
+      dry-initializer (~> 3.0)
+      dry-logic (>= 1.4, < 2)
+      dry-types (>= 1.7, < 2)
+      zeitwerk (~> 2.6)
+    dry-types (1.7.1)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.0)
+      dry-inflector (~> 1.0)
+      dry-logic (~> 1.4)
+      zeitwerk (~> 2.6)
+    dry-validation (1.10.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.0, < 2)
+      dry-initializer (~> 3.0)
+      dry-schema (>= 1.12, < 2)
+      zeitwerk (~> 2.6)
     erubi (1.12.0)
     excon (0.104.0)
     faraday (2.7.11)
@@ -1584,6 +1621,7 @@ GEM
     jmespath (1.6.2)
     jsbundling-rails (1.2.1)
       railties (>= 6.0.0)
+    json (2.6.3)
     jwt (2.7.1)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
@@ -1597,6 +1635,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    language_server-protocol (3.17.0.3)
     launchy (2.5.2)
       addressable (~> 2.8)
     letter_opener (1.8.1)
@@ -1615,6 +1654,8 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
+    meta-tags (2.19.0)
+      actionpack (>= 3.2.0, < 7.2)
     method_source (1.0.0)
     mime-types (3.5.1)
       mime-types-data (~> 3.2015)
@@ -1652,6 +1693,10 @@ GEM
       rack (>= 1.2, < 4)
       snaky_hash (~> 2.0)
       version_gem (~> 1.1)
+    parallel (1.23.0)
+    parser (3.2.2.4)
+      ast (~> 2.4.1)
+      racc
     pg (1.5.4)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -1698,6 +1743,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
+    rainbow (3.1.1)
     rake (13.0.6)
     rdoc (6.5.0)
       psych (>= 4.0.0)
@@ -1705,6 +1751,28 @@ GEM
     reline (0.3.9)
       io-console (~> 0.5)
     rexml (3.2.6)
+    rubocop (1.57.2)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
+      parallel (~> 1.10)
+      parser (>= 3.2.2.4)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.28.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.30.0)
+      parser (>= 3.2.1.0)
+    rubocop-performance (1.19.1)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
+    rubocop-rails (2.22.2)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.33.0, < 2.0)
+      rubocop-ast (>= 1.30.0, < 2.0)
+    ruby-progressbar (1.13.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
@@ -1743,6 +1811,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (2.5.0)
     version_gem (1.1.3)
     web-console (4.2.1)
       actionview (>= 6.0.0)
@@ -1769,6 +1838,7 @@ DEPENDENCIES
   capybara
   carrierwave (~> 2.0)
   chartkick
+  config
   cssbundling-rails
   debug
   fog-aws
@@ -1776,12 +1846,16 @@ DEPENDENCIES
   jsbundling-rails
   kaminari
   letter_opener_web (~> 1.0)
+  meta-tags
   mini_magick
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
   rails (= 7.0.8)
   rails-i18n
+  rubocop
+  rubocop-performance
+  rubocop-rails
   selenium-webdriver
   sorcery
   sprockets-rails
