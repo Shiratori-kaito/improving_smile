@@ -30,17 +30,19 @@ export default function NotLogin() {
 
   return (
     <div className="w-full">
-      <div className="fixed w-full top-0 z-50 bg-yellow-400 h-14">
+      <div className="fixed w-full top-0 z-50 bg-yellow-400 h-11 lg:h-16">
         <header className="flex justify-between py-1 w-full">
-          <button onClick={handleHome} type="button" className="py-1">
-            <img src="/images/camera.png" alt="logo"  />
+          <button onClick={handleHome} type="button" className="py-1 ">
+            <img src="/images/camera.png" alt="logo" className="w-24 h-12 pb-2 lg:w-full h-full"  />
           </button>
-          <div className="flex justify-center">
-            <h1 className="text-white text-6xl pr-10">Face</h1>
-            <h1 className="text-white text-6xl pl-10">World</h1>
+          <div className="invisible lg:visible">
+            <div className="flex justify-center">
+              <h1 className="text-white text-5xl pr-10">Face</h1>
+              <h1 className="text-white text-5xl pl-10">World</h1>
+            </div>
           </div>
           {/* humbergerbutton */}
-          <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3 pb-5">
+          <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3 pb-3 lg:pb-10">
             <div
               className={
                 openMenu
