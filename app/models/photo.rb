@@ -7,19 +7,25 @@ class Photo < ApplicationRecord
   belongs_to :user
 
   def s3_image
-    client = Aws::Rekognition::Client.new(region: 'ap-northeast-1')
+    # 明示的に使用するプロファイルを指定
+    credentials = Aws::SharedCredentials.new(profile_name: 'shiratori')
+  
+    # Rekognition クライアントの初期化時に指定したプロファイルを使用
+    client = Aws::Rekognition::Client.new(region: 'ap-northeast-1', credentials: credentials)
+  
     response = client.detect_faces({
-                                     image: {
-                                       s3_object: {
-                                         bucket: 'smile-images',
-                                         name: image.key
-                                       }
-                                     },
-                                     attributes: ['ALL']
-                                   })
-
+      image: {
+        s3_object: {
+          bucket: 'smile-images',
+          name: image.key
+        }
+      },
+      attributes: ['ALL']
+    })
+  
     response.face_details.first
   end
+  
 
   def analysed?
     analyse_face_detail.present? && analyse_face_emotion.present?
