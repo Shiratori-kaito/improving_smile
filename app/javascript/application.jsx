@@ -7,6 +7,9 @@ import AlreadyLogin from './components/AlreadyLogin';
 import NotLogin from './components/NotLogin';
 import {Favorite} from './components/Favorite';
 import {PostDelete} from './components/PostDelete';
+import {Checkbox} from './components/Checkbox';
+import {ImagePreview} from './components/ImagePreview';
+
 
 
 
@@ -85,7 +88,22 @@ if(document.getElementById("trash")){
   )
 }
 
+if(document.getElementById("checkbox")){
+  const checkboxElement = document.getElementById("checkbox");
+  const checkboxRoot = createRoot(checkboxElement);
+  checkboxRoot.render(
+    <Checkbox />
+  )
+}
 
+if (document.getElementById("image-preview")) {
+  const imagePreviewElement = document.getElementById("image-preview");
+  const image = imagePreviewElement.getAttribute('data-image');
+  const imagePreviewRoot = createRoot(imagePreviewElement );
+  imagePreviewRoot.render(
+    <ImagePreview image={image} />
+  )
+}
 
 
 

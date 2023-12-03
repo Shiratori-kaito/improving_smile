@@ -7,14 +7,11 @@ class Photo < ApplicationRecord
   belongs_to :user
 
   def s3_image
-    # 環境変数からAWSの認証情報を取得
-    credentials = Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
+    # 明示的に使用するプロファイルを指定
+    credentials = Aws::SharedCredentials.new(profile_name: 'shiratori')
   
-    # Rekognition クライアントの初期化
-    client = Aws::Rekognition::Client.new(
-      region: 'ap-northeast-1', 
-      credentials: credentials
-    )
+    # Rekognition クライアントの初期化時に指定したプロファイルを使用
+    client = Aws::Rekognition::Client.new(region: 'ap-northeast-1', credentials: credentials)
   
     response = client.detect_faces({
       image: {
@@ -28,6 +25,7 @@ class Photo < ApplicationRecord
   
     response.face_details.first
   end
+  
 
   def analysed?
     analyse_face_detail.present? && analyse_face_emotion.present?
