@@ -2,7 +2,7 @@
   <%= form_with model:Post.new,url: posts_path, local: true do |form| %>
     <div class="bg-yellow-100 pt-2">
       <div class="mx-3 flex justify-center rounded-lg ">
-        <%= image_tag @image, class: "w-[50%] h-[50%] rounded-lg" %>
+        <%= content_tag :div, id: 'image-preview', data: {image: url_for(@image)}  do %><% end %>
       </div>
       <div class="w-full flex justify-center text-center bg-yellow-300 p-6 mt-7 mb-7 ">
         <%= image_tag "light.png", class:"w-20 h-20"%>
@@ -60,10 +60,10 @@
       <div class="fixed bottom-0  w-full z-50 flex justify-center items-center bg-gray-200 py-2 px-4 shadow-md">
         <%= form.submit '投 稿', class: "bg-white border-2 border-black text-xl px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
         <%= link_to "シェア", "https://twitter.com/share?url=#{ request.url }&text=【君の笑顔は...】%0a%0a#{@analyse_face_emotion.score }点！", target: '_blank', class: "bg-white border-2 border-black text-xl px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105"  %>
-        <dic class="field flex justify-center item-center ml-10">
-          <%= form.check_box :blur, :as => :boolean, class: " mt-1" %>
-          <%= form.label :投稿時に顔写真をぼかします, class: "text-xl ml-2" %>
-        </dic>
+        <div class="field flex justify-center item-center ml-10">
+          <div id="checkbox"></div>
+          <%= form.hidden_field :blur, id: 'hiddenBlurInput', value: false %>
+        </div>
       </div>
     <% end %>
   <% end %>
