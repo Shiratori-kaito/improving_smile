@@ -1,5 +1,6 @@
 import React from "react";
 import {useState} from "react";
+import { useEffect } from "react";
 
 export const Checkbox = ()  => {
 
@@ -13,6 +14,13 @@ export const Checkbox = ()  => {
     window.dispatchEvent(event);
   }
 
+  useEffect(() => {
+    const hiddenInput = document.getElementById('hiddenBlurInput');
+    if (hiddenInput) {
+      hiddenInput.value = isBlur;
+    }
+  },[isBlur]);
+
   return (
     <>
       <label>
@@ -20,7 +28,7 @@ export const Checkbox = ()  => {
           type="checkbox"
           checked={isBlur}
           onChange={handleBlur}
-          className="mt-1 mr-1 mb-"
+          className="mt-1 mr-1 "
         />
         投稿時に顔写真をぼかします
       </label>
