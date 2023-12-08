@@ -20,9 +20,9 @@
       </div>
 
       <div class="mb-4">
-        <%= form.label :avatar, class: 'block text-gray-700 font-bold mb-2' %>
-        <%= form.file_field :avatar, class: 'w-full p-2 border rounded shadow appearance-none focus:outline-none focus:shadow-outline' %>
-        <%= form.hidden_field :avatar_cache %>
+        <p class="block font-medium text-sm text-gray-600">アバター</p>
+        <div id="avatarPreview"></div>
+        <%= form.hidden_field :avatar, id: "hiddenAvatarField", value: @user.avatar %>
       </div>
 
       <div class="mb-4">
