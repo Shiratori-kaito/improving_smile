@@ -9,6 +9,7 @@ import {Favorite} from './components/Favorite';
 import {PostDelete} from './components/PostDelete';
 import {Checkbox} from './components/Checkbox';
 import {ImagePreview} from './components/ImagePreview';
+import {AvatarPreview} from './components/AvatarPreview';
 
 
 
@@ -102,6 +103,15 @@ if (document.getElementById("image-preview")) {
   const imagePreviewRoot = createRoot(imagePreviewElement );
   imagePreviewRoot.render(
     <ImagePreview image={image} />
+  )
+}
+
+if(document.getElementById("avatarPreview")){
+  const avatarPreviewElement = document.getElementById("avatarPreview");
+  const avatar = avatarPreviewElement.getAttribute('data-avatar');
+  const avatarPreviewRoot = createRoot(avatarPreviewElement);
+  avatarPreviewRoot.render(
+    <AvatarPreview  avatar={avatar}/>
   )
 }
 

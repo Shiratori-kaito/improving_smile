@@ -15,9 +15,10 @@ export const PostDelete = ({post}) => {
 
   const redirectToPreviousPage = () => {
     window.history.back();
+    console.log('deleted');
     setTimeout(() => {
-      window.location.reload();
-    }, 100);
+      window.location.reload(true);
+    }, 1000);
   }
 
   useEffect (() => {

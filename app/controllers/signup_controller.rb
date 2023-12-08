@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-
 class SignupController < ApplicationController
+  include CarrierwaveBase64Uploader
   skip_before_action :require_login
   skip_before_action :require_signup
 
@@ -23,7 +23,7 @@ class SignupController < ApplicationController
       password: session[:password],
       password_confirmation: session[:password_confirmation],
       name: user_params[:name],
-      avatar: user_params[:avatar]
+      avatar: base64_conversion(user_params[:avatar])
     )
     if @user.save
       session[:id] = @user.id

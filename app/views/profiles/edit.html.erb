@@ -12,12 +12,9 @@
         <%= f.text_field :name, class: "mt-1 p-2 w-full border rounded-md" %>
       </div>
       <div>
-        <%= f.label :avatar, class: "block font-medium text-sm text-gray-600" %>
-        <%= f.file_field :avatar, class: "mt-1 p-2 w-full border rounded-md" %>
-        <%= f.hidden_field :avatar_cache %>
-        <div class='mt-3'>
-          <%= image_tag @user.avatar.url, class: 'h-24 w-24 rounded-full object-cover' %>
-        </div>
+        <p class="block font-medium text-sm text-gray-600">アバター</p>
+        <%= content_tag :div, id: 'avatarPreview', data: {avatar: @user.avatar.url}  do %><% end %>
+        <%= f.hidden_field :avatar, id: "hiddenAvatarField", value: @user.avatar %>
       </div>
       <div>
         <%= f.submit "Update", class: "mt-4 px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600" %>
