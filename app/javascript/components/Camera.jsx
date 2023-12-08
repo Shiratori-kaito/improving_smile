@@ -75,7 +75,7 @@ export const Camera = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontWeight: 'bold',
-              }}>Clear photo</button>
+              }}>再撮影</button>
               <button onClick={handleUpload} style={{
                 marginLeft: '10px',
                 background: 'yellow',
@@ -86,7 +86,7 @@ export const Camera = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontWeight: 'bold', }}>Upload</button>
+                fontWeight: 'bold', }}>分析</button>
             </div>
           </>
         ) : (
