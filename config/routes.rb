@@ -1,36 +1,57 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root to: 'home#index'
+
+  # Posts
   resources :posts do
     resources :comments, only: %i[create destroy]
     resource :favorites, only: %i[create destroy]
+    get 'favorites/favorite_status', on: :member, to: 'favorites#favorite_status'
   end
-  get '/posts/:post_id/favorites/favorite_status', to: 'favorites#favorite_status'
-  root to: 'home#index'
+
+  # Users
   resources :users do
     member do
-      get :following, :followers
-      get :liked_posts
+      get :following, :followers, :liked_posts
     end
     resource :relationships, only: %i[create destroy]
   end
+
+  # Profiles
   resource :profile, only: %i[show edit update]
-  resources :signup do
+
+  # Sign Up Steps
+  resources :signup, only: [] do
     collection do
       get 'step1'
       get 'step2'
     end
   end
-  get 'presigned_url', to: 'uploads#presigned_url'
-  get 'photos/capture', to: 'photos#capture'
-  post 'photos/create', to: 'photos#create'
-  get 'photos/detect_faces', to: 'photos#detect_faces'
-  get 'login', to: 'user_sessions#new'
-  post 'login', to: 'user_sessions#create'
-  delete 'logout', to: 'user_sessions#destroy'
-  post 'guest_login', to: 'user_sessions#guest_login'
+
+  # Password Resets
+  resources :password_resets, only: %i[new create edit update]
+
+
+  # Photos
+  scope :photos do
+    get 'capture', to: 'photos#capture'
+    post 'create', to: 'photos#create'
+    get 'detect_faces', to: 'photos#detect_faces'
+  end
+
+  # User Sessions
+  scope :session, controller: 'user_sessions' do
+    get 'login', action: :new
+    post 'login', action: :create
+    delete 'logout', action: :destroy
+    post 'guest_login', action: :guest_login
+  end
+
+  # Static Pages
   get 'pages/policy', to: 'pages#policy'
   get 'pages/about', to: 'pages#about'
-  resources :password_resets, only: %i[new create edit update]
+
+  # Development Tools
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
