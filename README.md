@@ -1,4 +1,4 @@
-# [その笑顔、全力？]
+# [Face World]
 [Figma](https://www.figma.com/file/8CS5ilDtB91CpvvoAxdnTm/improving_smile?type=design&node-id=0%3A1&mode=design&t=2Lil0QcGRa2ZQ86x-1)
 
 [ER図](https://gyazo.com/2821267c6641e4792dd5f83a912881c0)

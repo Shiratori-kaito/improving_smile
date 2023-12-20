@@ -24,6 +24,6 @@ class UserSessionsController < ApplicationController
     user = User.create!(email: random_email, password: random_password, password_confirmation: random_password,
                         name: 'ゲストユーザー', role: 'guest_user')
     auto_login(user)
-    redirect_to photos_capture_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to capture_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 end

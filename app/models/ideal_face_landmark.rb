@@ -1,0 +1,2 @@
+class IdealFaceLandmark < ApplicationRecord
+end

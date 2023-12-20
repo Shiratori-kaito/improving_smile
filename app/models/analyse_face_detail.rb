@@ -16,9 +16,9 @@ class AnalyseFaceDetail < ApplicationRecord
 
   def eye_direction_yaw_description
     if eye_direction_yaw > 10
-      '右'
-    elsif eye_direction_yaw < -10
       '左'
+    elsif eye_direction_yaw < -10
+      '右'
     else
       '正面'
     end
