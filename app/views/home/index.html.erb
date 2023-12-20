@@ -11,7 +11,7 @@
       <% else %>
         <%= link_to 'マイヒストリー', user_path(current_user.id), class: 'bg-red-500 hover:bg-red-600 shadow-xl shadow-red-700/50 text-white py-3 px-6 pt-4 rounded-full font-semibold text-xl ' %>
       <% end %>
-      <%= link_to '撮影', photos_capture_path, class: 'bg-blue-500 hover:bg-blue-600 shadow-xl shadow-blue-700/50 text-white py-3 px-6 mx-1 rounded-full font-semibold text-2xl'  %>
+      <%= link_to '撮影', capture_path, class: 'bg-blue-500 hover:bg-blue-600 shadow-xl shadow-blue-700/50 text-white py-3 px-6 mx-1 rounded-full font-semibold text-2xl'  %>
       <%= link_to '投稿一覧', posts_path, class: 'bg-green-500 hover:bg-green-600 shadow-xl shadow-green-700/50 text-white py-3 px-6 rounded-full font-semibold text-2xl' %>
     </div>
   </div>

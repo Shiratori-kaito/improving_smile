@@ -41,12 +41,10 @@ Rails.application.routes.draw do
   end
 
   # User Sessions
-  scope :session, controller: 'user_sessions' do
-    get 'login', action: :new
-    post 'login', action: :create
-    delete 'logout', action: :destroy
-    post 'guest_login', action: :guest_login
-  end
+  get 'login', to: 'user_sessions#new' 
+  post 'login', to: 'user_sessions#create' 
+  delete 'logout', to: 'user_sessions#destroy'
+  post 'guest_login', to: 'user_sessions#guest_login'
 
   # Static Pages
   get 'pages/policy', to: 'pages#policy'

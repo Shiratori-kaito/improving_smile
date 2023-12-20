@@ -39,6 +39,17 @@ export const AvatarPreview = ({avatar}) => {
                                                   }} />
       </div>
     );
+  }else if (avatar === 'default_avatar.png'){
+    content = (
+      <div>
+        <img src="/images/default_avatar.png" alt='Preview' style={{
+                                                  width: '96px',
+                                                  height: '96px',
+                                                  borderRadius: '9999px',
+                                                  objectFit: 'cover'
+                                                  }} />
+      </div>
+    );
   }else if (avatar){
     content = (
       <div>

@@ -28,7 +28,7 @@ export const Checkbox = ()  => {
           type="checkbox"
           checked={isBlur}
           onChange={handleBlur}
-          className="mt-1 mr-1 "
+          className="mt-1 mr-1 mb-2"
         />
         投稿時に顔写真をぼかします
       </label>

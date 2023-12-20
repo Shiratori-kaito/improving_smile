@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
     @photo = @user.photos.new
     if @photo.save
       @photo.image.attach(photo_params[:image])
-      redirect_to photos_detect_faces_path
+      redirect_to detect_faces_path
     else
       render :capture
     end
@@ -66,6 +66,23 @@ class PhotosController < ApplicationController
 
     @analyse_face_emotion.emotion_comment = view_context.extra_comment(@analyse_face_emotion)
     @analyse_face_emotion.save!
+
+    landmarks_data = face_detail.landmarks
+    @analyse_face_landmark = AnalyseFaceLandmark.new(photo_id: @photo.id)
+
+    landmarks_data.each do |landmark|
+      type_name = landmark[:type].underscore
+      x_coordinate = landmark[:x]
+      y_coordinate = landmark[:y]
+      @analyse_face_landmark["#{type_name}_x"] = x_coordinate
+      @analyse_face_landmark["#{type_name}_y"] = y_coordinate
+
+    end
+
+    @center_of_mouth = @analyse_face_landmark.center_of_mouth(@analyse_face_landmark.mouth_up_y, @analyse_face_landmark.mouth_down_y)
+    flash.now[:notice] = @analyse_face_landmark.corner_of_mouth(@center_of_mouth, @analyse_face_landmark.mouth_left_y, @analyse_face_landmark.mouth_right_y)
+    @analyse_face_landmark.save!
+
   end
 
   private
