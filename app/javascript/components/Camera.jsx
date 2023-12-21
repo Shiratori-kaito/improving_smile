@@ -94,7 +94,6 @@ export const Camera = () => {
             < LoadingIndicator />
             <div className="z-30 text-sky-300 text-xl absolute top-[5%] left-[42%]">顔を青枠に合わせてください</div>
             <div className="z-30 border-2 border-sky-300 w-[320px] h-[450px] rounded-full absolute top-[10%] left-[36%]"></div>
-            <div className="z-30 border-2 border-red-500 w-[40px] h-[40px] rounded-full absolute top-[46%] left-[45%]"></div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh', zIndex: 10, position: 'absolute', top: '37%', left: '50%', transform: 'translate(-50%, -50%)'  }}>
               <Webcam
                 audio={false}

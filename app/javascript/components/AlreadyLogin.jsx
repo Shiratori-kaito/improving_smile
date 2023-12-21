@@ -65,9 +65,9 @@ export default function AlreadyLogin({user}) {
             <img src="/images/camera.png" alt="logo" className="w-24 h-12 pb-2 lg:w-full h-full"/>
           </button>
           <div className="invisible lg:visible">
-            <div className="flex justify-center">
-              <h1 className="text-white text-5xl pr-10">Face</h1>
-              <h1 className="text-white text-5xl pl-10">World</h1>
+            <div className="absolute left-[10%] flex flex-row pt-2">
+              <h1 className="text-white text-4xl">Face</h1>
+              <h1 className="text-white text-4xl pl-3">World</h1>
             </div>
           </div>
           {/* humbergerbutton */}
