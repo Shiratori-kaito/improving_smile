@@ -79,9 +79,13 @@ class PhotosController < ApplicationController
 
     end
 
-    @center_of_mouth = @analyse_face_landmark.center_of_mouth(@analyse_face_landmark.mouth_up_y, @analyse_face_landmark.mouth_down_y)
-    flash.now[:notice] = @analyse_face_landmark.corner_of_mouth(@center_of_mouth, @analyse_face_landmark.mouth_left_y, @analyse_face_landmark.mouth_right_y)
-    @analyse_face_landmark.save!
+    center_of_mouth = @analyse_face_landmark.center_of_mouth(@analyse_face_landmark.mouth_up_y, @analyse_face_landmark.mouth_down_y)
+    corner_of_mouth_result = @analyse_face_landmark.corner_of_mouth(center_of_mouth, @analyse_face_landmark.mouth_left_y, @analyse_face_landmark.mouth_right_y)
+
+    unless corner_of_mouth_result.nil?
+      flash.now[:notice] = corner_of_mouth_result
+    end
+     @analyse_face_landmark.save!
 
   end
 

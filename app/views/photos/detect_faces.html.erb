@@ -46,18 +46,20 @@
     <% if current_user.role == "guest_user" %>
       <div class="fixed bottom-0  w-full z-50 flex justify-center items-center bg-gray-200 py-2 px-4 shadow-md">
         <div class="flex items-center justify-cente">
+          <%= link_to '再撮影', capture_path, class:"mx-5 bg-white border-2 border-black text-xl px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
           <div class="flex item-center justify-center  mx-5  bg-white border-2 border-black p-2 mb-1 rounded shadow-lg transform transition-transform hover:scale-105">
-            <%= link_to 'SignUp', login_path, class:"text-lime-600 font-bold text-3xl" %>
+            <%= link_to 'SignUp', login_path, class:"text-lime-600 font-bold text-2xl" %>
             <p class="ml-3 pt-2 text-black">すると投稿できます！</p>
           </div>
           <div class="flex item-center justify-center  mx-5  bg-white border-2 border-black p-2 mb-1 rounded shadow-lg transform transition-transform hover:scale-105">
-            <%= link_to 'Home', root_path, class:"text-lime-600 font-bold text-3xl ml-3" %>
+            <%= link_to 'Home', root_path, class:"text-lime-600 font-bold text-2xl ml-3" %>
             <p class="ml-3 pt-2 text-black">に戻ります</p>
           </div>
         </div>
       </div>
     <% else %>
       <div class="fixed bottom-0  w-full z-50 flex justify-center items-center bg-gray-200 py-2 px-4 shadow-md">
+        <%= link_to '再撮影', capture_path, class:"bg-white border-2 border-black text-xl px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
         <%= form.submit '投 稿', class: "bg-white border-2 border-black text-xl px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
         <%= link_to "シェア", "https://twitter.com/share?url=#{ request.url }&text=【君の笑顔は...】%0a%0a#{@analyse_face_emotion.score }点！", target: '_blank', class: "bg-white border-2 border-black text-xl px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105"  %>
         <div class="field flex justify-center item-center ml-10">

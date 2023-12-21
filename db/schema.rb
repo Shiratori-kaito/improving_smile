@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_16_140328) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_21_035206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -158,71 +158,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_16_140328) do
     t.index ["post_id"], name: "index_favorites_on_post_id"
     t.index ["user_id", "post_id"], name: "index_favorites_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
-  end
-
-  create_table "ideal_face_landmarks", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.float "nose_x"
-    t.float "nose_y"
-    t.float "nose_left_x"
-    t.float "nose_left_y"
-    t.float "nose_right_x"
-    t.float "nose_right_y"
-    t.float "mouth_left_x"
-    t.float "mouth_left_y"
-    t.float "mouth_right_x"
-    t.float "mouth_right_y"
-    t.float "mouth_up_x"
-    t.float "mouth_up_y"
-    t.float "mouth_down_x"
-    t.float "mouth_down_y"
-    t.float "left_eye_brow_left_x"
-    t.float "left_eye_brow_left_y"
-    t.float "left_eye_brow_right_x"
-    t.float "left_eye_brow_right_y"
-    t.float "right_eye_brow_left_x"
-    t.float "right_eye_brow_left_y"
-    t.float "right_eye_brow_right_x"
-    t.float "right_eye_brow_right_y"
-    t.float "right_eye_brow_up_x"
-    t.float "right_eye_brow_up_y"
-    t.float "left_eye_brow_up_x"
-    t.float "left_eye_brow_up_y"
-    t.float "eye_left_x"
-    t.float "eye_left_y"
-    t.float "eye_right_x"
-    t.float "eye_right_y"
-    t.float "left_eye_up_x"
-    t.float "left_eye_up_y"
-    t.float "left_eye_down_x"
-    t.float "left_eye_down_y"
-    t.float "left_eye_left_x"
-    t.float "left_eye_left_y"
-    t.float "left_eye_right_x"
-    t.float "left_eye_right_y"
-    t.float "right_eye_up_x"
-    t.float "right_eye_up_y"
-    t.float "right_eye_down_x"
-    t.float "right_eye_down_y"
-    t.float "right_eye_left_x"
-    t.float "right_eye_left_y"
-    t.float "right_eye_right_x"
-    t.float "right_eye_right_y"
-    t.float "upper_jawline_left_x"
-    t.float "upper_jawline_left_y"
-    t.float "upper_jawline_right_x"
-    t.float "upper_jawline_right_y"
-    t.float "mid_jawline_left_x"
-    t.float "mid_jawline_left_y"
-    t.float "mid_jawline_right_x"
-    t.float "mid_jawline_right_y"
-    t.float "chin_bottom_x"
-    t.integer "chin_bottom_y"
-    t.float "left_pupil_x"
-    t.float "left_pupil_y"
-    t.float "right_pupil_x"
-    t.float "right_pupil_y"
   end
 
   create_table "photos", force: :cascade do |t|
