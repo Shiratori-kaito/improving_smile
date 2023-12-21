@@ -14,7 +14,7 @@ module.exports = {
       },
       animation: {
         'bg-slide': 'bg 10s infinite linear',
-        flash: "flashFade 5.0s forwards",
+        flash: "flashFade 7.0s forwards",
       },
       keyframes: {
         bg: {
