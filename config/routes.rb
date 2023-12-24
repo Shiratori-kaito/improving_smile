@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resource :profile, only: %i[show edit update]
 
   # Sign Up Steps
-  resources :signup, only: [] do
+  resources :signup, only: %i[create] do
     collection do
       get 'step1'
       get 'step2'
