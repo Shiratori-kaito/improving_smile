@@ -3,15 +3,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { useConfirm } from '../hooks/UseConfirm';
+import { useDeletePost } from '../hooks/UseDeletePost';
+
 
 export const PostDelete = ({post}) => {
-  const [confirm, setConfirm] = useState(false);
-
-  const handleConfirm = () => {
-    if (window.confirm('投稿を削除しますか？')){
-      setConfirm(true);
-    };
-  };
+  const { confirm, handleConfirm } = useConfirm('投稿を削除しますか？');
 
   const redirectToPreviousPage = () => {
     window.history.back();
@@ -19,27 +16,9 @@ export const PostDelete = ({post}) => {
     setTimeout(() => {
       window.location.reload(true);
     }, 1000);
-  }
+  };
 
-  useEffect (() => {
-    if (confirm){
-      fetch(`/posts/${post}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-        }
-      })
-      .then(response => {
-        if (response.ok) {
-          redirectToPreviousPage();
-        } else {
-          console.error('Error deleting post');
-        }
-      });
-    };
-  }, [confirm]);
-
+  useDeletePost({post, confirm, onSuccess: redirectToPreviousPage, onFailure: () => console.error('投稿を削除できませんでした')});
 
   return (
     <>

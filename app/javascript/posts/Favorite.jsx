@@ -1,53 +1,12 @@
 import React from "react";
 import { useState } from "react";
-
 import { useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp as regularThumbsUp } from '@fortawesome/free-regular-svg-icons'
-
+import { useFavorite } from "../hooks/UseFavorite";
 export const Favorite = ({post, favoriteCount}) => {
-  const [favorite, setFavorite] = useState(false);
-  const [count, setCount] = useState(Number(favoriteCount));
-
-  
-  useEffect (() => {
-    fetch(`/posts/${post}/favorites/favorite_status`, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json',
-        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-      },
-    }).then(response =>  response.json())
-      .then(data => {
-        setFavorite(data.is_favorite);
-      });
-  }, []);
-
-
-
-  const handleFavorite = () => {
-    const method = favorite ? 'DELETE' : 'POST';
-    fetch(`/posts/${post}/favorites`, {
-      method: method,
-      headers: {
-      'content-type': 'application/json',
-      'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-      },
-      body: JSON.stringify({ post_id: post })
-    }).then(response => {
-      if (response.ok) {
-        setFavorite(!favorite);
-
-        setCount(count => favorite? count - 1 : count + 1)
-
-      } else {
-        console.error('Error toggling favorite');
-      }
-    });
-  };
-  console.log(count);
-
+  const { favorite, count, handleFavorite } = useFavorite(post, favoriteCount);
   return (
     <>
       <div className="flex justify-center item-center absolute top-[90%] px-20">

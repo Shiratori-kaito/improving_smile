@@ -52,9 +52,6 @@ export const Camera = () => {
     }
   }
 
-  const onUserMedia = (e) => {
-    console.log(e);
-  }
   return (
     <>
       <div className="mt-20 mx-5 fixed bg-yellow-100 border-4 border-yellow-500 relative">
@@ -102,7 +99,6 @@ export const Camera = () => {
                 width={900}
                 height={900}
                 videoConstraints={videoConstraints}
-                onUserMedia={onUserMedia}
               />
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', zIndex: 10, position: 'absolute', top: '78%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -123,6 +119,4 @@ export const Camera = () => {
       </div>
     </>
   );
-}
-
-export default Camera;
+};

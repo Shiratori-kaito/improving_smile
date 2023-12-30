@@ -4,8 +4,6 @@ import { FollowerUsers } from './FollowerUsers'; // FollowerUsers コンポー�
 
 export const UserDashboard = ({ followers, countFollowers, followings, countFollowings }) => {
   const [activeTab, setActiveTab] = useState(null);
-  console.log(followers);
-  console.log(followings);
   const toggleTab = (tabName) => {
     // 現在のタブがすでにアクティブな場合は閉じるために null をセットする
     setActiveTab(activeTab === tabName ? null : tabName);
