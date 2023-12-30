@@ -1,15 +1,15 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import {Camera} from './components/Camera';
-import { UserDashboard } from './components/UserDashboard';
-import {EmotionChart} from './components/EmotionChart';
-import AlreadyLogin from './components/AlreadyLogin';
-import NotLogin from './components/NotLogin';
-import {Favorite} from './components/Favorite';
-import {PostDelete} from './components/PostDelete';
-import {Checkbox} from './components/Checkbox';
-import {ImagePreview} from './components/ImagePreview';
-import {AvatarPreview} from './components/AvatarPreview';
+import { Camera } from "./camera/Camera";
+import { UserDashboard } from './user/UserDashboard';
+import {EmotionChart} from './posts/EmotionChart';
+import AlreadyLogin from './header/AlreadyLogin';
+import NotLogin from './header/NotLogin';
+import {Favorite} from './posts/Favorite';
+import {PostDelete} from './posts/PostDelete';
+import {Checkbox} from './posts/Checkbox';
+import {ImagePreview} from './posts/ImagePreview';
+import {AvatarPreview} from './preview/AvatarPreview';
 
 
 

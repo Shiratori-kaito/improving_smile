@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { handleLogout } from "../apis/HandleLogout";
 
 export default function AlreadyLogin({user}) {
   const [openMenu, setOpenMenu] = useState(false);
@@ -9,7 +10,7 @@ export default function AlreadyLogin({user}) {
     setOpenMenu(!openMenu);
   };
 
-  const handleMypage = () => {
+  const handleMyPage = () => {
     window.location.href = `/users/${user}`
   }
 
@@ -30,7 +31,7 @@ export default function AlreadyLogin({user}) {
     window.location.href = "/pages/policy";
   }
 
-  const handleabout = () => {
+  const handleAbout = () => {
     window.location.href = "/pages/about";
   }
 
@@ -38,24 +39,6 @@ export default function AlreadyLogin({user}) {
     window.location.href = "https://twitter.com/nvrl623";
   }
 
-  const handleLogout = () => {
-    fetch('/logout', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-      },
-      body: JSON.stringify({ user_id: user.id })  // 必要に応じてパラメータを追加
-    })
-    .then(response => {
-      if (response.ok) {
-        window.location.href = "/login";
-      }
-    })
-    .catch(error => {
-      console.error('There was an error with logout:', error);
-    });
-  };
 
   return (
     <div className="w-full">
@@ -105,7 +88,7 @@ export default function AlreadyLogin({user}) {
           >
             <ul className="mt-6">
               <li className="">
-                <button onClick={handleMypage} type="button" className="py-2 inline-block">マイページ</button>
+                <button onClick={handleMyPage} type="button" className="py-2 inline-block">マイページ</button>
               </li>
               <li className="">
                 <button onClick={handlePostsIndex} type="button" className="py-2 inline-block">投稿一覧</button>
@@ -114,13 +97,13 @@ export default function AlreadyLogin({user}) {
                 <button onClick={handleProfile} type="button" className="py-2 inline-block">アカウント管理</button>
               </li>
               <li className="">
-                <button onClick={handleLogout} type="button" className="py-2 inline-block">ログアウト</button>
+                <button onClick={() => handleLogout(user)} type="button" className="py-2 inline-block">ログアウト</button>
               </li>
               <li className="pt-10">
                 <button onClick={handlePolicy} type="button" className="py-2 inline-block">プライバシーポリシー</button>
               </li>
               <li className="">
-                <button onClick={handleabout} type="button" className="py-2 inline-block">利用規約</button>
+                <button onClick={handleAbout} type="button" className="py-2 inline-block">利用規約</button>
               </li>
               <li className="">
                 <button onClick={handleMyTwitter} type="button" className="py-2 inline-block">運営元</button>

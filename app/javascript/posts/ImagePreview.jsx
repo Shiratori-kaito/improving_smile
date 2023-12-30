@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 export const ImagePreview = ( {image} ) => {
 
-  console.log(image);
 
   const [isBlur, setIsBlur] = useState(false);
 
