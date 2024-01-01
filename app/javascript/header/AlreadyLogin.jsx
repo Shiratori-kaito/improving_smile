@@ -54,7 +54,7 @@ export default function AlreadyLogin({user}) {
             </div>
           </div>
           {/* humbergerbutton */}
-          <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3 pb-5">
+          <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3 pb-8">
             <div
               className={
                 openMenu
@@ -82,7 +82,7 @@ export default function AlreadyLogin({user}) {
           <nav
             className={
               openMenu
-                ? 'text-left fixed bg-slate-50 right-0 top-0 w-4/12 h-screen flex flex-col justify-start pt-8 px-3 ease-linear duration-300'
+                ? 'text-left fixed bg-slate-50 right-0 top-0 w-1/2 lg:w-4/12 h-screen flex flex-col justify-start pt-8 px-3 ease-linear duration-300'
                 : 'fixed right-[-100%] ease-linear duration-300'
             }
           >
