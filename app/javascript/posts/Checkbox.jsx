@@ -23,15 +23,15 @@ export const Checkbox = ()  => {
 
   return (
     <>
-      <label>
+      <label className="text-xs lg:text-lg">
         <input
           type="checkbox"
           checked={isBlur}
           onChange={handleBlur}
-          className="mt-1 mr-1 mb-2"
+          className="mt-1 mr-1 mb-2 lg:align-middle"
         />
-        投稿時に顔写真をぼかします
+        投稿時に顔写真をぼかす
       </label>
     </>
-  )
+  );
 }

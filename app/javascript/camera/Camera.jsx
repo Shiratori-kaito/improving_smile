@@ -54,11 +54,11 @@ export const Camera = () => {
 
   return (
     <>
-      <div className="mt-20 mx-5 fixed bg-yellow-100 border-4 border-yellow-500 relative">
+      <div className=" mt-12 lg:mt-20 mx-2 lg:mx-5 fixed bg-yellow-100 border-4 border-yellow-500 relative">
         <div className="bg-custom-bg  bg-cover animate-bg-slide h-[800px] w-full top-0 left-0"></div>
         {url ? (
           <>
-            <div style={{ display: 'flex', justifyContent: 'center', zIndex: 10, position: 'absolute', top: '37%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+            <div className="flex justify-center items-center mr-5 lg:mr-0 z-10 absolute top-[40%] lg:top-[37%] left-[5%] lg:left-1/2 lg:-translate-x-1/2 lg: -translate-y-1/2 ">
               <img src={url} alt="Screenshot" style={{ maxWidth: '90%', height: 'auto' }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', zIndex: 10, position: 'absolute', top: '78%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -89,15 +89,14 @@ export const Camera = () => {
         ) : (
           <>
             < LoadingIndicator />
-            <div className="z-30 text-sky-300 text-xl absolute top-[5%] left-[42%]">顔を青枠に合わせてください</div>
-            <div className="z-30 border-2 border-sky-300 w-[320px] h-[450px] rounded-full absolute top-[10%] left-[36%]"></div>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh', zIndex: 10, position: 'absolute', top: '37%', left: '50%', transform: 'translate(-50%, -50%)'  }}>
+            <div className="hidden lg:block lg:z-30 text-sky-300 text-xl absolute top-[5%] left-[42%]">顔を青枠に合わせてください</div>
+            <div className="hidden lg:block lg:z-30 border-2 border-sky-300 w-[320px] h-[450px] rounded-full absolute top-[10%] left-[36%]"></div>
+            <div className="flex justify-center items-center mr-5 lg:mr-0 z-10 absolute top-[40%] lg:top-[37%] left-[5%] lg:left-1/2 lg:-translate-x-1/2 lg: -translate-y-1/2 ">
               <Webcam
                 audio={false}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
-                width={900}
-                height={900}
+                className="w-[400px] h-[550px] lg:w-[900px] lg:h-[900px]"
                 videoConstraints={videoConstraints}
               />
             </div>
