@@ -65,9 +65,13 @@ export const AvatarPreview = ({avatar}) => {
 
   return (
     <div>
-      <input type="file" 
+      <label htmlFor="file-input" className="cursor-pointer">
+        <div className="bg-gray-300 text-black p-2 rounded-md">アバターを選択</div>
+      </label>
+      <input id="file-input" type="file" 
         accept='image/*' 
         onChange={onFileChange}
+        className="hidden"
       />
       <div className="mt-3">
         {content}

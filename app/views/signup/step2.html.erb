@@ -1,5 +1,5 @@
 <div class="container mx-auto p-6 bg-gray-100 min-h-screen flex items-center justify-center">
-  <div class="w-6/12 mx-auto bg-white p-6 rounded-lg shadow-md">
+  <div class="w-5/6 lg:w-6/12 mx-auto bg-white p-6 rounded-lg shadow-md">
     <h1 class="text-4xl font-bold mb-6 text-center">新規会員登録</h1>
     <%= form_with(model: @user, url: signup_index_path, method: :post, local: true, html: { class: 'max-w-md mx-auto' }) do |form| %>
       <% if @user.errors.any? %>
@@ -20,7 +20,6 @@
       </div>
 
       <div class="mb-4">
-        <p class="block font-medium text-sm text-gray-600">アバター</p>
         <div id="avatarPreview"></div>
         <%= form.hidden_field :avatar, id: "hiddenAvatarField", value: "public/default_avatar.png" %>
       </div>

@@ -22,9 +22,9 @@ export const PostDelete = ({post}) => {
 
   return (
     <>
-      <div className="flex justify-center item-center absolute top-[90%] left-[90%] px-20">
+      <div className="flex justify-center item-center absolute top-[95%] lg:top-[90%] left-[91%] lg:left-[90%] ">
         <button onClick={handleConfirm} type="button" >
-          <FontAwesomeIcon icon={faTrashAlt} className="text-gray-500 text-5xl" />
+          <FontAwesomeIcon icon={faTrashAlt} className="text-gray-500 text-2xl lg:text-5xl" />
         </button>
       </div>
     </>

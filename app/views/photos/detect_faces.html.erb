@@ -1,4 +1,4 @@
-<div class="h-hull mt-20">
+<div class="h-hull mt-12 lg:mt-20">
   <%= form_with model:Post.new,url: posts_path, local: true do |form| %>
     <div class="bg-yellow-100 pt-2">
       <div class="mx-3 flex justify-center rounded-lg ">
@@ -20,7 +20,7 @@
           </div>
       </div>
       <div class="lg:w-2/5 mb-10 lg:mb-0 mx-4 lg:mx-0 p-4 border-2 border-gray-500 rounded-lg flex flex-col items-center justify-center">
-        <div class="text-lg lg:text-xl tblack mt-1">目の開き</div>
+        <div class="text-lg lg:text-xl text-black mt-1">目の開き</div>
         <div class="text-5xl text-black font-bold mt-4 mb-16"><%= @analyse_face_detail.eye_open_judge %></div>
         <div class="flex justify-between w-full">
           <div class="text-lg lg:text-xl text-black">目線（上下）</div>
