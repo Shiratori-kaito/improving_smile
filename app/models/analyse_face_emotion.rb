@@ -18,7 +18,10 @@ class AnalyseFaceEmotion < ApplicationRecord
   end
 
   def score
+    percent_scale = 100
+
     emotions = {
+      # それぞれの感情の重みを設定して得点に反映する
       'happy' => 100.0 / 100,
       'surprised' => 3.0 / 4,
       'calm' => 2.0 / 3,
@@ -29,11 +32,29 @@ class AnalyseFaceEmotion < ApplicationRecord
       'angry' => 1.0 / 12
     }
 
+    half_of_max = 5000 #最大値が10000のため、半分の値を基準値に設定
     emotions.each do |emotion, factor|
       value = send(emotion).to_i
-      return (value / 100 * factor).round if value > 5000
+      # 最初に半分の値を超えた感情を返す　また、max値が10000となっているため、100で割って、100点満点で表示する
+      return (value / percent_scale * factor).round if value > half_of_max
     end
 
-    30
+  
+  end
+
+  def max_score_emotion
+    emotions = [
+      { name: '喜び',  score: happy },
+      { name: '悲しみ', score: sad },
+      { name: '怒り',  score: angry },
+      { name: '驚き',  score: surprised },
+      { name: '落ち着き', score: calm },
+      { name: '恐れ',  score: fear },
+      { name: '混乱',  score: confused },
+      { name: '嫌悪',  score: disgusted }
+    ]
+    max_emotion = emotions.max_by { |emotion| emotion[:score] }
+    max_emotion_name = max_emotion[:name]
+    return max_emotion_name
   end
 end

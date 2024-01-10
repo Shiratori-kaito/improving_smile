@@ -35,32 +35,33 @@ class PhotosController < ApplicationController
 
     @emotion = face_detail.emotions
 
+    confidence_scale = 100 # 信頼度のスケールを100にする
     @analyse_face_emotion = AnalyseFaceEmotion.create!({
                                                          photo_id: @photo.id,
                                                          happy: (@emotion.find do |e|
                                                                    e[:type] == 'HAPPY'
-                                                                 end&.dig(:confidence)&.* 100).round,
+                                                                 end&.dig(:confidence)&.* confidence_scale).round,
                                                          sad: (@emotion.find do |e|
                                                                  e[:type] == 'SAD'
-                                                               end&.dig(:confidence)&.* 100).round,
+                                                               end&.dig(:confidence)&.* confidence_scale).round,
                                                          angry: (@emotion.find do |e|
                                                                    e[:type] == 'ANGRY'
-                                                                 end&.dig(:confidence)&.* 100).round,
+                                                                 end&.dig(:confidence)&.* confidence_scale).round,
                                                          surprised: (@emotion.find do |e|
                                                                        e[:type] == 'SURPRISED'
-                                                                     end&.dig(:confidence)&.* 100).round,
+                                                                     end&.dig(:confidence)&.* confidence_scale).round,
                                                          calm: (@emotion.find do |e|
                                                                   e[:type] == 'CALM'
-                                                                end&.dig(:confidence)&.* 100).round,
+                                                                end&.dig(:confidence)&.* confidence_scale).round,
                                                          fear: (@emotion.find do |e|
                                                                   e[:type] == 'FEAR'
-                                                                end&.dig(:confidence)&.* 100).round,
+                                                                end&.dig(:confidence)&.* confidence_scale).round,
                                                          confused: (@emotion.find do |e|
                                                                       e[:type] == 'CONFUSED'
-                                                                    end&.dig(:confidence)&.* 100).round,
+                                                                    end&.dig(:confidence)&.* confidence_scale).round,
                                                          disgusted: (@emotion.find do |e|
                                                                        e[:type] == 'DISGUSTED'
-                                                                     end&.dig(:confidence)&.* 100).round
+                                                                     end&.dig(:confidence)&.* confidence_scale).round
                                                        })
     @data = @analyse_face_emotion.emotion_data
 
