@@ -5,13 +5,13 @@
       <h1 class="text-7xl font-extrabold text-black mb-10 lg:ml-8 pr-4 text-8xl">Face</h1>
       <h1 class="text-7xl font-extrabold text-white mb-10 text-8xl">World</h1>
     </div>
-    <div class="flex flex-col lg:flex-row lg:justify-center">
+    <div class="flex flex-col justify-center items-center lg:flex-row">
       <% if logged_in? === false %>
-        <%= button_to 'ゲスト', guest_login_path, method: :post, class: 'bg-red-500 hover:bg-red-600 shadow-xl shadow-red-700/50 text-white py-3 px-6 rounded-full font-semibold text-2xl   ' %>
+        <%= button_to 'ゲスト', guest_login_path, method: :post, class: 'bg-red-500 hover:bg-red-600 shadow-xl shadow-red-700/50 text-white py-3 px-7 rounded-full font-semibold text-2xl   ' %>
       <% else %>
         <%= link_to 'マイヒストリー', user_path(current_user.id), class: 'bg-red-500 hover:bg-red-600 shadow-xl shadow-red-700/50 text-white py-3 px-6 pt-4 rounded-full font-semibold text-xl ' %>
       <% end %>
-      <%= link_to '撮影', capture_path, class: 'bg-blue-500 hover:bg-blue-600 shadow-xl shadow-blue-700/50 text-white py-3 px-6 mx-1 rounded-full font-semibold text-2xl'  %>
+      <%= link_to '撮影', capture_path, class: 'bg-blue-500 hover:bg-blue-600 shadow-xl shadow-blue-700/50 text-white py-3 px-10 lg:mx-1 rounded-full font-semibold text-2xl' %>
       <%= link_to '投稿一覧', posts_path, class: 'bg-green-500 hover:bg-green-600 shadow-xl shadow-green-700/50 text-white py-3 px-6 rounded-full font-semibold text-2xl' %>
     </div>
   </div>

@@ -1,13 +1,14 @@
-<div class="h-hull mt-20">
+<div class="h-hull mt-12 lg:mt-20">
   <%= form_with model:Post.new,url: posts_path, local: true do |form| %>
     <div class="bg-yellow-100 pt-2">
       <div class="mx-3 flex justify-center rounded-lg ">
         <%= content_tag :div, id: 'image-preview', data: {image: url_for(@image)}  do %><% end %>
       </div>
-      <div class="w-full flex justify-center text-center bg-yellow-300 p-2 lg:p-6 mt-7 mb-7 ">
+      <div class="w-full flex justify-center items-center text-center bg-yellow-300 p-2 lg:p-6 mt-7 mb-7 ">
         <%= image_tag "light.png", class:"w-10 lg:w-20 h-10 lg:h-20"%>
-        <h2 class="font-bold text-sm lg:text-3xl pt-1 pr-3">あなたの診断結果は...</h2>
-        <h2 class="font-bold text-xl lg:text-5xl pt-1">【<%= @analyse_face_emotion.emotion_comment %>】</h2>
+        <h2 class="hidden lg:block font-bold text-3xl pt-1 pr-3">あなたの分析結果は...</h2>
+        <h2 class="block lg:hidden font-bold text-sm w-[120px] pt-1 pr-3">分析結果は...</h2>
+        <h2 class="font-bold text-base lg:text-5xl pt-1">【<%= @analyse_face_emotion.emotion_comment %>】</h2>
       </div>
     </div>
     <div class="lg:flex ">
@@ -20,7 +21,7 @@
           </div>
       </div>
       <div class="lg:w-2/5 mb-10 lg:mb-0 mx-4 lg:mx-0 p-4 border-2 border-gray-500 rounded-lg flex flex-col items-center justify-center">
-        <div class="text-lg lg:text-xl tblack mt-1">目の開き</div>
+        <div class="text-lg lg:text-xl text-black mt-1">目の開き</div>
         <div class="text-5xl text-black font-bold mt-4 mb-16"><%= @analyse_face_detail.eye_open_judge %></div>
         <div class="flex justify-between w-full">
           <div class="text-lg lg:text-xl text-black">目線（上下）</div>
@@ -37,32 +38,30 @@
       </div>
     </div>
 
-    <div class="flex-grow flex flex-col items-center justify-center mb-[70px] lg:mb-[100px]">
+    <div class="flex-grow flex flex-col items-center justify-center mb-[40px] lg:mb-[100px]">
       <%= form.hidden_field :user_id, value: current_user.id %>
       <%= form.hidden_field :photo_id, value: @photo.id %>
       <%= form.hidden_field :analyse_face_detail_id, value: @analyse_face_detail.id %>
       <%= form.hidden_field :analyse_face_emotion_id, value: @analyse_face_emotion.id %>
     </div>
     <% if current_user.role == "guest_user" %>
-      <div class="fixed bottom-0  w-full z-50 flex justify-center items-center bg-gray-200 py-2 px-4 shadow-md">
-        <div class="flex items-center justify-cente">
-          <%= link_to '再撮影', capture_path, class:"mx-5 bg-white border-2 border-black text-xl px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
-          <div class="flex item-center justify-center  mx-5  bg-white border-2 border-black p-2 mb-1 rounded shadow-lg transform transition-transform hover:scale-105">
-            <%= link_to 'SignUp', login_path, class:"text-lime-600 font-bold text-2xl" %>
-            <p class="ml-3 pt-2 text-black">すると投稿できます！</p>
-          </div>
-          <div class="flex item-center justify-center  mx-5  bg-white border-2 border-black p-2 mb-1 rounded shadow-lg transform transition-transform hover:scale-105">
-            <%= link_to 'Home', root_path, class:"text-lime-600 font-bold text-2xl ml-3" %>
-            <p class="ml-3 pt-2 text-black">に戻ります</p>
-          </div>
+      <div class="fixed bottom-0  w-full z-50 flex justify-center items-center bg-gray-200 py-1 lg:py-2 px-4 shadow-md">
+        <%= link_to '再撮影', capture_path, class:"mx-5 bg-white border-2 border-black text-sm lg:text-xl px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
+        <div class="flex flex-col lg:flex-row mx-5  bg-white border-2 border-black p-1 lg:p-2 mb-1 rounded shadow-lg transform transition-transform hover:scale-105">
+          <%= link_to 'SignUp', login_path, class:"text-lime-600 font-bold text-base lg:text-2xl" %>
+          <p class="ml-1 lg:ml-3 pt-0 lg:pt-2 text-black text-[7px] lg:text-sm">すると投稿できます！</p>
+        </div>
+        <div class="flex flex-col lg:flex-row  mx-5  bg-white border-2 border-black p-1 lg:p-2 mb-1 rounded shadow-lg transform transition-transform hover:scale-105">
+          <%= link_to 'Home', root_path, class:"text-lime-600 font-bold text-base lg:text-2xl" %>
+          <p class="ml-1 lg:ml-3 pt-0 lg:pt-2 text-black text-[7px] lg:text-sm">に戻ります</p>
         </div>
       </div>
     <% else %>
-      <div class="fixed bottom-0 w-full z-50 flex flex-col lg:flex-row justify-center items-center bg-gray-200 py-2 px-4 shadow-md">
+      <div class="fixed bottom-0 w-full z-50 flex flex-col lg:flex-row justify-center items-center bg-gray-200 py-1 lg:py-2 px-4 shadow-md">
         <div class="flex">
           <%= link_to '再撮影', capture_path, class:"bg-white border-2 border-black text-sm lg:text-xl px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
-          <%= form.submit '投 稿', class: "bg-white border-2 border-black text-sm lg:text-xl px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
-          <%= link_to "シェア", "https://twitter.com/share?url=#{ request.url }&text=【君の笑顔は...】%0a%0a#{@analyse_face_emotion.score }点！", target: '_blank', class: "bg-white border-2 border-black text-sm lg:text-xl  px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105"  %>
+          <%= form.submit '投 稿', class: "bg-white border-2 border-black text-sm lg:text-xl px-4 lg:px-16 py-1 lg:py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
+          <%= link_to "シェア", "https://twitter.com/share?url=#{ request.url }&text=あなたの感情は...#{CGI.escape(@analyse_face_emotion.max_score_emotion)}!!%0aあなたの笑顔は...#{CGI.escape(@analyse_face_emotion.score.to_s)}点", target: '_blank', class: "bg-white border-2 border-black text-sm lg:text-xl px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
         </div>
         <div class="field flex ml-10">
           <div id="checkbox"></div>

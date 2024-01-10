@@ -42,7 +42,7 @@ export default function NotLogin() {
             </div>
           </div>
           {/* humbergerbutton */}
-          <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3 pb-3 lg:pb-10">
+          <button onClick={handleMenuOpen} type="button" className="z-10 space-y-2 pr-3 pb-8">
             <div
               className={
                 openMenu
