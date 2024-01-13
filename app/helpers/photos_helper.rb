@@ -18,7 +18,7 @@ module PhotosHelper
       sad: '悲しい時は母ちゃんに電話しろい！',
       angry: 'GEKIOKO。',
       surprised: '部屋に虫でもいたの？',
-      calm: '穏やかだね。それともサウナ中？',
+      calm: 'サウナで整い中？',
       fear: '上司に呼び出された？？一緒についていくよ！',
       confused: 'モヤモヤするときは思いっきり叫ぶんだ！',
       disgusted: '何か気に入らないことがあったのかな？'
