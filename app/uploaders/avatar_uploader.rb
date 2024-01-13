@@ -13,6 +13,22 @@ class AvatarUploader < CarrierWave::Uploader::Base
     storage :file # 開発環境とテスト環境ではfileを使用
   end
 
+  def cache_dir
+    if Rails.env.test?
+      "uploads/#{Rails.env}/tmp/#{mounted_as}/#{model.id}"
+    else
+      "uploads/tmp/#{mounted_as}/#{model.id}"
+    end
+  end
+
+ #storeのフォルダを指定
+  def store_dir
+    if Rails.env.test?
+      "uploads/#{Rails.env}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    else
+      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    end
+  end
   # storage :fog
 
   # Override the directory where uploaded files will be stored.

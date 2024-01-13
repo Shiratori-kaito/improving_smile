@@ -101,7 +101,7 @@ export const Camera = () => {
               />
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', zIndex: 10, position: 'absolute', top: '78%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-              <button onClick={capturePhoto} style={{
+              <button id="capture-photo-button" onClick={capturePhoto} style={{
                 background: 'yellow',
                 borderRadius: '50%',
                 width: '100px',

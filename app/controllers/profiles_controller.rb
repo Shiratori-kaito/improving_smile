@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
         @user.avatar = base64_conversion(params[:user][:avatar])
         @user.save
       end
-      redirect_to profile_path(@user), notice: 'プロフィールを更新しました'
+      redirect_to profile_path, notice: 'プロフィールを更新しました'
     else
       flash.now[:alert] = 'プロフィールの更新に失敗しました'
       render :edit

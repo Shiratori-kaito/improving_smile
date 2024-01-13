@@ -8,6 +8,11 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  validates :user_id, presence: true
+  validates :analyse_face_emotion_id, presence: true
+  validates :analyse_face_detail_id, presence: true
+  validates :photo_id, presence: true
+
   attr_accessor :width, :height
 
   def favorited?(user)
