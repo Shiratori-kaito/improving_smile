@@ -97,7 +97,7 @@ export const Camera = () => {
                 audio={false}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
-                className="w-[400px] h-[300px] lg:w-[900px] lg:h-[900px]"
+                className="w-[400px] h-[400px] lg:w-[900px] lg:h-[900px]"
                 videoConstraints={videoConstraints}
               />
             </div>
