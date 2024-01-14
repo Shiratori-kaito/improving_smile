@@ -1,9 +1,7 @@
-import React from 'react';
-
-export const handleUpload = async ({image}) => {
+export const handleUpload = async ({ image }) => {
   if (image) {
-    const formData = new FormData();
-    formData.append('photo[image]', image);
+    const formData = new FormData()
+    formData.append('photo[image]', image)
 
     try {
       const response = await fetch('/photos/create', {
@@ -12,15 +10,15 @@ export const handleUpload = async ({image}) => {
           'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
         },
         body: formData
-      });
+      })
 
       if (response.ok) {
-        window.location.href = '/photos/detect_faces';
+        window.location.href = '/photos/detect_faces'
       } else {
-        console.error("Error uploading image to Rails");
+        console.error('Error uploading image to Rails')
       }
     } catch (e) {
-      console.error(e);
+      console.error(e)
     }
   }
 }

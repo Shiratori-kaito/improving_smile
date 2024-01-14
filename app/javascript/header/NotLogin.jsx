@@ -1,31 +1,30 @@
+import React, { useState } from 'react'
 
-import React, { useState } from "react";
-
-export default function NotLogin() {
-  const [openMenu, setOpenMenu] = useState(false);
+export default function NotLogin () {
+  const [openMenu, setOpenMenu] = useState(false)
 
   const handleMenuOpen = () => {
-    setOpenMenu(!openMenu);
-  };
+    setOpenMenu(!openMenu)
+  }
 
   const handleHome = () => {
-    window.location.href = "/";
+    window.location.href = '/'
   }
 
   const handlePolicy = () => {
-    window.location.href = "/pages/policy";
+    window.location.href = '/pages/policy'
   }
 
   const handleabout = () => {
-    window.location.href = "/pages/about";
+    window.location.href = '/pages/about'
   }
 
   const handleMyTwitter = () => {
-    window.location.href = "https://twitter.com/nvrl623";
+    window.location.href = 'https://twitter.com/nvrl623'
   }
 
   const handleLogin = () => {
-    window.location.href = "/login";
+    window.location.href = '/login'
   }
 
   return (
@@ -33,7 +32,7 @@ export default function NotLogin() {
       <div className="fixed w-full top-0 z-50 bg-yellow-400 h-11 lg:h-16">
         <header className="flex justify-between py-1 w-full">
           <button onClick={handleHome} type="button" className="py-1 ">
-            <img src="/images/camera.png" alt="logo" className="w-24 h-12 pb-2 lg:w-full h-full"  />
+            <img src="/images/camera.png" alt="logo" className="w-24 h-12 pb-2 lg:w-full h-full" />
           </button>
           <div className="invisible lg:visible">
             <div className="absolute left-[10%] flex flex-row pt-2">
@@ -92,5 +91,5 @@ export default function NotLogin() {
         </header>
       </div>
     </div>
-  );
+  )
 }

@@ -1,44 +1,45 @@
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { handleLogout } from '../apis/HandleLogout'
 
-import React, { useState } from "react";
-import { handleLogout } from "../apis/HandleLogout";
-
-export default function AlreadyLogin({user}) {
-  const [openMenu, setOpenMenu] = useState(false);
-
+export default function AlreadyLogin ({ user }) {
+  const [openMenu, setOpenMenu] = useState(false)
 
   const handleMenuOpen = () => {
-    setOpenMenu(!openMenu);
-  };
+    setOpenMenu(!openMenu)
+  }
 
   const handleMyPage = () => {
     window.location.href = `/users/${user}`
   }
 
-
   const handlePostsIndex = () => {
-    window.location.href = "/posts";
+    window.location.href = '/posts'
   }
 
   const handleProfile = () => {
-    window.location.href = "/profile";
+    window.location.href = '/profile'
   }
 
   const handleHome = () => {
-    window.location.href = "/";
+    window.location.href = '/'
   }
 
   const handlePolicy = () => {
-    window.location.href = "/pages/policy";
+    window.location.href = '/pages/policy'
   }
 
   const handleAbout = () => {
-    window.location.href = "/pages/about";
+    window.location.href = '/pages/about'
   }
 
   const handleMyTwitter = () => {
-    window.location.href = "https://twitter.com/nvrl623";
+    window.location.href = 'https://twitter.com/nvrl623'
   }
 
+  AlreadyLogin.propTypes = {
+    user: PropTypes.number.isRequired
+  }
 
   return (
     <div className="w-full">
@@ -113,5 +114,5 @@ export default function AlreadyLogin({user}) {
         </header>
       </div>
     </div>
-  );
+  )
 }
