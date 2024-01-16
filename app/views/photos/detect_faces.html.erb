@@ -51,17 +51,14 @@
           <%= link_to 'SignUp', login_path, class:"text-lime-600 font-bold text-base lg:text-2xl" %>
           <p class="ml-1 lg:ml-3 pt-0 lg:pt-2 text-black text-[7px] lg:text-sm">すると投稿できます！</p>
         </div>
-        <div class="flex flex-col lg:flex-row  mx-5  bg-white border-2 border-black p-1 lg:p-2 mb-1 rounded shadow-lg transform transition-transform hover:scale-105">
-          <%= link_to 'Home', root_path, class:"text-lime-600 font-bold text-base lg:text-2xl" %>
-          <p class="ml-1 lg:ml-3 pt-0 lg:pt-2 text-black text-[7px] lg:text-sm">に戻ります</p>
-        </div>
+        <%= link_to "シェア", "https://twitter.com/share?url=#{ request.url }&text=あなたの感情は...#{CGI.escape(@analyse_face_emotion.max_score_emotion)}!!%0aあなたの笑顔は...#{CGI.escape(@analyse_face_emotion.score.to_s)}点", target: '_blank', class: "bg-white border-2 border-black text-sm lg:text-xl  px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105"  %>
       </div>
     <% else %>
       <div class="fixed bottom-0 w-full z-50 flex flex-col lg:flex-row justify-center items-center bg-gray-200 py-2 px-4 shadow-md">
         <div class="flex">
           <%= link_to '再撮影', capture_path, class:"bg-white border-2 border-black text-sm lg:text-xl px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
           <%= form.submit '投 稿', class: "bg-white border-2 border-black text-sm lg:text-xl px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
-          <%= link_to "シェア", "https://twitter.com/share?url=#{ request.url }&text=【君の笑顔は...】%0a%0a#{@analyse_face_emotion.score }点！", target: '_blank', class: "bg-white border-2 border-black text-sm lg:text-xl  px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105"  %>
+          <%= link_to "シェア", "https://twitter.com/share?url=#{ request.url }&text=あなたの感情は...#{CGI.escape(@analyse_face_emotion.max_score_emotion)}!!%0aあなたの笑顔は...#{CGI.escape(@analyse_face_emotion.score.to_s)}点", target: '_blank', class: "bg-white border-2 border-black text-sm lg:text-xl  px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105"  %>
         </div>
         <div class="field flex ml-10">
           <div id="checkbox"></div>
