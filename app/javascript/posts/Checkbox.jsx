@@ -1,25 +1,22 @@
-import React from "react";
-import {useState} from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 
-export const Checkbox = ()  => {
-
-  const [isBlur, setIsBlur] = useState(false);
+export const Checkbox = () => {
+  const [isBlur, setIsBlur] = useState(false)
 
   const handleBlur = () => {
-    const newIsBlur = !isBlur;
-    setIsBlur(newIsBlur);
+    const newIsBlur = !isBlur
+    setIsBlur(newIsBlur)
 
-    const event = new CustomEvent('blurToggle',{detail:newIsBlur});
-    window.dispatchEvent(event);
+    const event = new CustomEvent('blurToggle', { detail: newIsBlur })
+    window.dispatchEvent(event)
   }
 
   useEffect(() => {
-    const hiddenInput = document.getElementById('hiddenBlurInput');
+    const hiddenInput = document.getElementById('hiddenBlurInput')
     if (hiddenInput) {
-      hiddenInput.value = isBlur;
+      hiddenInput.value = isBlur
     }
-  },[isBlur]);
+  }, [isBlur])
 
   return (
     <>
@@ -33,5 +30,5 @@ export const Checkbox = ()  => {
         投稿時に顔写真をぼかす
       </label>
     </>
-  );
+  )
 }

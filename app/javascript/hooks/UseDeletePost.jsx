@@ -1,8 +1,6 @@
-import React, { useEffect} from 'react';
-
-export const useDeletePost = ({post, confirm, onSuccess, onFailure}) => {
-  useEffect (() => {
-    if (confirm){
+export const useDeletePost = ({ post, confirm, onSuccess, onFailure }) => {
+  useEffect(() => {
+    if (confirm) {
       fetch(`/posts/${post}`, {
         method: 'DELETE',
         headers: {
@@ -10,13 +8,13 @@ export const useDeletePost = ({post, confirm, onSuccess, onFailure}) => {
           'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
         }
       })
-      .then(response => {
-        if (response.ok) {
-          onSuccess();
-        } else {
-          onFailure;
-        }
-      });
+        .then(response => {
+          if (response.ok) {
+            onSuccess();
+          } else {
+            onFailure();
+          }
+        })
     };
-  }, [confirm, post, onSuccess, onFailure]);
-};
+  }, [confirm, post, onSuccess, onFailure])
+}

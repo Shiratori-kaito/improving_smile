@@ -1,5 +1,6 @@
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Bar } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -7,8 +8,8 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend,
-} from 'chart.js';
+  Legend
+} from 'chart.js'
 
 ChartJS.register(
   CategoryScale,
@@ -17,7 +18,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend
-);
+)
 
 export const options = {
   responsive: true,
@@ -28,29 +29,32 @@ export const options = {
       beginAtZero: true,
       ticks: {
         autoSkip: false, // ラベルを自動的にスキップしない
-        maxRotation: 0,  // ラベルの回転を許可しない
+        maxRotation: 0, // ラベルの回転を許可しない
         minRotation: 0
       }
     }
   },
   plugins: {
     legend: {
-      position: 'top',
+      position: 'top'
     },
     title: {
       display: true,
-      text: '感情パラメーターチャート',
-    },
-  },
-};
-
+      text: '感情パラメーターチャート'
+    }
+  }
+}
 
 export const EmotionChart = ({ emotions = {}, height }) => {
-  const labels = Object.keys(emotions);
-  const dataValues = Object.values(emotions).map(value => parseInt(value));
+  const labels = Object.keys(emotions)
+  const dataValues = Object.values(emotions).map(value => parseInt(value))
+  EmotionChart.propTypes = {
+    emotions: PropTypes.object.isRequired,
+    height: PropTypes.number.isRequired
+  }
 
   const chartData = {
-    labels: labels,
+    labels,
     datasets: [
       {
         label: '感情パラメーター',
@@ -61,13 +65,13 @@ export const EmotionChart = ({ emotions = {}, height }) => {
         borderColor: [
           'blue', 'green', 'red', 'yellow', 'aqua', 'purple', 'orange', 'lime'
         ],
-        borderWidth: 1,
-      },
-    ],
-  };
+        borderWidth: 1
+      }
+    ]
+  }
 
   return (
-    <div style={{ width: '100%', height: height }}>
+    <div style={{ width: '100%', height }}>
       <Bar data={chartData} options={options} />
     </div>
   )

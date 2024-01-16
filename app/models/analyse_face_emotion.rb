@@ -18,7 +18,6 @@ class AnalyseFaceEmotion < ApplicationRecord
   end
 
   def score
-    percent_scale = 100
 
     emotions = {
       # それぞれの感情の重みを設定して得点に反映する
@@ -32,11 +31,10 @@ class AnalyseFaceEmotion < ApplicationRecord
       'angry' => 1.0 / 12
     }
 
-    half_of_max = 5000 #最大値が10000のため、半分の値を基準値に設定
     emotions.each do |emotion, factor|
       value = send(emotion).to_i
       # 最初に半分の値を超えた感情を返す　また、max値が10000となっているため、100で割って、100点満点で表示する
-      return (value / percent_scale * factor).round if value > half_of_max
+      return (value / Settings.percent_scale * factor).round if value > Settings.half_of_max
     end
 
   
