@@ -7,8 +7,8 @@
       <div class="w-full flex justify-center items-center text-center bg-yellow-300 p-2 lg:p-6 mt-7 mb-7 ">
         <%= image_tag "light.png", class:"w-10 lg:w-20 h-10 lg:h-20"%>
         <h2 class="hidden lg:block font-bold text-3xl pt-1 pr-3">あなたの分析結果は...</h2>
-        <h2 class="block lg:hidden font-bold text-sm w-[120px] pt-1 pr-3">分析結果は...</h2>
-        <h2 class="font-bold text-base lg:text-5xl pt-1">【<%= @analyse_face_emotion.emotion_comment %>】</h2>
+        <h2 class="block lg:hidden font-bold text-base w-[120px] pt-1 pr-3">分析結果は...</h2>
+        <h2 class="font-bold text-lg lg:text-5xl pt-1">【<%= @analyse_face_emotion.emotion_comment %>】</h2>
       </div>
     </div>
     <div class="lg:flex ">
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div class="flex-grow flex flex-col items-center justify-center mb-[40px] lg:mb-[100px]">
+    <div class="flex-grow flex flex-col items-center justify-center mb-[52px] lg:mb-[100px]">
       <%= form.hidden_field :user_id, value: current_user.id %>
       <%= form.hidden_field :photo_id, value: @photo.id %>
       <%= form.hidden_field :analyse_face_detail_id, value: @analyse_face_detail.id %>
@@ -54,7 +54,7 @@
         <%= link_to "シェア", "https://twitter.com/share?url=#{ request.url }&text=あなたの感情は...#{CGI.escape(@analyse_face_emotion.max_score_emotion)}!!%0aあなたの笑顔は...#{CGI.escape(@analyse_face_emotion.score.to_s)}点", target: '_blank', class: "bg-white border-2 border-black text-sm lg:text-xl  px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105"  %>
       </div>
     <% else %>
-      <div class="fixed bottom-0 w-full z-50 flex flex-col lg:flex-row justify-center items-center bg-gray-200 py-2 px-4 shadow-md">
+      <div class="fixed bottom-0 w-full z-50 flex flex-col lg:flex-row justify-center items-center bg-gray-200  py-1 px-4 shadow-md">
         <div class="flex">
           <%= link_to '再撮影', capture_path, class:"bg-white border-2 border-black text-sm lg:text-xl px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
           <%= form.submit '投 稿', class: "bg-white border-2 border-black text-sm lg:text-xl px-4 lg:px-16 py-2 ml-5 rounded shadow-lg transform transition-transform hover:scale-105" %>
