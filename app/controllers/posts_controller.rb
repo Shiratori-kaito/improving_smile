@@ -2,7 +2,6 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show destroy]
   skip_before_action :require_login, only: %i[index]
   skip_before_action :require_signup, only: %i[index]
-  skip_before_action :
 
   def index
     @posts = Post.includes(:user, :analyse_face_detail,

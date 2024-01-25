@@ -1,7 +1,7 @@
-# [Face World]
+![表紙](README.png)
 [Figma](https://www.figma.com/file/8CS5ilDtB91CpvvoAxdnTm/improving_smile?type=design&node-id=0%3A1&mode=design&t=2Lil0QcGRa2ZQ86x-1)
 
-[ER図](https://gyazo.com/2821267c6641e4792dd5f83a912881c0)
+[ER図](https://dbdiagram.io/d/65ab78eeac844320ae5436a2)
 ## サービス概要
 
 自分の顔の表情を分析して、結果を返します。
