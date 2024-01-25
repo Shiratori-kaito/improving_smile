@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_11_120044) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_20_080116) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,12 +74,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_11_120044) do
   end
 
   create_table "analyse_face_landmarks", force: :cascade do |t|
-    t.float "nose_x"
-    t.float "nose_y"
-    t.float "nose_left_x"
-    t.float "nose_left_y"
-    t.float "nose_right_x"
-    t.float "nose_right_y"
     t.float "mouth_left_x"
     t.float "mouth_left_y"
     t.float "mouth_right_x"
@@ -88,55 +82,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_11_120044) do
     t.float "mouth_up_y"
     t.float "mouth_down_x"
     t.float "mouth_down_y"
-    t.float "left_eye_brow_left_x"
-    t.float "left_eye_brow_left_y"
-    t.float "left_eye_brow_right_x"
-    t.float "left_eye_brow_right_y"
-    t.float "right_eye_brow_left_x"
-    t.float "right_eye_brow_left_y"
-    t.float "right_eye_brow_right_x"
-    t.float "right_eye_brow_right_y"
-    t.float "right_eye_brow_up_x"
-    t.float "right_eye_brow_up_y"
-    t.float "left_eye_brow_up_x"
-    t.float "left_eye_brow_up_y"
-    t.float "eye_left_x"
-    t.float "eye_left_y"
-    t.float "eye_right_x"
-    t.float "eye_right_y"
-    t.float "left_eye_up_x"
-    t.float "left_eye_up_y"
-    t.float "left_eye_down_x"
-    t.float "left_eye_down_y"
-    t.float "left_eye_left_x"
-    t.float "left_eye_left_y"
-    t.float "left_eye_right_x"
-    t.float "left_eye_right_y"
-    t.float "right_eye_up_x"
-    t.float "right_eye_up_y"
-    t.float "right_eye_down_x"
-    t.float "right_eye_down_y"
-    t.float "right_eye_left_x"
-    t.float "right_eye_left_y"
-    t.float "right_eye_right_x"
-    t.float "right_eye_right_y"
-    t.float "upper_jawline_left_x"
-    t.float "upper_jawline_left_y"
-    t.float "upper_jawline_right_x"
-    t.float "upper_jawline_right_y"
-    t.float "mid_jawline_left_x"
-    t.float "mid_jawline_left_y"
-    t.float "mid_jawline_right_x"
-    t.float "mid_jawline_right_y"
-    t.float "chin_bottom_x"
-    t.float "chin_bottom_y"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "photo_id"
-    t.float "left_pupil_x"
-    t.float "left_pupil_y"
-    t.float "right_pupil_x"
-    t.float "right_pupil_y"
     t.index ["photo_id"], name: "index_analyse_face_landmarks_on_photo_id"
   end
 
