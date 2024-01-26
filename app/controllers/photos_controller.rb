@@ -67,17 +67,19 @@ class PhotosController < ApplicationController
     @analyse_face_emotion.emotion_comment = view_context.extra_comment(@analyse_face_emotion)
     @analyse_face_emotion.save!
 
-    landmarks_data = face_detail.landmarks
-    @analyse_face_landmark = AnalyseFaceLandmark.new(photo_id: @photo.id)
+    @landmarks_data = face_detail.landmarks
+    @analyse_face_landmark = AnalyseFaceLandmark.create!(
+                                                          photo_id: @photo.id,
+                                                          mouth_left_y: (@landmarks_data.find { |e| e[:type] == 'mouthLeft' }[:y]),
+                                                          mouth_left_x: (@landmarks_data.find { |e| e[:type] == 'mouthLeft' }[:x]),
+                                                          mouth_right_y: (@landmarks_data.find { |e| e[:type] == 'mouthRight' }[:y]),
+                                                          mouth_right_x: (@landmarks_data.find { |e| e[:type] == 'mouthRight' }[:x]),
+                                                          mouth_up_y: (@landmarks_data.find { |e| e[:type] == 'mouthUp' }[:y]),
+                                                          mouth_up_x: (@landmarks_data.find { |e| e[:type] == 'mouthUp' }[:x]),
+                                                          mouth_down_y: (@landmarks_data.find { |e| e[:type] == 'mouthDown' }[:y]),
+                                                          mouth_down_x: (@landmarks_data.find { |e| e[:type] == 'mouthDown' }[:x])
+                                                        )
 
-    landmarks_data.each do |landmark|
-      type_name = landmark[:type].underscore
-      x_coordinate = landmark[:x]
-      y_coordinate = landmark[:y]
-      @analyse_face_landmark["#{type_name}_x"] = x_coordinate
-      @analyse_face_landmark["#{type_name}_y"] = y_coordinate
-
-    end
 
     center_of_mouth = @analyse_face_landmark.center_of_mouth(@analyse_face_landmark.mouth_up_y, @analyse_face_landmark.mouth_down_y)
     corner_of_mouth_result = @analyse_face_landmark.corner_of_mouth(center_of_mouth, @analyse_face_landmark.mouth_left_y, @analyse_face_landmark.mouth_right_y)
