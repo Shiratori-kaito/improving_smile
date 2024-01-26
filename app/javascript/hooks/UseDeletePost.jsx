@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 export const useDeletePost = ({ post, confirm, onSuccess, onFailure }) => {
   useEffect(() => {
     if (confirm) {
