@@ -62,7 +62,8 @@ https://www.face-world-app.com/
 ## ER図
 ![ER](app/assets/images/ER.png)
 
-## 画面遷移図
-
+<br>
 
 ## 今後の実装予定
+・ログイン機能としてGoogle認証を実装
+・Post機能に関するRspecの実装
