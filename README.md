@@ -35,43 +35,19 @@ https://www.face-world-app.com/
 |![分析画面下部](app/assets/images/DetectPage(2).png)|![投稿一覧画面](app/assets/images/PostindexPage.png)
 |感情をグラフ化して、笑顔判定機能や目線の向きなども機能に加えました。| 撮影した顔写真とグラフが見えるようにしました。また、ページネーション機能も実装しました。|
 
-### MVP
+| 投稿詳細画面 | プロファイル画面|
+| ----------|----------|
+|![投稿詳細画面](app/assets/images/PostshowPage.png) |![プロファイル画面](app/assets/images/ProfilePage.png)
+|コメント機能やいいね機能を実装して、ユーザーの交流を促しています。|プレビュー機能を実装しました。|
 
-- 会員登録
-- ログイン
-- 写真撮影機能
-（画像のサイズを統一）⬜︎Reactで実装
-- 写真分析機能（採点）
-- 自分のレビューを投稿する機能
-　（投稿の仕方に「ボカシ」を選べるようにする）⬜︎Tailwindcssで実装
-- SNSへの投稿機能
-- 会員登録時にステップ入力を導入
-（1ページ目：メール、パスワード　2ページ目：名前、アイコン）⬜︎ステップ入力で実装
-- ユーザーは過去の投稿を一覧で「マイスマイルヒストリー」としてマイページに保持
-（採点時に用いた画像を縮小して掲載する）⬜︎ImageMagicを使用する。
-- ユーザー同士のフォロー機能
-- 投稿へのいいね機能
-- 投稿へのコメント機能
+## 使用技術
 
-### その後の機能
+| Category | Technology Stack |
+| ----------|----------|
+| Frontend | React.js  Chasrt.js |
+| Backend | Ruby, Ruby on Rails |
+| Infrastructure | Heroku |
+| Database | |PostgreSQL |
+| Storage | AWS S3 |
+|　etc. | Amazon Rekognition ESlint Rubocop Github Git |
 
-- 写真分析機能(提案)
- 顔のランドマークを取得して、理想的な顔との差異を判定
-- 初期画面で好きな笑顔の画像を選択→それに近づけるような提案
-- 表情改善に関するコンテンツ の掲載
-- OGP設定
-- アバター設定時のプレビュー機能
-
-#### 使用技術
-##### フロントエンド
-- React.js 
-- Chart.js
-- Tailwindcss
-##### バックエンド
-- Ruby (3.2.2)
-- Ruby on Rails (7.0.8)
- #####インフラ/ストレージ
-- heroku
-- AWS S3
-##### 顔認識
-- aws-sdk-rekognition
