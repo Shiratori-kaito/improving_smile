@@ -70,14 +70,14 @@ class PhotosController < ApplicationController
     @landmarks_data = face_detail.landmarks
     @analyse_face_landmark = AnalyseFaceLandmark.create!(
                                                           photo_id: @photo.id,
-                                                          mouth_left_y: (@landmarks_data.find { |e| e[:type] == 'mouthLeft' }[:y]),
-                                                          mouth_left_x: (@landmarks_data.find { |e| e[:type] == 'mouthLeft' }[:x]),
-                                                          mouth_right_y: (@landmarks_data.find { |e| e[:type] == 'mouthRight' }[:y]),
-                                                          mouth_right_x: (@landmarks_data.find { |e| e[:type] == 'mouthRight' }[:x]),
-                                                          mouth_up_y: (@landmarks_data.find { |e| e[:type] == 'mouthUp' }[:y]),
-                                                          mouth_up_x: (@landmarks_data.find { |e| e[:type] == 'mouthUp' }[:x]),
-                                                          mouth_down_y: (@landmarks_data.find { |e| e[:type] == 'mouthDown' }[:y]),
-                                                          mouth_down_x: (@landmarks_data.find { |e| e[:type] == 'mouthDown' }[:x])
+                                                          mouth_left_y: (@landmarks_data.find { |e| e[:type] == 'mouthLeft' }&.[](:y)),
+                                                          mouth_left_x: (@landmarks_data.find { |e| e[:type] == 'mouthLeft' }&.[](:x)),
+                                                          mouth_right_y: (@landmarks_data.find { |e| e[:type] == 'mouthRight' }&.[](:y)),
+                                                          mouth_right_x: (@landmarks_data.find { |e| e[:type] == 'mouthRight' }&.[](:x)),
+                                                          mouth_up_y: (@landmarks_data.find { |e| e[:type] == 'mouthUp' }&.[](:y)),
+                                                          mouth_up_x: (@landmarks_data.find { |e| e[:type] == 'mouthUp' }&.[](:x)),
+                                                          mouth_down_y: (@landmarks_data.find { |e| e[:type] == 'mouthDown' }&.[](:y)),
+                                                          mouth_down_x: (@landmarks_data.find { |e| e[:type] == 'mouthDown' }&.[](:x))
                                                         )
 
 
