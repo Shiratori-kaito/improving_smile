@@ -62,7 +62,7 @@ https://www.face-world-app.com/
 ## ER図
 ![ER](app/assets/images/ER.png)
 
-##　画面遷移図
+## 画面遷移図
 
 
 ## 今後の実装予定
