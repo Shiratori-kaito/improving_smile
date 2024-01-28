@@ -54,7 +54,7 @@ https://www.face-world-app.com/
 | Frontend | React.js  Chasrt.js |
 | Backend | Ruby, Ruby on Rails |
 | Infrastructure | Heroku |
-| Database | |PostgreSQL |
+| Database | | PostgreSQL |
 | Storage | AWS S3 |
 |　etc. | Amazon Rekognition ESlint Rubocop Github Git |
 <br>
