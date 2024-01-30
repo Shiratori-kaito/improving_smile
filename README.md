@@ -39,10 +39,15 @@ https://www.face-world-app.com/
 |![分析画面下部](app/assets/images/DetectPage(2).png)|![投稿一覧画面](app/assets/images/PostindexPage.png)
 |感情をグラフ化して、笑顔判定機能や目線の向きなども機能に加えました。| 撮影した顔写真とグラフが見えるようにしました。また、ページネーション機能も実装しました。|
 
-| 投稿詳細画面 | プロファイル画面|
+| 投稿詳細画面 | マイヒストリー画面|
 | ----------|----------|
-|![投稿詳細画面](app/assets/images/PostshowPage.png) |![プロファイル画面](app/assets/images/ProfilePage.png)
-|コメント機能やいいね機能を実装して、ユーザーの交流を促しています。|プレビュー機能を実装しました。|
+|![投稿詳細画面](app/assets/images/PostshowPage.png) |![マイヒストリー画面](app/assets/images/UsershowPage.png)
+|コメント機能やいいね機能を実装して、ユーザーの交流を促しています。|ユーザー同士のフォロー機能を実装しました。自分の投稿を一覧で表示できます。|
+
+|いいねした投稿画面 | プロファイル画面 |
+| ----------|----------|
+|![いいねした投稿画面](app/assets/images/UserfavoritePage.png) |![プロファイル画面](app/assets/images/ProfilePage.png)|
+|いいねした投稿は一覧にして表示できます。| プレビュー機能を実装しました。|
 
 <br>
 
