@@ -69,4 +69,4 @@ https://www.face-world-app.com/
 <br>
 
 ## 今後の実装予定　「機能」
-・ログイン機能としてGoogle認証を実装
+・ログイン機能としてLINE認証を実装
