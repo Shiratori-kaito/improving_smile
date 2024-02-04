@@ -73,6 +73,11 @@ gem 'config'
 
 gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.32'
 
+gem 'omniauth-line'
+
+gem 'omniauth-rails_csrf_protection'
+
+gem 'dotenv-rails'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
