@@ -10,6 +10,7 @@ import { PostDelete } from './posts/PostDelete'
 import { Checkbox } from './posts/Checkbox'
 import { ImagePreview } from './posts/ImagePreview'
 import { AvatarPreview } from './preview/AvatarPreview'
+import { ReturnTop } from './pages/ReturnTop'
 
 if (document.getElementById('user-data')) {
   const userDataElement = document.getElementById('user-data')
@@ -104,5 +105,13 @@ if (document.getElementById('avatarPreview')) {
   const avatarPreviewRoot = createRoot(avatarPreviewElement)
   avatarPreviewRoot.render(
     <AvatarPreview avatar={avatar}/>
+  )
+}
+
+if (document.getElementById('returnTop')){
+  const returnTopElement = document.getElementById('returnTop')
+  const returnTopRoot = createRoot(returnTopElement)
+  returnTopRoot.render(
+    <ReturnTop />
   )
 }
