@@ -1,28 +1,26 @@
-import React, { useEffect } from "react";
-import { Icon, useBoolean } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Icon } from "@chakra-ui/react";
 import { RiArrowUpSLine } from "react-icons/ri";
 
 export const ScrollTop = () => {
-  const [showButton, setShowButton] = useBoolean();
+  const [showButton, setShowButton] = useState(false);
 
-  // スクロールイベントをListen
   useEffect(() => {
+    const watchScroll = () => {
+      const basePosition = 200;
+      const scrollPosition = window.scrollY;
+      if (basePosition <= scrollPosition) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+
     window.addEventListener("scroll", watchScroll);
     return () => {
-      window.removeEventListener("scroll", watchScroll);
+      window.removeEventListener("scroll",watchScroll);
     };
-  }, []);
-
-  // Scrollを検知しボタン表示のフラグを切り替え
-  const watchScroll = () => {
-    const basePosition = 200;
-    const scrollPosition = window.scrollY;
-    if (basePosition <= scrollPosition) {
-      setShowButton.on();
-    } else {
-      setShowButton.off();
-    }
-  };
+  },[]);
 
   return (
     <Icon

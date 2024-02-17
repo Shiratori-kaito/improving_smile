@@ -49,16 +49,16 @@
       <% @comments.each do |comment| %>
         <div class="flex items-center justify-center space-x-3 p-4 bg-gray-100 rounded-lg border-2 ">
           <div class="shrink-0">
-            <%= image_tag comment.user.avatar.url, width: '60', height: '60', class: "rounded-full" %>
+            <%= image_tag comment.user.avatar.url, class: "rounded-full w-[40px] lg:w-[60px] h-[100px]" %>
           </div>
           <div class="flex-grow">
-            <div class="text-xl font-medium"><%= link_to comment.user.name, user_path(comment.user.id) %></div>
-            <div class="text-2xl pl-5"><%= comment.content %></div>
+            <div class="text-lg lg:text-xl font-medium"><%= link_to comment.user.name, user_path(comment.user.id) %></div>
+            <div class="text-sm lg:text-2xl pl-5"><%= comment.content %></div>
           </div>
           <!-- 削除ボタン -->
           <% if current_user.id == comment.user_id %>
             <div class="shrink-0">
-              <%= button_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, "data-confirm" => "コメントを削除しますか？", class: "text-lg bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded" %>
+              <%= button_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, "data-confirm" => "コメントを削除しますか？", class: "text-sm lg:text-lg bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded" %>
             </div>
           <% end %>
         </div>
