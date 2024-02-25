@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'oauths/oauth'
+  get 'oauths/callback'
   root to: 'home#index'
 
   # Posts
@@ -45,6 +47,11 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create' 
   delete 'logout', to: 'user_sessions#destroy'
   post 'guest_login', to: 'user_sessions#guest_login'
+
+  # line authentication
+  post "oauth/callback", to: "oauths#callback"
+  get "oauth/callback", to: "oauths#callback" # for use with line
+  get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
 
   # Static Pages
   get 'pages/policy', to: 'pages#policy'
