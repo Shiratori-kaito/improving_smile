@@ -2,5 +2,4 @@ default_url_options:
   protocol: 'https'
   host: 'face-world-app.com'
 sorcery:
-  line_callback_url: 'https://www.face-world-app.com//oauth/callback?provider=line'
-```
+  line_callback_url: 'https://www.face-world-app.com/oauth/callback?provider=line'
